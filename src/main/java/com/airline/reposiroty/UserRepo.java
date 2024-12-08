@@ -1,5 +1,5 @@
 package com.airline.reposiroty;
 
-public class UserRepo {
+public class UserRepo extends DbConfig {
 
 }

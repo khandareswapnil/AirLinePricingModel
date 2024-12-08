@@ -11,16 +11,18 @@ public class DbConfig {
 	
 	//we are making singalton class so private constructor
 	
-	private DbConfig ()
+	protected DbConfig ()
 	{
 		//connection logic can generate exception
 		
 		try {
 			
-			File f = new File("");
+			File f = new File(".");
 			String path = f.getAbsolutePath();
+			path=path.substring(0, (path.length()-1));
+			path=path+"src\\main\\resources\\DbConfig.properties";
 			//System.out.println(path);
-			FileInputStream inputStream = new FileInputStream("D:/Exam4_12/AirlineTicketPricingModel/src/main/resources/dbconfig.properties");
+			FileInputStream inputStream = new FileInputStream(path);
 			Properties p = new Properties();
 			p.load(inputStream);       // property file loaded
 			
@@ -31,13 +33,13 @@ public class DbConfig {
 			//System.out.println(username+"\t"+password+"\t"+url);
 			
 			Class.forName(driverClassName);
-			//System.out.println("Driver loaded successfully..");
+			System.out.println("Driver loaded successfully..");
 			
 			 conn=DriverManager.getConnection(url,username,password);
-			/* if(conn!=null)
+			 if(conn!=null)
 			 {
 				 System.out.println("Database connected Successfully");
-			 }*/
+			 }
 			
 		}
 		catch(Exception ex)
@@ -69,7 +71,8 @@ public class DbConfig {
 		return rs;
 	}
 	
-	/*public static void main(String x[])
+	/*
+	public static void main(String x[])
 	{
 		new DbConfig();
 	} */
