@@ -4,7 +4,7 @@ import java.util.*;
 import com.airline.entity.User;
 public class UserRepo extends DbConfig {
 	
-	public void registerUser(User user) {
+	public boolean registerUser(User user) {
 		try 
 		{
 			stmt = conn.prepareStatement ("insert into users (name, email, contact, gender, password) values (?, ?, ?, ?, ?)");
@@ -16,17 +16,18 @@ public class UserRepo extends DbConfig {
             int val=stmt.executeUpdate();
             if(val!=0)
             {
-            	System.out.println("User registration succeessful...");
+            	return true;
             }
             else
             {
-            	System.out.println("There is some problem");
+            	return false;
             }
 	    }
 		catch(Exception ex)
 		{
 			System.out.println(ex);
 		}
+		return false;
 	}
 	
 	public boolean validateUser(String email, String password)

@@ -1,5 +1,7 @@
 package com.airline.app;
 import java.util.*;
+import com.airline.service.UserService;
+import com.airline.entity.User;
 public class ClientAppication {
 
 	public static void main(String[] args) {
@@ -28,11 +30,35 @@ public class ClientAppication {
 				}
 				break;
 			case 2:
+				UserService us =new UserService();
+				UserPanel up = new UserPanel();
+				System.out.println("\n1. FOR NEW USER REGISTER FIRST");
+				System.out.println("2. CONTINUE LOGIN..");
+				System.out.println("Enter the choice");
+				int num =sc.nextInt();
+				sc.nextLine();
+				
+				if (num==1)
+				{     
+				        boolean status =us.registerUser(); 
+				        if(status)
+				        	up.userpanel();
+				        	
+				}
+				else if(num==2)
+				{
+					
+						boolean status= us.loginUser();
+						if(status)
+						{
+							up.userpanel();
+						}
+				}
 				break;
 			case 3:
 				System.exit(0);
 				default :
-					System.out.println("InValid Input");
+					System.out.println("Invalid Input");
 			}
 			
 		}while(true);
