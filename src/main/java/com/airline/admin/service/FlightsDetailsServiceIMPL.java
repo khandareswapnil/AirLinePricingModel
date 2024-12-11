@@ -1,13 +1,14 @@
-package com.airline.app.admin.service.c;
+package com.airline.admin.service;
 
-import com.airline.app.admin.repo.copy.FlightsDetailsRepoIMPL;
+import com.airline.admin.repo.FlightsDetailsRepoIMPL;
 
-public class FlightsDetailsServiceIMPL implements FlightsDetails {
+public class FlightsDetailsServiceIMPL implements FlightsDetailsService{
 	FlightsDetailsRepoIMPL fdeatilRepo=new FlightsDetailsRepoIMPL();
+
 	@Override
 	public boolean isAddFlightsDetails(String fname) {
 		boolean b=fdeatilRepo.isAddFlightDetails(fname);
 		return b;
-	}
 
+}
 }

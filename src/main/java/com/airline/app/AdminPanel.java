@@ -1,7 +1,8 @@
 package com.airline.app;
 import java.util.*;
 
-import com.airline.app.admin.service.c.FlightsDetailsServiceIMPL;
+import com.airline.admin.service.FlightsDetailsServiceIMPL;
+
 
 
 
@@ -10,7 +11,7 @@ public class AdminPanel {
 	public void adminPanel()
 	{
 		ClientAppication clintApp=new ClientAppication();
-		FlightsDetailsServiceIMPL fdetails=new FlightsDetailsServiceIMPL();
+		FlightsDetailsServiceIMPL fdetailsservice=new FlightsDetailsServiceIMPL();
 		Scanner sc=new Scanner(System.in);
 		System.out.println("WELOCME TO ADMIN PANEL");
 		System.out.println("****************************************");
@@ -31,7 +32,7 @@ public class AdminPanel {
 			case 3:
 				System.out.println("ENTER THE NAME OF FLIGHTS");
 				String fname=sc.nextLine();
-				boolean b=fdetails.isAddFlightsDetails(fname);
+				boolean b=fdetailsservice.isAddFlightsDetails(fname);
 				break;
 			case 4:
 				clintApp.main(null);
