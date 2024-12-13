@@ -31,8 +31,17 @@ public class AdminPanel {
 				break;
 			case 3:
 				System.out.println("ENTER THE NAME OF FLIGHTS");
+				sc.nextLine();
 				String fname=sc.nextLine();
 				boolean b=fdetailsservice.isAddFlightsDetails(fname);
+				if(b)
+				{
+					System.out.println("Data Added Sucess");
+				}
+				else
+				{
+					System.out.println("Some Problem Is There in Add Flights Repository");
+				}
 				break;
 			case 4:
 				clintApp.main(null);
