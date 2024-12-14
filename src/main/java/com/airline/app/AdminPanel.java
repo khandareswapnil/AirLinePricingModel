@@ -33,10 +33,17 @@ public class AdminPanel {
 				System.out.println("ENTER THE NAME OF FLIGHTS");
 				sc.nextLine();
 				String fname=sc.nextLine();
-				boolean b=fdetailsservice.isAddFlightsDetails(fname);
+				System.out.println("Enter the Time Of Flights");
+				int time=sc.nextInt();
+				System.out.println("Enter the No Of Seats");
+				int no_seats=sc.nextInt();
+				System.out.println("Enter the Base Price for Per KM");
+				int basePrice=sc.nextInt();
+				
+				boolean b=fdetailsservice.isAddFlightsDetails(fname,time,no_seats,basePrice);
 				if(b)
 				{
-					System.out.println("Data Added Sucess");
+					System.out.println("Flights Details Added Sucess");
 				}
 				else
 				{

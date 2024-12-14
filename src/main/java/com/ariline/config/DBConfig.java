@@ -7,6 +7,7 @@ public class DBConfig {
 		protected static Connection conn;
 		protected static PreparedStatement stmt;
 		protected static ResultSet rs;
+		protected static CallableStatement csmt;
 		
 		private static DBConfig db;
 		
