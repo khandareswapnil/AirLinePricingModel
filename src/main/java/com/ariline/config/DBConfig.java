@@ -35,14 +35,14 @@ public class DBConfig {
 				//System.out.println(username+"\t"+password+"\t"+url);
 				
 				Class.forName(driverClassName);
-				System.out.println("Driver loaded successfully..");
+				//System.out.println("Driver loaded successfully..");
 				
 				 conn=DriverManager.getConnection(url,username,password);
-				 if(conn!=null)
-				 {
-					 System.out.println("Database connected Successfully");
-				 }
-				
+//				 if(conn!=null)
+//				 {
+//					 System.out.println("Database connected Successfully");
+//				 }
+//				
 			}
 			catch(Exception ex)
 			{

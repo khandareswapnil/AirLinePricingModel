@@ -3,9 +3,6 @@ import java.util.*;
 
 import com.airline.admin.service.FlightsDetailsServiceIMPL;
 
-
-
-
 public class AdminPanel {
 	
 	public void adminPanel()
@@ -17,7 +14,7 @@ public class AdminPanel {
 		System.out.println("****************************************");
 		do
 		{
-			System.out.println("1.View Users");			
+			System.out.println("1.USERS");			
 			System.out.println("2.View Booking");
 			System.out.println("3. Add Flights Details");
 			System.out.println("Enter the Choice");
@@ -25,7 +22,8 @@ public class AdminPanel {
 			switch(ch)
 			{
 			case 1:
-				
+				AddUserByAdmin adduserbyAdmin=new AddUserByAdmin();
+				adduserbyAdmin.userOperation();
 				break;
 			case 2:
 				break;
