@@ -65,6 +65,14 @@ public class AddUserByAdmin {
 			sc.nextLine();
 			email=sc.nextLine();
 			b=userOpSer.isDeleted(email);
+			 if(b)
+			 {
+				 System.out.println("Deleted Sucessfully");
+			 }
+			 else
+			 {
+				 System.out.println("Some Problem is There");
+			 }
 			break;
 		case 4:
 			System.out.println("Enter the Name");
@@ -83,6 +91,12 @@ public class AddUserByAdmin {
 			 }
 			break;
 		case 5:
+			System.out.println("Enter the Name For Search");
+			sc.nextLine();
+			String searchName=sc.nextLine();
+			list=userOpSer.isSearchByName(searchName);
+			list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+			
 			break;
 		case 6:
 			System.exit(0);

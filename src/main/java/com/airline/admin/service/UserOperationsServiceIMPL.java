@@ -25,6 +25,11 @@ public class UserOperationsServiceIMPL implements UserOperationsService {
 		// TODO Auto-generated method stub
 		return userOpRepo.isDeleted(email);
 	}
+	@Override
+	public List<User> isSearchByName(String name) {
+		// TODO Auto-generated method stub
+		return userOpRepo.isSearchByName(name);
+	}
 
 	
 

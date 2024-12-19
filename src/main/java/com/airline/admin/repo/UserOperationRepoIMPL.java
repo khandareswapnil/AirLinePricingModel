@@ -28,12 +28,12 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 		return false;
 	}
 
-	List<User> list=new ArrayList<>();
 	@Override
 	public List<User> isGetUser() {
 		try {
 			stmt=conn.prepareStatement("Select *from userInfo");
 		 rs=stmt.executeQuery();
+		 List<User> list=new ArrayList<>();
 		 while(rs.next())
 		 {
 			User user=new User();
@@ -81,6 +81,32 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 			System.out.println("Error is"+ex);
 		}
 		return false;
+	}
+	@Override
+	public List<User> isSearchByName(String name) {
+		try {
+			stmt=conn.prepareStatement("select * from userInfo where name=?");
+			stmt.setString(1, name);
+			rs=stmt.executeQuery();
+			List<User> list=new ArrayList<>();
+			while(rs.next())
+			{
+				user=new User();
+				user.setName(rs.getString(2));
+				user.setEmail(rs.getString(3));
+				user.setContact(rs.getString(4));
+				user.setGender(rs.getString(6));
+				list.add(user);
+				
+			}
+			return list;
+			
+			
+		}catch(Exception ex)
+		{
+			System.out.println("Some Problem is There");
+		}
+		return null;
 	}
 
 }

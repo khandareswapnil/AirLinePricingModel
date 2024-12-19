@@ -9,5 +9,7 @@ public interface UserOperationsService {
 	public List<User> isGetUser();
 	public boolean isUpdateUser(String name,String email);
 	public boolean isDeleted(String email);
+	public List<User> isSearchByName(String name);
+	
 
 }
