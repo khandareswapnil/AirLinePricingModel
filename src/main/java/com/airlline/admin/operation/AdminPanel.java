@@ -1,7 +1,8 @@
-package com.airline.app;
+package com.airlline.admin.operation;
 import java.util.*;
 
 import com.airline.admin.service.FlightsDetailsServiceIMPL;
+import com.airline.app.ClientAppication;
 
 public class AdminPanel {
 	
@@ -14,9 +15,10 @@ public class AdminPanel {
 		System.out.println("****************************************");
 		do
 		{
-			System.out.println("1.USERS");			
-			System.out.println("2.View Booking");
-			System.out.println("3. Add Flights Details");
+			System.out.println("1.USERS");	
+			System.out.println("2. Add Cities");
+			System.out.println("3.View Booking");
+			System.out.println("4. Add Flights Details");
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
 			switch(ch)
@@ -26,6 +28,25 @@ public class AdminPanel {
 				adduserbyAdmin.userOperation();
 				break;
 			case 2:
+				System.out.println("1. Start City");
+				System.out.println("2. End City");
+				System.out.println("Enter the Choice");
+				int ch1=sc.nextInt();
+				switch(ch1)
+				{
+				case 1:
+					CityOperation startCityAdd=new CityOperation();
+					startCityAdd.addStartCity();
+					break;
+				case 2:
+					break;
+				case 3:
+					System.exit(3);
+					break;
+					default:
+						System.out.println("Invalid Input");
+				}
+				
 				break;
 			case 3:
 				System.out.println("ENTER THE NAME OF FLIGHTS");

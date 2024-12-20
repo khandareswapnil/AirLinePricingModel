@@ -1,4 +1,4 @@
-package com.airline.app;
+package com.airlline.admin.operation;
 
 import java.util.List;
 import java.util.Scanner;
