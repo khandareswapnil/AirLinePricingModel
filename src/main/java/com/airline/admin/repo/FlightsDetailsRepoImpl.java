@@ -1,6 +1,8 @@
 package com.airline.admin.repo;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.FlightsDetails;
@@ -95,6 +97,38 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			System.out.println("Error is"+ex);
 		}
 		return false;
+	}
+
+	@Override
+	public List<FlightsName> isGetFlightName() {
+		try {
+			List<FlightsName> list=new ArrayList<>();
+			stmt=conn.prepareStatement("select *from citymaster");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				FlightsName flightName=new FlightsName();
+				flightName.setFlightname(rs.getString(2));
+				list.add(flightName);
+			}
+			return list;
+		}catch(Exception ex)
+		{
+			System.out.println("Error is"+ex);
+		}
+		return null;
+	}
+
+	@Override
+	public List<FlightsTimes> isGetTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<FlightsSeatsAndBasePrice> isGetSeat() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 		
 }

@@ -112,6 +112,27 @@ public class AddFlightDetails {
 				}
 				break;
 			case 5:
+				System.out.println("Choose Your Starting City");
+				 list=cityOpSer.isGetCity();
+				list.forEach(list1->System.out.println(list1.getCityName()));
+				 startCity=sc.nextLine();
+				System.out.println("Choose Your Ending City");
+				for(CitytEntity city:list)
+				{
+					 if (!city.getCityName().equalsIgnoreCase(startCity)) {
+			                System.out.println(city.getCityName());
+				}
+				}
+				endCity=sc.nextLine();
+				System.out.println("Choose Flight");
+				List<FlightsName> list1=fDetailsService.isGetFlightName();
+				list1.forEach(list2->System.out.println(list2.getFlightname()));
+				String flname=sc.nextLine();
+				System.out.println("Enter the Date ");
+				String date=sc.nextLine();
+				System.out.println("Enter the departure time ");
+				
+					
 				break;
 				
 				default:
@@ -124,36 +145,15 @@ public class AddFlightDetails {
 		
 		
 		
+	
+	
 		
-//		System.out.println("Enter Your Starting City");
-//		List<CitytEntity> list=cityOpSer.isGetCity();
-//		list.forEach(list1->System.out.println(list1.getCityName()));
-//		String startCity=sc.nextLine();
-//		System.out.println("Enter Your Ending City");
-//		for(CitytEntity city:list)
-//		{
-//			 if (!city.getCityName().equalsIgnoreCase(startCity)) {
-//	                System.out.println(city.getCityName());
-//		}
-//		}
-//		
-//		String endCity=sc.nextLine();
-//		System.out.println("Enter the Distance");
-//		int dis=sc.nextInt();
-//		System.out.println("Enter the Date ");
-//		String date=sc.nextLine();
-//		System.out.println("Enter the departure time ");
-//		float time=sc.nextFloat();
-//		System.out.println("Enter the Flight Name");
-//		String fname=sc.nextLine();
-//		System.out.println("Enter the Base Price");
-//		int basePrice=sc.nextInt();
-//		
-//		FlightsDetails fDetail=new FlightsDetails( startCity,endCity,dis,date,time,fname,basePrice);
-//		FlightsDetailsServiceIMPL fDetailsService=new FlightsDetailsServiceIMPL();		
-//		fDetailsService.isAddFlightsDetails(fDetail);
-//		
-//		
+		
+		
+		
+		
+		
+		
 
 		
 	}
