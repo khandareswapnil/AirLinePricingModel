@@ -100,7 +100,7 @@ public class AddUserByAdmin {
 			break;
 		case 6:
 			System.exit(0);
-			break;
+			
 			default:
 				System.out.println("Invalid Choice Enter");
 			

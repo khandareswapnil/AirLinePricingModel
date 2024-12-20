@@ -43,15 +43,58 @@ public class CityOperation {
 			case 2:
 				List<CitytEntity> list=new ArrayList<>();
 				list=startCityService.isGetCity();
-				System.out.println("City Name");
-				list.forEach(list1->System.out.println(cityEntity.getCityName()));
+				if(list.isEmpty())
+				{
+					System.out.println("No City Present");
+
+			
+				}else
+				{
+					System.out.println("City Name");
+					list.forEach(list1->System.out.println(list1.getCityName()));
+				}
 				
 				break;
 			case 3:
+				System.out.println("Enter the Old City Name");
+				sc.nextLine();
+				 String oldCityName=sc.nextLine();
+				 System.out.println("Enter the New City Name");
+					sc.nextLine();
+					String newCityName=sc.nextLine();
+				 
+				 
+				b=startCityService.isUpdateCity(oldCityName,newCityName);
+				if(b)
+				{
+					System.out.println("City Name Update Sucess");
+				}
+				else
+				{
+					System.out.println("Some Problem Is There.............");
+				}
 				break;
 			case 4:
+				System.out.println("Enter the Old City Name");
+				sc.nextLine();
+				 cityName=sc.nextLine();
+				 b=startCityService.isDeleted(cityName);
+				 if(b)
+				 {
+					 System.out.println("Deleted Sucess");
+				 }
+				 else
+				 {
+					 System.out.println("Some Problem is There");
+				 }
 				break;
 			case 5:
+				System.out.println("Enter the City Name");
+				sc.nextLine();
+				cityName=sc.nextLine();
+				
+				 list=startCityService.isSearchCity(cityName);
+				 list.forEach(list1->System.out.println(list1.getCityName()));
 				break;
 			case 6:
 				System.exit(6);

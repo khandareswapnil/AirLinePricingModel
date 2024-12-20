@@ -1,81 +1,53 @@
 package com.airlline.admin.operation;
+
 import java.util.*;
 
-import com.airline.admin.service.FlightsDetailsServiceIMPL;
 import com.airline.app.ClientAppication;
 
 public class AdminPanel {
-	
-	public void adminPanel()
-	{
-		ClientAppication clintApp=new ClientAppication();
-		FlightsDetailsServiceIMPL fdetailsservice=new FlightsDetailsServiceIMPL();
-		Scanner sc=new Scanner(System.in);
+
+	public void adminPanel() {
+		ClientAppication clintApp = new ClientAppication();
+		Scanner sc = new Scanner(System.in);
 		System.out.println("WELOCME TO ADMIN PANEL");
 		System.out.println("****************************************");
-		do
-		{
-			System.out.println("1.USERS");	
-			System.out.println("2. Add Cities");
+		do {
+			System.out.println("1.USERS");
+			System.out.println("2. City Operation");
 			System.out.println("3.View Booking");
 			System.out.println("4. Add Flights Details");
 			System.out.println("Enter the Choice");
-			int ch=sc.nextInt();
-			switch(ch)
-			{
+			int ch = sc.nextInt();
+			switch (ch) {
 			case 1:
-				AddUserByAdmin adduserbyAdmin=new AddUserByAdmin();
+				AddUserByAdmin adduserbyAdmin = new AddUserByAdmin();
 				adduserbyAdmin.userOperation();
 				break;
 			case 2:
-				System.out.println("1. Start City");
-				System.out.println("2. End City");
-				System.out.println("Enter the Choice");
-				int ch1=sc.nextInt();
-				switch(ch1)
-				{
-				case 1:
-					CityOperation startCityAdd=new CityOperation();
-					startCityAdd.addStartCity();
-					break;
-				case 2:
-					break;
-				case 3:
-					System.exit(3);
-					break;
-					default:
-						System.out.println("Invalid Input");
-				}
-				
+				CityOperation startCityAdd = new CityOperation();
+				startCityAdd.addStartCity();
+
 				break;
 			case 3:
 				System.out.println("ENTER THE NAME OF FLIGHTS");
 				sc.nextLine();
-				String fname=sc.nextLine();
+				String fname = sc.nextLine();
 				System.out.println("Enter the Time Of Flights");
-				int time=sc.nextInt();
+				int time = sc.nextInt();
 				System.out.println("Enter the No Of Seats");
-				int no_seats=sc.nextInt();
+				int no_seats = sc.nextInt();
 				System.out.println("Enter the Base Price for Per KM");
-				int basePrice=sc.nextInt();
+				int basePrice = sc.nextInt();
+
 				
-				boolean b=fdetailsservice.isAddFlightsDetails(fname,time,no_seats,basePrice);
-				if(b)
-				{
-					System.out.println("Flights Details Added Sucess");
-				}
-				else
-				{
-					System.out.println("Some Problem Is There in Add Flights Repository");
-				}
 				break;
 			case 4:
 				clintApp.main(null);
 				break;
-				default:
-					System.out.println("Invalid Input");
+			default:
+				System.out.println("Invalid Input");
 			}
-		}while(true);
-		
+		} while (true);
+
 	}
 }
