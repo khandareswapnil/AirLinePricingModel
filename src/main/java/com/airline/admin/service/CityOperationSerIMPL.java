@@ -16,6 +16,21 @@ public class CityOperationSerIMPL implements CityOperationInte {
 		
 		return Cityoprepo.isGetCity();
 	}
+	@Override
+	public boolean isUpdateCity(String oldCityName,String newCityName) {
+		// TODO Auto-generated method stub
+		return Cityoprepo.isUpdateCity(oldCityName,newCityName);
+	}
+	@Override
+	public boolean isDeleted(String name) {
+		// TODO Auto-generated method stub
+		return Cityoprepo.isDeleted(name);
+	}
+	@Override
+	public List<CitytEntity> isSearchCity(String name) {
+		// TODO Auto-generated method stub
+		return Cityoprepo.isSearchCity(name);
+	}
 	
 
 }
