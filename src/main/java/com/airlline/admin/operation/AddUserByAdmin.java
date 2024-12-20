@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.airline.admin.service.UserOperationsServiceIMPL;
 import com.airline.entity.User;
+import com.airline.user.operation.UserRegistrationOperation;
 
 public class AddUserByAdmin {
 	Scanner sc=new Scanner(System.in);
@@ -27,33 +28,8 @@ public class AddUserByAdmin {
 		switch(ch)
 		{
 		case 1:
-			System.out.println("Enter the Name");
-			sc.nextLine();
-			String name=sc.nextLine();
-			System.out.println("Enter the Email");
-			String email=sc.nextLine();
-			System.out.println("Enter the Contact Number");
-			String contact=sc.nextLine();
-			System.out.println("Enter the Gender");
-			String gender=sc.nextLine();
-			System.out.println("Enter the Password");
-			String password=sc.nextLine();
-			
-			user.setName(name);
-			user.setEmail(email);
-			user.setContact(contact);
-			user.setGender(gender);
-			user.setPassword(password);
-			
-			boolean b=userOpSer.isAddUser(user);
-			if(b)
-			{
-				System.out.println("User Added Sucess");
-			}
-			else
-			{
-				System.out.println("Some Problem is There from User Add By Admin");
-			}
+			UserRegistrationOperation userRegisOpe=new UserRegistrationOperation();
+			userRegisOpe.registerUser();
 			break;
 		case 2:
 			list=userOpSer.isGetUser();
@@ -63,35 +39,35 @@ public class AddUserByAdmin {
 		case 3:
 			System.out.println("Enter the Email");
 			sc.nextLine();
-			email=sc.nextLine();
-			b=userOpSer.isDeleted(email);
+			String email=sc.nextLine();
+			boolean b=userOpSer.isDeleted(email);
 			 if(b)
 			 {
-				 System.out.println("Deleted Sucessfully");
+				 System.out.println("Deleted Sucessfully....................");
 			 }
 			 else
 			 {
-				 System.out.println("Some Problem is There");
+				 System.out.println("Some Problem is There.......................");
 			 }
 			break;
 		case 4:
-			System.out.println("Enter the Name");
+			System.out.println("Enter the Name :");
 			sc.nextLine();
-			name=sc.nextLine();
-			System.out.println("Enter the Email");
+			String name=sc.nextLine();
+			System.out.println("Enter the Email :");
 			email=sc.nextLine();
 			 b=userOpSer.isUpdateUser(name,email);
 			 if(b)
 			 {
-				 System.out.println("Update Sucessfully");
+				 System.out.println("Update Sucessfully...................");
 			 }
 			 else
 			 {
-				 System.out.println("Some Problem is There");
+				 System.out.println("Some Problem is There...................");
 			 }
 			break;
 		case 5:
-			System.out.println("Enter the Name For Search");
+			System.out.println("Enter the Name For Search :");
 			sc.nextLine();
 			String searchName=sc.nextLine();
 			list=userOpSer.isSearchByName(searchName);
