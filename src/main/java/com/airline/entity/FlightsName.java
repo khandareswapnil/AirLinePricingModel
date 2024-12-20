@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FlightsTimes {
-	private String time;
-
-
+public class FlightsName {
+	private String flightname;
 }

@@ -26,22 +26,14 @@ public class AdminPanel {
 			case 2:
 				CityOperation startCityAdd = new CityOperation();
 				startCityAdd.addStartCity();
-
 				break;
 			case 3:
-				System.out.println("ENTER THE NAME OF FLIGHTS");
-				sc.nextLine();
-				String fname = sc.nextLine();
-				System.out.println("Enter the Time Of Flights");
-				int time = sc.nextInt();
-				System.out.println("Enter the No Of Seats");
-				int no_seats = sc.nextInt();
-				System.out.println("Enter the Base Price for Per KM");
-				int basePrice = sc.nextInt();
-
-				
 				break;
 			case 4:
+				AddFlightDetails addFlights=new AddFlightDetails();
+				addFlights.isDistanceOFCities();;
+				break;
+			case 5:
 				clintApp.main(null);
 				break;
 			default:
