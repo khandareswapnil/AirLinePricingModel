@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.airline.entity.AddDistanceOfCity;
+import com.airline.entity.FlightSchedules;
 import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
@@ -129,6 +130,55 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	public List<FlightsSeatsAndBasePrice> isGetSeat() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean isAddFlightSchedule(FlightSchedules fs) {
+		// TODO Auto-generated method stub
+		int startCityId;
+		int endCityId;
+		int flightNameId;
+		int flightTimeId;
+		int flightBasePriceId;
+		int flightScheduleDate;
+		try 
+		{
+			// for start city id
+			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
+			stmt.setString(1,fs.getStartCity() );
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				startCityId=rs.getInt(1);
+			}
+			else System.out.println("Some problem is there while fetching id of start city");
+			
+			// for end city id
+			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
+			stmt.setString(1,fs.getEndCity() );
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				endCityId=rs.getInt(1);
+			}
+			else System.out.println("Some problem is there while fetching id of end city");
+			
+			//for flight name id
+			stmt=conn.prepareStatement("select fid from citymaster where cityname=?");
+			stmt.setString(1,fs.getEndCity() );
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				endCityId=rs.getInt(1);
+			}
+			else System.out.println("Some problem is there while fetching id of end city");
+			
+		}
+		catch(Exception ex) 
+		{
+			System.out.println(ex);
+		}
+		return false;
 	}
 		
 }

@@ -7,6 +7,7 @@ import com.airline.admin.service.CityOperationSerIMPL;
 import com.airline.admin.service.FlightsDetailsServiceIMPL;
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.CitytEntity;
+import com.airline.entity.FlightSchedules;
 import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
@@ -131,6 +132,24 @@ public class AddFlightDetails {
 				System.out.println("Enter the Date ");
 				String date=sc.nextLine();
 				System.out.println("Enter the departure time ");
+				List <FlightsTimes> list2 =fDetailsService.isGetTime();
+				list2.forEach(list3->System.out.println(list3.getTime()));
+				String time=sc.nextLine();
+				System.out.println("Enter the sits base price");
+				int bprice=sc.nextInt();
+				sc.nextLine();
+				System.out.println("Enter the date");
+				String fsdate=sc.nextLine();
+				//Setting data to entity class
+				FlightSchedules fs=new FlightSchedules(startCity,endCity,flname,time,bprice,date);
+				//calling service method by passing entity class object
+				boolean status=fDetailsService.isAddFlightSchedule(fs);
+				if(status) {
+					System.out.println("Flight Schedule added succeessfully");
+				}
+				else {
+					System.out.println("Some problem is there");
+				}
 				
 					
 				break;

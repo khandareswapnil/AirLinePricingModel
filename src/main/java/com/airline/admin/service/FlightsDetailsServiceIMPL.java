@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
 import com.airline.entity.AddDistanceOfCity;
+import com.airline.entity.FlightSchedules;
 import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
@@ -45,13 +46,19 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	@Override
 	public List<FlightsTimes> isGetTime() {
 		// TODO Auto-generated method stub
-		return null;
+		return fDetailsRepo.isGetTime();
 	}
 
 	@Override
 	public List<FlightsSeatsAndBasePrice> isGetSeat() {
 		// TODO Auto-generated method stub
-		return null;
+		return fDetailsRepo.isGetSeat();
+	}
+
+	@Override
+	public boolean isAddFlightSchedule(FlightSchedules fs) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isAddFlightSchedule(fs);
 	}
 
 }
