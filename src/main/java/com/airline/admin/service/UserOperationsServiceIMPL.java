@@ -30,6 +30,11 @@ public class UserOperationsServiceIMPL implements UserOperationsService {
 		// TODO Auto-generated method stub
 		return userOpRepo.isSearchByName(name);
 	}
+	@Override
+	public List<User> isSearchByCityName(String cityName) {
+		// TODO Auto-generated method stub
+		return userOpRepo.isSearchByCityName(cityName);
+	}
 
 	
 

@@ -20,7 +20,7 @@ public class AddUserByAdmin {
 		System.out.println("2. View User");
 		System.out.println("3. Delete the User");
 		System.out.println("4. Update The User ");
-		System.out.println("5. Serach User By Name");
+		System.out.println("5. Serach User");
 		System.out.println("6. For EXIT");
 		System.out.println("Enter the Choice");
 		int ch=sc.nextInt();
@@ -67,13 +67,37 @@ public class AddUserByAdmin {
 			 }
 			break;
 		case 5:
-			System.out.println("Enter the Name For Search :");
-			sc.nextLine();
-			String searchName=sc.nextLine();
-			list=userOpSer.isSearchByName(searchName);
-			list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+			do {
+				System.out.println("1. Search By Name");
+				System.out.println("2. Search By City");
+				System.out.println("3. FOR EXIT");
+				System.out.println("Enter the Choice");
+				 int ch1=sc.nextInt();
+				switch(ch1)
+				{
+					case 1:
+						System.out.println("Enter the Name For Search :");
+						sc.nextLine();
+						String searchName=sc.nextLine();
+						list=userOpSer.isSearchByName(searchName);
+						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+						break;
+					case 2:
+						System.out.println("Enter the City Name For Search :");
+						sc.nextLine();
+						String cityNamee=sc.nextLine();
+						list=userOpSer.isSearchByName(cityNamee);
+						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+						break;
+					case 3:
+						break;
+						default:
+							System.out.println("Invalid Input");
+				}
+			}while(true);
 			
-			break;
+			
+		
 		case 6:
 			AdminPanel adminPanel=new AdminPanel();
 			adminPanel.adminPanel();

@@ -10,6 +10,7 @@ public interface UserOperationsService {
 	public boolean isUpdateUser(String name,String email);
 	public boolean isDeleted(String email);
 	public List<User> isSearchByName(String name);
-	
+	public List<User> isSearchByCityName(String cityName);
+
 
 }
