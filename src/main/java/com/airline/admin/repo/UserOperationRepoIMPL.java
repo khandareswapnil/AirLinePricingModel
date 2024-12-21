@@ -12,12 +12,15 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 	@Override
 	public boolean isAddUser(User user) {
 		try {
-		stmt=conn.prepareStatement("Insert into userInfo values('0',?,?,?,?,?)");
+		stmt=conn.prepareStatement("Insert into userInfo values('0',?,?,?,?,?,?)");
 		stmt.setString(1, user.getName());
 		stmt.setString(2, user.getEmail());
 		stmt.setString(3, user.getContact());
 		stmt.setString(4, user.getPassword());
 		stmt.setString(5, user.getGender());
+		stmt.setString(6, user.getCityname());
+
+		
 		
 		int res=stmt.executeUpdate();		
 		return res>0?true:false;

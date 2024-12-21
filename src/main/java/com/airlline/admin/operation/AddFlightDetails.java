@@ -93,7 +93,7 @@ public class AddFlightDetails {
 					System.out.println("Some Problem is There..................");
 
 				}
-				
+				break;
 					
 			case 4:
 				System.out.println("Enter the Flights Seats");

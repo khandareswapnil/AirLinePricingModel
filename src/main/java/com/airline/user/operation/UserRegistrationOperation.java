@@ -24,10 +24,13 @@ public class UserRegistrationOperation {
         System.out.println("Enter Gender(Male/Female/Other): ");
         String gender = sc.nextLine();
         
+        System.out.println("Enter Your City): ");
+        String city = sc.nextLine();
+        
         System.out.println("Enter password");
         String password= sc.nextLine();
         
-        User myUser = new User(name,email,contact,gender,password); 
+        User myUser = new User(name,email,contact,gender,city,password); 
         UserOperationsServiceIMPL userOpService=new UserOperationsServiceIMPL();
         
         boolean status = userOpService.isAddUser(myUser);
