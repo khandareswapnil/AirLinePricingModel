@@ -97,7 +97,8 @@ public class CityOperation {
 				 list.forEach(list1->System.out.println(list1.getCityName()));
 				break;
 			case 6:
-				System.exit(6);
+				AdminPanel adminPanel=new AdminPanel();
+				adminPanel.adminPanel();
 				break;
 				default:
 					System.out.println("Invalid Input");

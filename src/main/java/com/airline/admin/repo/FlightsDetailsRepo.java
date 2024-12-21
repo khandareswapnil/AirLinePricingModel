@@ -17,5 +17,6 @@ public interface FlightsDetailsRepo {
 	public List<FlightsName> isGetFlightName();
 	public List<FlightsTimes> isGetTime();
 	public List<FlightsSeatsAndBasePrice> isGetSeat();
- 
+	public boolean isAddFlightSchedule(FlightsDetails fDetails);
+
 }

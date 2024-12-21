@@ -11,11 +11,11 @@ public class FlightsDetails {
 	
 	private String startCity;
 	private String endCity;
-	private int distance;
 	private String date;
-	private float time;
+	private String time;
 	private String fname;
 	private int basePrice;
+	private int no_seats;
 	
 	
 }

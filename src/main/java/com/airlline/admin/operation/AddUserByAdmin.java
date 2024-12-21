@@ -75,7 +75,8 @@ public class AddUserByAdmin {
 			
 			break;
 		case 6:
-			System.exit(0);
+			AdminPanel adminPanel=new AdminPanel();
+			adminPanel.adminPanel();
 			
 			default:
 				System.out.println("Invalid Choice Enter");

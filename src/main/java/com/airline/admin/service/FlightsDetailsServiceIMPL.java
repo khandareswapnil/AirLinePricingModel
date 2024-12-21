@@ -45,13 +45,19 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	@Override
 	public List<FlightsTimes> isGetTime() {
 		// TODO Auto-generated method stub
-		return null;
+		return fDetailsRepo.isGetTime();
 	}
 
 	@Override
 	public List<FlightsSeatsAndBasePrice> isGetSeat() {
+		
+		return fDetailsRepo.isGetSeat();
+	}
+
+	@Override
+	public boolean isAddFlightSchedule(FlightsDetails fDetails) {
 		// TODO Auto-generated method stub
-		return null;
+		return fDetailsRepo.isAddFlightSchedule(fDetails);
 	}
 
 }

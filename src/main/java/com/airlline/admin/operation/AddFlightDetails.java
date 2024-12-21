@@ -27,6 +27,7 @@ public class AddFlightDetails {
 			System.out.println("3. Add Distance");
 			System.out.println("4. Add Seats And Base Price");
 			System.out.println("5. Add Flights Schedule");
+			System.out.println("6. FOR Exit");
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
 			switch(ch)
@@ -115,6 +116,7 @@ public class AddFlightDetails {
 				System.out.println("Choose Your Starting City");
 				 list=cityOpSer.isGetCity();
 				list.forEach(list1->System.out.println(list1.getCityName()));
+				sc.nextLine();
 				 startCity=sc.nextLine();
 				System.out.println("Choose Your Ending City");
 				for(CitytEntity city:list)
@@ -131,8 +133,30 @@ public class AddFlightDetails {
 				System.out.println("Enter the Date ");
 				String date=sc.nextLine();
 				System.out.println("Enter the departure time ");
+				List<FlightsTimes> list2=fDetailsService.isGetTime();
+				list2.forEach(list3->System.out.println(list3.getTime()));
+				String time=sc.nextLine();
+				System.out.println("Choose the No. of Seats and Base Price");
+				List<FlightsSeatsAndBasePrice> list4=fDetailsService.isGetSeat();
+				list4.forEach(list5->System.out.println(list5.getNo_OF_Seats()+"\t"+list5.getBasePrice()));
+				 seats=sc.nextInt();
+				 basePrice=sc.nextInt();
+				FlightsDetails fDetails=new FlightsDetails(startCity,endCity,date,time,flname,basePrice,seats);
+				b=fDetailsService.isAddFlightSchedule(fDetails);
+				if(b)
+				{
+					System.out.println("Flights Schedule Added Sucess");
+				}
+				else
+				{
+					System.out.println("Please Enter the Enter the Information");
+				}
 				
 					
+				break;
+			case 6:
+				AdminPanel adminPanel=new AdminPanel();
+				adminPanel.adminPanel();
 				break;
 				
 				default:
