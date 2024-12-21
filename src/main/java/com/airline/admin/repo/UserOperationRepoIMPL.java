@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.airline.entity.CitytEntity;
 import com.airline.entity.User;
 import com.ariline.config.DBConfig;
 
@@ -90,6 +91,33 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 		try {
 			stmt=conn.prepareStatement("select * from userInfo where name=?");
 			stmt.setString(1, name);
+			rs=stmt.executeQuery();
+			List<User> list=new ArrayList<>();
+			while(rs.next())
+			{
+				user=new User();
+				user.setName(rs.getString(2));
+				user.setEmail(rs.getString(3));
+				user.setContact(rs.getString(4));
+				user.setGender(rs.getString(6));
+				list.add(user);
+				
+			}
+			return list;
+			
+			
+		}catch(Exception ex)
+		{
+			System.out.println("Some Problem is There");
+		}
+		return null;
+	}
+
+	@Override
+	public List<User> isSearchByCityName(String cityName) {
+		try {
+			stmt=conn.prepareStatement("select * from userInfo where cityName=?");
+			stmt.setString(1, cityName);
 			rs=stmt.executeQuery();
 			List<User> list=new ArrayList<>();
 			while(rs.next())
