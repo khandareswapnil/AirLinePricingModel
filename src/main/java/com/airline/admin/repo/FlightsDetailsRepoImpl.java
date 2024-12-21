@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.airline.entity.AddDistanceOfCity;
-import com.airline.entity.FlightSchedules;
 import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
@@ -70,6 +69,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			if(rs.next())
 			{
 				sid=rs.getInt(1);
+				
 				if(sid!=0)
 				{
 					stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
@@ -104,7 +104,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	public List<FlightsName> isGetFlightName() {
 		try {
 			List<FlightsName> list=new ArrayList<>();
-			stmt=conn.prepareStatement("select *from citymaster");
+			stmt=conn.prepareStatement("select *from flightsinfomaster");
 			rs=stmt.executeQuery();
 			while(rs.next())
 			{
@@ -122,63 +122,121 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 
 	@Override
 	public List<FlightsTimes> isGetTime() {
-		// TODO Auto-generated method stub
+		try {
+			List<FlightsTimes> list=new ArrayList<>();
+			stmt=conn.prepareStatement("select *from flightstiming_master");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				FlightsTimes time=new FlightsTimes();
+				time.setTime(rs.getString(2));
+				list.add(time);
+			}
+			return list;
+		}catch(Exception ex)
+		{
+			System.out.println("Error is"+ex);
+		}
 		return null;
 	}
 
 	@Override
 	public List<FlightsSeatsAndBasePrice> isGetSeat() {
-		// TODO Auto-generated method stub
+		try {
+			List<FlightsSeatsAndBasePrice> list=new ArrayList<>();
+			stmt=conn.prepareStatement("select *from seat_base_price_master");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				FlightsSeatsAndBasePrice fSABP=new FlightsSeatsAndBasePrice();
+				fSABP.setNo_OF_Seats(rs.getInt(2));
+				fSABP.setBasePrice(rs.getInt(3));
+				list.add(fSABP);
+			}
+			return list;
+			
+		}catch(Exception ex)
+		{
+			System.out.println("Error is"+ex);
+		}
 		return null;
 	}
 
 	@Override
-	public boolean isAddFlightSchedule(FlightSchedules fs) {
-		// TODO Auto-generated method stub
-		int startCityId;
-		int endCityId;
-		int flightNameId;
-		int flightTimeId;
-		int flightBasePriceId;
-		int flightScheduleDate;
-		try 
-		{
-			// for start city id
-			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-			stmt.setString(1,fs.getStartCity() );
+
+	public boolean isAddFlightSchedule(FlightsDetails fDetails) {
+		try {
+			int scid=0;
+			int ecid=0;
+			int fid=0;
+			int tid=0;
+			int sbpid=0;
+			stmt=conn.prepareStatement("select * from CityMaster where cityName=?");
+			stmt.setString(1,fDetails.getStartCity());
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				startCityId=rs.getInt(1);
-			}
-			else System.out.println("Some problem is there while fetching id of start city");
+				  scid=rs.getInt(1);
+				if(scid!=0)
+				{
+					stmt=conn.prepareStatement("select *from cityMaster where cityName=?");
+					stmt.setString(1, fDetails.getEndCity());
+					rs=stmt.executeQuery();
+					if(rs.next())
+					{
+						ecid=rs.getInt(1);
+					}
+				}
 			
-			// for end city id
-			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-			stmt.setString(1,fs.getEndCity() );
+			}
+			stmt=conn.prepareStatement("select *from flightsinfomaster where flightsname=?");
+			stmt.setString(1, fDetails.getFname());
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				endCityId=rs.getInt(1);
+				fid=rs.getInt(1);
 			}
-			else System.out.println("Some problem is there while fetching id of end city");
 			
-			//for flight name id
-			stmt=conn.prepareStatement("select fid from citymaster where cityname=?");
-			stmt.setString(1,fs.getEndCity() );
+			stmt=conn.prepareStatement("select * from flightstiming_master where time=?");
+			stmt.setString(1, fDetails.getTime());
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				endCityId=rs.getInt(1);
+				tid=rs.getInt(1);
 			}
-			else System.out.println("Some problem is there while fetching id of end city");
+			stmt=conn.prepareStatement("select * from seat_base_price_master where no_seats=? and base_price=?");
+			stmt.setInt(1, fDetails.getNo_seats());
+			stmt.setInt(2, fDetails.getBasePrice());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				sbpid=rs.getInt(1);
+			}
+			
+			if( scid!=0 && ecid!=0 &&fid!=0 && tid!=0 && sbpid!=0)
+			{
+				stmt=conn.prepareStatement("insert into flightschedule values('0',?,?,?,?,?,?)");
+				stmt.setInt(1, scid);
+				stmt.setInt(2, ecid);
+				stmt.setInt(3, fid);
+				stmt.setInt(4, tid);
+				stmt.setInt(5, sbpid);
+				stmt.setString(6,fDetails.getDate());
+				int val=stmt.executeUpdate();
+				return val>0?true:false;
+			}
+			else 
+			{
+				return false;
+			}
 			
 		}
-		catch(Exception ex) 
+		catch(Exception ex)
 		{
-			System.out.println(ex);
+			System.out.println("Error is"+ex);
+			return false;
 		}
-		return false;
+
 	}
 		
 }

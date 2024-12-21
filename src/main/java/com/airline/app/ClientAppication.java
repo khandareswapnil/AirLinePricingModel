@@ -30,7 +30,7 @@ public class ClientAppication {
 				}
 				else
 				{
-					System.out.println("Please Enter the Correct UserName And Password");
+					System.out.println("Enter the Correct UserName and Password");
 					admin.adminInfo();
 				}
 				break;

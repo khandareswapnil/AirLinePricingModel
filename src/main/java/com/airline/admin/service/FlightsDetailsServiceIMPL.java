@@ -51,14 +51,14 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 
 	@Override
 	public List<FlightsSeatsAndBasePrice> isGetSeat() {
-		// TODO Auto-generated method stub
+		
 		return fDetailsRepo.isGetSeat();
 	}
 
 	@Override
-	public boolean isAddFlightSchedule(FlightSchedules fs) {
+	public boolean isAddFlightSchedule(FlightsDetails fDetails) {
 		// TODO Auto-generated method stub
-		return fDetailsRepo.isAddFlightSchedule(fs);
+		return fDetailsRepo.isAddFlightSchedule(fDetails);
 	}
 
 }
