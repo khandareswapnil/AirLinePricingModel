@@ -15,7 +15,7 @@ public class UserRegistrationOperation {
 		System.out.println("Enter Name: ");
         String name = sc.nextLine();
         
-        System.out.print("Enter Email: ");
+        System.out.println("Enter Email: ");
         String email = sc.nextLine();
         
         System.out.println ("Enter Contact Number: ");
