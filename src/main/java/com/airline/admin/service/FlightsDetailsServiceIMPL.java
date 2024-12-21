@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
 import com.airline.entity.AddDistanceOfCity;
-import com.airline.entity.FlightSchedules;
 import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
