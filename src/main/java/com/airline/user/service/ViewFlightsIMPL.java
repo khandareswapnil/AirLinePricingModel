@@ -3,19 +3,35 @@ package com.airline.user.service;
 import java.util.*;
 
 import com.airline.entity.FlightsDetails;
+import com.airline.entity.ViewFlightsScheduleByUser;
 import com.airline.user.repo.ViewFlightsRepo;
 import com.airline.user.repo.ViewFlightsRepoIMPL;
 
 public class ViewFlightsIMPL implements ViewFlights
 {
-	ViewFlightsRepoIMPL objFlightRepo =new ViewFlightsRepoIMPL();
+	ViewFlightsRepoIMPL objFlightRepo =new ViewFlightsRepoIMPL();   // created object of repository class
+	List<ViewFlightsScheduleByUser> list;                           // created list to accept list of flights from repo
+	
 
 	@Override
-	public List<FlightsDetails> isGetAllFlightsByStartEndCity(String startcity, String endcity) {
+	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCity(String startcity, String endcity) {
+		// TODO Auto-generated method stub	
+		list=objFlightRepo.viewAllFlightsByStartEndCity (startcity, endcity);	
+		return list;
+	}
+
+	@Override
+	public List<ViewFlightsScheduleByUser> isGetAllFlights() {
 		// TODO Auto-generated method stub
-		objFlightRepo.viewAllFlightsByStartEndCity (startcity, endcity);
-		
-		return null;
+		list=objFlightRepo.viewAllFlights();
+		return list;
+	}
+
+	@Override
+	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCityDate(String startcity, String endcity, String date) {
+		// TODO Auto-generated method stub
+		list=objFlightRepo.viewAllFlightsByStartEndCityDate (startcity, endcity,date);	
+		return list;
 	}
 	
 		
