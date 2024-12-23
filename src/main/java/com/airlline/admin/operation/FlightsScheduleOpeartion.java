@@ -10,11 +10,14 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
 import com.airline.entity.FlightsTimes;
+import com.airline.entity.ViewFlightsScheduleByUser;
+import com.airline.user.service.ViewFlightsIMPL;
 
 public class FlightsScheduleOpeartion {
 	Scanner sc=new Scanner(System.in);
 	FlightsDetailsServiceIMPL fDetailsService=new FlightsDetailsServiceIMPL();
 	CityOperationSerIMPL cityOpSer=new CityOperationSerIMPL();
+	ViewFlightsIMPL viewFlight=new ViewFlightsIMPL();
 
 	
 	public void flightsScheduleOperation()
@@ -72,6 +75,11 @@ public class FlightsScheduleOpeartion {
 				System.out.println("Please Enter the Enter the Information");
 			}
 			
+			break;
+		case 4:
+			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
+			List<ViewFlightsScheduleByUser> flightsList= viewFlight.isGetAllFlights();
+			flightsList.forEach(flightsList1->System.out.println(flightsList1.getId() +"\t"+flightsList1.getFlightName()+"\t"+flightsList1.getStartCity()+"\t\t"+flightsList1.getEndCity()+"\t\t"+flightsList1.getDate()+"\t"+flightsList1.getTime()+"\t"+flightsList1.getNoOfSits()+"\t\t"+flightsList1.getBasePrice()));
 			break;
 		}
 		}while(true);

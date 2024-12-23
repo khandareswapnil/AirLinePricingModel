@@ -23,8 +23,8 @@ public class ViewFlightsIMPL implements ViewFlights
 	@Override
 	public List<ViewFlightsScheduleByUser> isGetAllFlights() {
 		// TODO Auto-generated method stub
-		list=objFlightRepo.viewAllFlights();
-		return list;
+		return list=objFlightRepo.viewAllFlights();
+		
 	}
 
 	@Override
