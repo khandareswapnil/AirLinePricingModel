@@ -39,9 +39,14 @@ public class UserRegistrationOperation {
         {
         	System.out.println("Registration Successful ! Login now.");
         	
+        	System.out.println("Enter the USer Name");
+			String userName=sc.nextLine();
+			System.out.println("Enter the Password");
+			password=sc.nextLine();
+			
         	// for login after registration
         	UserLoginOperation userloginOperation = new UserLoginOperation();
-        	boolean loginSuccess = userloginOperation.userLogin();      //method call for login
+        	boolean loginSuccess = userloginOperation.userLogin(userName,password);      //method call for login
         	return loginSuccess;
         }
         else

@@ -16,47 +16,42 @@ public class ClientAppication {
 
 		do
 		{
-			System.out.println("1. ADMIN LOGIN");
-			System.out.println("2. USER LOGIN");
-			System.out.println("Enter the Choice");
+			System.out.println("******** WELCOME TO NANA CHI AIRLINE ******** ");
+			System.out.println("1.Login");
+			System.out.println("2. Register");
+
 			int ch=sc.nextInt();
 			switch(ch)
 			{
 			case 1:
-				boolean b=admin.adminInfo();
-				if(b)
+				System.out.println("Enter the USer Name");
+				sc.nextLine();
+				String userName=sc.nextLine();
+				System.out.println("Enter the Password");
+				String password=sc.nextLine();
+				
+				if(userName.equals("Admin") && password.equals("Admin"))
 				{
 					adPanel.adminPanel();
 				}
 				else
 				{
-					System.out.println("Enter the Correct UserName and Password");
-					admin.adminInfo();
+					UserLoginOperation ul = new UserLoginOperation();
+					boolean status= ul.userLogin(userName,password);
+					if(status)
+					{
+						up.userPanel();
+					}
 				}
+				
 				break;
 			case 2:
-				System.out.println("\n1. FOR NEW USER REGISTER FIRST");
-				System.out.println("2. CONTINUE LOGIN..");
-				System.out.println("Enter the choice");
-				int num =sc.nextInt();
-				sc.nextLine();
-				
-				if (num==1)
-				{       UserRegistrationOperation ur= new UserRegistrationOperation();
+				     UserRegistrationOperation ur= new UserRegistrationOperation();
 				        boolean status =ur.registerUser(); 
 				        if(status)
 				        	up.userPanel();
 				        	
-				}
-				else if(num==2)
-				{
-						UserLoginOperation ul = new UserLoginOperation();
-						boolean status= ul.userLogin();
-						if(status)
-						{
-							up.userPanel();
-						}
-				}
+				
 
 
 				break;

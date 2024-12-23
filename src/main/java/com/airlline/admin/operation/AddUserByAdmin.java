@@ -86,8 +86,8 @@ public class AddUserByAdmin {
 						System.out.println("Enter the City Name For Search :");
 						sc.nextLine();
 						String cityNamee=sc.nextLine();
-						list=userOpSer.isSearchByName(cityNamee);
-						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+						list=userOpSer.isSearchByCityName(cityNamee);
+						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
 						break;
 					case 3:
 						break;

@@ -4,14 +4,12 @@ import java.util.*;
 import com.airline.user.repo.UserLoginRepo;
 public class UserLoginOperation {
 	Scanner sc =new Scanner(System.in);
-	public boolean userLogin()
+	public boolean userLogin(String userName,String password)
 	{
-		System.out.println("Enter your email");
-		String email =sc.nextLine();
-		System.out.println("Enter Your Password");
-		String password = sc.nextLine();
+		
+		
 		UserLoginRepo userLoginRepo = new UserLoginRepo();
-		boolean status= userLoginRepo.validateUserRepo(email,password);
+		boolean status= userLoginRepo.validateUserRepo(userName,password);
 		
 		if(status)
 		{
@@ -20,7 +18,12 @@ public class UserLoginOperation {
 		else
 		{
 			System.out.println("Wrong username or password . please try again..");
-			userLogin();
+			System.out.println("Enter the User Name");
+			 userName=sc.nextLine();
+			System.out.println("Enter the Password");
+			password=sc.nextLine();
+			
+			userLogin(userName,password);
 		}
 		
 		return true;
