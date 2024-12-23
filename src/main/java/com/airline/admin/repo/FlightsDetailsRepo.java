@@ -18,5 +18,10 @@ public interface FlightsDetailsRepo {
 	public List<FlightsTimes> isGetTime();
 	public List<FlightsSeatsAndBasePrice> isGetSeat();
 	public boolean isAddFlightSchedule(FlightsDetails fDetails);
+	public int isUpdateFlightsName();
+	public List<FlightsName> isSearchName(FlightsName fname);
+	public boolean isUpdate(String fname,String newName);
+	public boolean isDeleteFlight(FlightsName fname);
+	
 
 }

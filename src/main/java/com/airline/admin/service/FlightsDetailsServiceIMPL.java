@@ -60,6 +60,34 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 		return fDetailsRepo.isAddFlightSchedule(fDetails);
 	}
 
+	@Override
+	public int isUpdateFlightsName() {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdateFlightsName();
+	}
+
+	@Override
+	public List<FlightsName> isSearchName(FlightsName fname) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isSearchName(fname);
+	}
+
+	@Override
+	public boolean isUpdate(String fname, String newName) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdate(fname, newName);
+	}
+
+	@Override
+	public boolean isDeleteFlight(FlightsName fname) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isDeleteFlight(fname);
+	}
+
+	
+
+	
+
 }
 	
 	

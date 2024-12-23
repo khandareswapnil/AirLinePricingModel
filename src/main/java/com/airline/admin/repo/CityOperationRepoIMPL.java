@@ -16,7 +16,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 			return val > 0 ? true : false;
 
 		} catch (Exception ex) {
-			System.out.println("Error is" + ex);
+			ex.printStackTrace();
 
 		}
 		return false;
@@ -41,7 +41,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 			return list;
 
 		} catch (Exception ex) {
-			System.out.println("Error is" + ex);
+			ex.printStackTrace();
 		}
 		return null;
 	}
@@ -66,7 +66,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 					
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -81,7 +81,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 			
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -103,7 +103,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 			
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 		}
 		return null;
 	}

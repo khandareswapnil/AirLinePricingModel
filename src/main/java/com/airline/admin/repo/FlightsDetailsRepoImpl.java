@@ -16,15 +16,16 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	@Override
 	public boolean isFlightsName(FlightsName fname) {
 		try {
-			stmt=conn.prepareStatement("insert into flightsinfomaster values('0',?)");
-			stmt.setString(1,fname.getFlightname());
-			int val=stmt.executeUpdate();
-			return val>0?true:false;
+				stmt=conn.prepareStatement("insert into flightsinfomaster values('0',?)");
+				stmt.setString(1,fname.getFlightname());
+				int val=stmt.executeUpdate();
+				return val>0?true:false;
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
+			return false;
 		}
-		return false;
+		
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -53,7 +54,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 
 		}catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 		}
 		return false;
 	}
@@ -233,10 +234,73 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 		}
 		catch(Exception ex)
 		{
-			System.out.println("Error is"+ex);
+			ex.printStackTrace();
 			return false;
 		}
 
+	}
+
+	@Override
+	public int isUpdateFlightsName() {
+		
+		return 0;
+	}
+
+	@Override
+	public List<FlightsName> isSearchName(FlightsName fname) {
+		try {
+		stmt=conn.prepareStatement("select * from flightsinfomaster where flightsname=?");
+		stmt.setString(1, fname.getFlightname());
+		rs=stmt.executeQuery();
+		List<FlightsName> list=null;
+		if(rs.next())
+		{			
+			list=new ArrayList<>();
+			FlightsName fname1 =new FlightsName();
+			fname1.setFlightname(rs.getString(2));
+			list.add(fname1);
+		}
+		return list;
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+		
+	
+	}
+
+	@Override
+	public boolean isUpdate(String fname,String newName) {
+		try {
+			stmt=conn.prepareStatement("update  flightsinfomaster set flightsname=? where flightsname=?");
+			stmt.setString(1, newName);
+			stmt.setString(2, fname);
+			int val=stmt.executeUpdate();
+			return val>0?true:false;
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isDeleteFlight(FlightsName fname) {
+		try
+		{
+			stmt=conn.prepareStatement("delete from flightsinfomaster where flightsname=?");
+			stmt.setString(1, fname.getFlightname());
+			int val=stmt.executeUpdate();
+			return val>0?true:false;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+		}
+	
 	}
 		
 }
