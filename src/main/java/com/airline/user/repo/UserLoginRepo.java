@@ -5,8 +5,9 @@ import java.sql.SQLException;
 import com.ariline.config.DBConfig;
 
 public class UserLoginRepo extends DBConfig {
-	public boolean validateUserRepo(String email, String password)
+	public int validateUserRepo(String email, String password)
 	{
+		int uid=0;
 		try 
 		{
 			stmt = conn.prepareStatement("select * from userinfo where email = ? AND password = ?");
@@ -14,14 +15,17 @@ public class UserLoginRepo extends DBConfig {
 			stmt.setString(2, password);
 			
 			 rs = stmt.executeQuery();
+			 if(rs.next()) {
+				 uid=rs.getInt(1);
+			 }
 			 
-			 return rs.next();
+			 return uid;
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return false;
+		return uid;
 
 	}
 }

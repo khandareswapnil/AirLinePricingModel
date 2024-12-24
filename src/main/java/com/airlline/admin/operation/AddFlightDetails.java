@@ -17,14 +17,14 @@ import lombok.NoArgsConstructor;
 
 public class AddFlightDetails {
 	Scanner sc=new Scanner(System.in);
-	public void isDistanceOFCities()
+	public void flightALLOperation()
 	{
 		do {
-			System.out.println("1. Flights Name Operation");
-			System.out.println("2. Flights Times");
-			System.out.println("3. Add Distance");
-			System.out.println("4. Add Seats And Base Price");
-			System.out.println("5. Add Flights Schedule");
+			System.out.println("1. Flights Name Operations");
+			System.out.println("2. Flights Times Operations");
+			System.out.println("3. Distance Of Two Cities Operations");
+			System.out.println("4. Flight Seats And Base Price Operations");
+			System.out.println("5. Flights Schedule Operations");
 			System.out.println("6. FOR Exit");
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();

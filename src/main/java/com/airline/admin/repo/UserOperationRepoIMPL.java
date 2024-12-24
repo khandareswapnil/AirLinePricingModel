@@ -41,6 +41,7 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 		 while(rs.next())
 		 {
 			User user=new User();
+			user.setId(rs.getInt(1));
 			 user.setName(rs.getString(2));
 			 user.setEmail(rs.getString(3));
 			 user.setContact(rs.getString(4));

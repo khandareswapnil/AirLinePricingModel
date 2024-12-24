@@ -8,9 +8,9 @@ import com.airline.user.repo.UserRegistrationRepo;
 public class UserRegistrationOperation {
 	Scanner sc =new Scanner(System.in);
 	
-	public boolean registerUser()
+	public int registerUser()
 	{
-
+		int uid=0;
 		System.out.println("Provide following details for registration");
 		System.out.println("Enter Name: ");
         String name = sc.nextLine();
@@ -30,7 +30,7 @@ public class UserRegistrationOperation {
         System.out.println("Enter password");
         String password= sc.nextLine();
         
-        User myUser = new User(name,email,contact,gender,city,password); 
+        User myUser = new User(0,name,email,contact,gender,city,password); 
         UserOperationsServiceIMPL userOpService=new UserOperationsServiceIMPL();
         
         boolean status = userOpService.isAddUser(myUser);
@@ -46,8 +46,8 @@ public class UserRegistrationOperation {
 			
         	// for login after registration
         	UserLoginOperation userloginOperation = new UserLoginOperation();
-        	boolean loginSuccess = userloginOperation.userLogin(userName,password);      //method call for login
-        	return loginSuccess;
+        	uid = userloginOperation.userLogin(userName,password);      //method call for login
+        	return uid;
         }
         else
         {
@@ -55,7 +55,7 @@ public class UserRegistrationOperation {
         	registerUser();
         }
 	
-	return true;
+	return uid;
 		
 	}
 }

@@ -108,6 +108,30 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 		return fDetailsRepo.isDeleteCityDistRecord(startCity,endCity);
 	}
 
+	@Override
+	public List<FlightsSeatsAndBasePrice> isSearchSeatAndBasePriceExists(FlightsSeatsAndBasePrice fSABP) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isSearchSeatAndBasePriceExists(fSABP);
+	}
+
+	@Override
+	public List<FlightsSeatsAndBasePrice> isViewALlSeatAndBasePriceRecords() {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isViewALlSeatAndBasePriceRecords();
+	}
+
+	@Override
+	public boolean isUpdateSeatAndBasePriceRecord(int noOfSits,int bprice) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdateSeatAndBasePriceRecord(noOfSits,bprice);
+	}
+
+	@Override
+	public boolean isDeleteSeatAndBasePriceRecord(int seats) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isDeleteSeatAndBasePriceRecord(seats);
+	}
+
 	
 
 	
