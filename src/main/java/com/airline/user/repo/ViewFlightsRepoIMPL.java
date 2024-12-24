@@ -76,13 +76,18 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt=conn.prepareStatement("select * from flightschedule");
 			rs=stmt.executeQuery();
 			list=new ArrayList<>();
+		
+	
 			list=fetchFsRecordsInReadableFormat(rs);
+			
+			return list;
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
+			return null;
 		}
-		return list;
+	
 	}
 	
 
@@ -160,6 +165,21 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date)
+	{
+		try
+		{
+			stmt=conn.prepareStatement("select *from flightschedule where date=?");
+			stmt.setString(1, date);
+			rs=stmt.executeQuery();
+			list=fetchFsRecordsInReadableFormat(rs);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
 		}
 		return list;
 	}

@@ -23,7 +23,7 @@ public class ViewFlightsIMPL implements ViewFlights
 	@Override
 	public List<ViewFlightsScheduleByUser> isGetAllFlights() {
 		// TODO Auto-generated method stub
-		return list=objFlightRepo.viewAllFlights();
+		return objFlightRepo.viewAllFlights();
 		
 	}
 
@@ -32,6 +32,12 @@ public class ViewFlightsIMPL implements ViewFlights
 		// TODO Auto-generated method stub
 		list=objFlightRepo.viewAllFlightsByStartEndCityDate (startcity, endcity,date);	
 		return list;
+	}
+
+	@Override
+	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date) {
+		// TODO Auto-generated method stub
+		return objFlightRepo.viewAllFlightsByDate(date);
 	}
 	
 		

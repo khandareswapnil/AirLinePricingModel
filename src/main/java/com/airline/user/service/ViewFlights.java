@@ -8,6 +8,6 @@ public interface ViewFlights {
 	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCity(String startcity, String endcity); 
 	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCityDate(String startcity, String endcity,String date); 
 	 
-
+	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
 
 }

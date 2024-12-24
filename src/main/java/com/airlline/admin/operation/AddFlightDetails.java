@@ -26,6 +26,7 @@ public class AddFlightDetails {
 			System.out.println("4. Flight Seats And Base Price Operations");
 			System.out.println("5. Flights Schedule Operations");
 			System.out.println("6. FOR Exit");
+
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
 			switch(ch)
