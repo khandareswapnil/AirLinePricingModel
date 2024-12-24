@@ -32,9 +32,9 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	}
 
 	@Override
-	public boolean isAddDistance(AddDistanceOfCity addDistnace,String startCity,String endCity) {
+	public boolean isAddDistance(AddDistanceOfCity addDistnace) {
 		// TODO Auto-generated method stub
-		return fDetailsRepo.isAddDistance(addDistnace,startCity,endCity);
+		return fDetailsRepo.isAddDistance(addDistnace);
 	}
 
 	@Override
@@ -82,6 +82,30 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	public boolean isDeleteFlight(FlightsName fname) {
 		// TODO Auto-generated method stub
 		return fDetailsRepo.isDeleteFlight(fname);
+	}
+
+	@Override
+	public List<AddDistanceOfCity> isSearchCityDistRecord(String startCity, String endCity) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isSearchCityDistRecord(startCity,endCity);
+	}
+
+	@Override
+	public List<AddDistanceOfCity> isViewAllDistanceRecords() {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isViewAllDistanceRecords();
+	}
+
+	@Override
+	public boolean isUpdateCityDistRecord(String startCity, String endCity, int dist) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdateCityDistRecord(startCity, endCity, dist);
+	}
+
+	@Override
+	public boolean isDeleteCityDistRecord(String startCity, String endCity) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isDeleteCityDistRecord(startCity,endCity);
 	}
 
 	

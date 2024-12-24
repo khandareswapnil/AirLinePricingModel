@@ -22,7 +22,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 
 	
 	
-	//helper method for to convert flight schedules data int id type to String type. takes resultset as parameter which contain records in id format
+	//helper method for to convert flight schedules data int id type to String type. takes resultset as parameter which may contain multiple records in id format
 	
 	@Override
 	public List<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs) {
@@ -34,7 +34,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
                    " inner join flightsinfomaster fi ON fs.flight_id=fi.fid"+
                    " inner join citymaster cm ON  fs.start_city_id=cm.cityid"+
                    " inner join citymaster cm2 ON  fs.end_city_id=cm2.cityid"+
-                   " inner join flightstiming_master ftm ON fs.flight_id=ftm.tid"+
+                   " inner join flightstiming_master ftm ON fs.tid=ftm.tid"+
                    " inner join seat_base_price_master sbp ON fs.sbpid=sbp.sbpid where fsid=?";
 		try {
 			while(rs.next())

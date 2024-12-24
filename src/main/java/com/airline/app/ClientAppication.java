@@ -24,7 +24,7 @@ public class ClientAppication {
 			switch(ch)
 			{
 			case 1:
-				System.out.println("Enter the USer Name");
+				System.out.println("Enter the User Name");
 				sc.nextLine();
 				String userName=sc.nextLine();
 				System.out.println("Enter the Password");
