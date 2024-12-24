@@ -76,13 +76,18 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt=conn.prepareStatement("select * from flightschedule");
 			rs=stmt.executeQuery();
 			list=new ArrayList<>();
+		
+	
 			list=fetchFsRecordsInReadableFormat(rs);
+			
+			return list;
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
+			return null;
 		}
-		return list;
+	
 	}
 	
 
