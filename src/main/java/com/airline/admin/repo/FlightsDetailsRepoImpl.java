@@ -1,8 +1,10 @@
 package com.airline.admin.repo;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.FlightsDetails;
@@ -60,11 +62,11 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	}
 
 	@Override
-	public boolean isAddDistance(AddDistanceOfCity addDistnace,String startCity,String endCity) {
+	public boolean isAddDistance(AddDistanceOfCity addDistnace) {
 		try {
 			int flag=0;
 			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-			stmt.setString(1, startCity);
+			stmt.setString(1,addDistnace.getScity() );
 			int sid=0;
 			rs=stmt.executeQuery();
 			if(rs.next())
@@ -74,7 +76,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 				if(sid!=0)
 				{
 					stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-					stmt.setString(1, endCity);
+					stmt.setString(1, addDistnace.getEcity());
 					int eid=0;
 					rs=stmt.executeQuery();
 					if(rs.next())
@@ -82,7 +84,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 						eid=rs.getInt(1);
 						if(eid!=0)
 						{
-							stmt=conn.prepareStatement("insert into start_end_city_join values(?,?,?)");
+							stmt=conn.prepareStatement("insert into start_end_city_join values(?,?,?,'0')");
 							stmt.setInt(1, sid);
 							stmt.setInt(2, eid);
 							stmt.setInt(3,addDistnace.getDistance());
@@ -301,6 +303,141 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			return false;
 		}
 	
+	}
+
+	@Override
+	public List<AddDistanceOfCity> isSearchCityDistRecord(String startCity, String endCity) {
+		// TODO Auto-generated method stub
+		List<AddDistanceOfCity> li= null;
+		int startCityId=0;
+		int endCityId=0;
+		try {
+			stmt=conn.prepareStatement("select * from citymaster where cityname=?");
+			stmt.setString(1, startCity);
+			rs=stmt.executeQuery();
+			if(rs.next()) startCityId=rs.getInt(1);
+			
+			stmt=conn.prepareStatement("select * from citymaster where cityname=?");
+			stmt.setString(1, endCity);
+			rs=stmt.executeQuery();
+			if(rs.next()) endCityId=rs.getInt(1);
+
+			stmt=conn.prepareStatement("select * from start_end_city_join where startCity_id=? AND EndCity_id=?");
+			stmt.setInt(1, startCityId);
+			stmt.setInt(2, endCityId);
+			rs=stmt.executeQuery();
+			while(rs.next()) 
+			{
+			li= new ArrayList<>();
+		    int dist=rs.getInt(3);
+		    AddDistanceOfCity ad =new AddDistanceOfCity(startCity,endCity,dist); 
+		    li.add(ad); 
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return li;	 
+		
+	}
+
+	@Override
+	public List<AddDistanceOfCity> isViewAllDistanceRecords() {
+		// TODO Auto-generated method stub
+		List<AddDistanceOfCity> li= new ArrayList<>();
+		try {
+			stmt=conn.prepareStatement("select *from start_end_city_join");
+			rs=stmt.executeQuery();
+			while(rs.next()) 
+			{
+			int scid=rs.getInt(1);
+			int ecid=rs.getInt(2);
+			int dist=rs.getInt(3);
+			String startCity = null;
+			String endCity = null;
+			stmt=conn.prepareStatement("select *from citymaster where cityid=? ");
+			stmt.setInt(1, scid);
+			ResultSet rs2;
+			rs2=stmt.executeQuery();
+			if(rs2.next())
+			{
+				 startCity=rs2.getString(2);
+			}
+			stmt=conn.prepareStatement("select *from citymaster where cityid=? ");
+			stmt.setInt(1, ecid);
+			rs2=stmt.executeQuery();
+			if(rs2.next())
+			{
+				endCity=rs2.getString(2);
+			}
+		   
+		    AddDistanceOfCity ad =new AddDistanceOfCity(startCity,endCity,dist); 
+		    li.add(ad); 
+			}
+			
+		}
+		catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		return li;
+	}
+
+	@Override
+	public boolean isUpdateCityDistRecord(String startCity, String endCity, int dist) {
+		// TODO Auto-generated method stub
+		int startCityId =0;
+		int endCityId=0;
+		try {
+			stmt=conn.prepareStatement("select *from citymaster where cityname=? ");
+			stmt.setString(1, startCity);
+			
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				 startCityId = rs.getInt(1);
+			}
+			stmt=conn.prepareStatement("select *from citymaster where cityname=? ");
+			stmt.setString(1, endCity);
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				endCityId = rs.getInt(1);
+			}
+			stmt=conn.prepareStatement("update start_end_city_join set distnace=? where startCity_id=? AND  EndCity_id=?");
+			stmt.setInt(1, dist);
+			stmt.setInt(2,startCityId );
+			stmt.setInt(3, endCityId);
+			int val=stmt.executeUpdate();
+			if(val!=0) return true;
+			
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isDeleteCityDistRecord(String startCity, String endCity) {
+		// TODO Auto-generated method stub
+		try {
+			stmt=conn.prepareStatement("delete secj from start_end_city_join secj JOIN citymaster c1 ON c1.cityid=secj.startCity_id"+
+		                               " JOIN citymaster c2 ON c2.cityid=secj.EndCity_id"+
+									   " where c1.cityname=? AND"+
+		                               " c2.cityname=?");
+			stmt.setString(1, startCity);
+			stmt.setString(2, endCity);
+			int value=stmt.executeUpdate();
+			if(value!=0) return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 		
 }
