@@ -23,6 +23,10 @@
 		
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 
-
+<dependency>
+    <groupId>com.sun.mail</groupId>
+    <artifactId>javax.mail</artifactId>
+    <version>1.6.2</version>
+</dependency>
 	</dependencies>
 </project>

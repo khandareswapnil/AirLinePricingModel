@@ -22,11 +22,11 @@ public class FlightsScheduleOpeartion {
 	public void flightsScheduleOperation()
 	{
 		do {
-		System.out.println("1. ADD FLIGHTS TIME");
-		System.out.println("2. UPDATE FLIGHTS TIME");
-		System.out.println("3. DELETE FLIGHTS TIME");
-		System.out.println("4. VIEW FLIGHTS TIME");
-		System.out.println("5. SEARCH FLIGHTS TIME");
+		System.out.println("1. ADD FLIGHT SCHEDULE");
+		System.out.println("2. UPDATE FLIGHT SCHEDULE");
+		System.out.println("3. DELETE FLIGHT SCHEDULE");
+		System.out.println("4. VIEW FLIGHT SCHEDULE");
+		System.out.println("5. SEARCH FLIGHT SCHEDULE");
 		System.out.println("6. FOR EXIT");
 	
 		System.out.println("Enter the Choice");
@@ -75,11 +75,30 @@ public class FlightsScheduleOpeartion {
 			}
 			
 			break;
+			
+		case 2:
+			System.out.println("Enter the Date");
+			sc.nextLine();
+			 date=sc.nextLine();
+			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
+			List<ViewFlightsScheduleByUser> list6= viewFlightsser.viewAllFlightsByDate(date);
+			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
+			
+			break;
+		case 3:
+			break;
 		case 4:
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
 			List<ViewFlightsScheduleByUser> flightsList= viewFlightsser.isGetAllFlights();
 			flightsList.forEach(flightsList1->System.out.println(flightsList1.getId() +"\t"+flightsList1.getFlightName()+"\t"+flightsList1.getStartCity()+"\t\t"+flightsList1.getEndCity()+"\t\t"+flightsList1.getDate()+"\t"+flightsList1.getTime()+"\t"+flightsList1.getNoOfSits()+"\t\t"+flightsList1.getBasePrice()));
 			break;
+		case 5:
+			new SearchFlightSchedule().searchFlightSchedule();
+			break;
+		case 6:
+			new AddFlightDetails().isDistanceOFCities();
+			break;
+			
 		}
 		}while(true);
 	}

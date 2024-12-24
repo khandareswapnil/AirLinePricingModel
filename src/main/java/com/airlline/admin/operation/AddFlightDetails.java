@@ -20,12 +20,12 @@ public class AddFlightDetails {
 	public void isDistanceOFCities()
 	{
 		do {
-			System.out.println("1. Flights Name Operation");
-			System.out.println("2. Flights Times");
-			System.out.println("3. Add Distance");
-			System.out.println("4. Add Seats And Base Price");
-			System.out.println("5. Add Flights Schedule");
-			System.out.println("6. FOR Exit");
+			System.out.println("1. FLIGHTS NAME ");
+			System.out.println("2. FLIGHTS TIME");
+			System.out.println("3. CITY DISTANCE");
+			System.out.println("4. SEATS AND BASE PRICE");
+			System.out.println("5. FLIGHTS SCHEDULE");
+			System.out.println("6. FOR EXIT");
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
 			switch(ch)

@@ -10,4 +10,5 @@ public interface ViewFlightsRepo {
 	public List<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCity(String scity, String ecity);
 	public List<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCityDate(String scity, String ecity, String date);
 	public List<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs); // helper method
+	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
 }

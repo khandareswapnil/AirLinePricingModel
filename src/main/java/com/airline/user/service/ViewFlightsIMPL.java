@@ -33,6 +33,12 @@ public class ViewFlightsIMPL implements ViewFlights
 		list=objFlightRepo.viewAllFlightsByStartEndCityDate (startcity, endcity,date);	
 		return list;
 	}
+
+	@Override
+	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date) {
+		// TODO Auto-generated method stub
+		return objFlightRepo.viewAllFlightsByDate(date);
+	}
 	
 		
 }
