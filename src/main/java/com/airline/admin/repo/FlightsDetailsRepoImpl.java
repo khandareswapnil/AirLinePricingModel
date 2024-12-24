@@ -439,6 +439,84 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 		}
 		return false;
 	}
+
+	@Override
+	public List<FlightsSeatsAndBasePrice> isSearchSeatAndBasePriceExists(FlightsSeatsAndBasePrice fsabp) {
+		// TODO Auto-generated method stub
+		 List<FlightsSeatsAndBasePrice> li=new ArrayList<>();
+		try {
+			stmt=conn.prepareStatement("select *from seat_base_price_master where no_seats=? OR base_price=?");
+			stmt.setInt(1, fsabp.getNo_OF_Seats());
+			stmt.setInt(2, fsabp.getBasePrice());
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				li.add(fsabp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return li;
+	}
+
+	@Override
+	public List<FlightsSeatsAndBasePrice> isViewALlSeatAndBasePriceRecords() {
+		// TODO Auto-generated method stub
+		 List<FlightsSeatsAndBasePrice> li=new ArrayList<>();
+		 try {
+			 stmt=conn.prepareStatement("select *from seat_base_price_master");
+			 rs=stmt.executeQuery();
+			 while(rs.next())
+				{
+				 	int noOfSits=rs.getInt(2);
+				 	int basePrice=rs.getInt(3);
+				 	FlightsSeatsAndBasePrice fsabp =new FlightsSeatsAndBasePrice(noOfSits,basePrice);
+					li.add(fsabp);
+				}
+		 }
+		 catch(Exception ex) {
+			 ex.printStackTrace();
+		 }
+		return li;
+	}
+
+	// *********************************************************************************************************************//
+	
+	@Override
+	public boolean isUpdateSeatAndBasePriceRecord(int noOfSits,int bprice) {
+		// TODO Auto-generated method stub
+		try {
+			stmt=conn.prepareStatement("update seat_base_price_master set base_price=? where no_seats=?");
+			stmt.setInt(1, bprice);
+			stmt.setInt(2, noOfSits);
+			int val=stmt.executeUpdate();
+			if(val!=0) return true;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isDeleteSeatAndBasePriceRecord(int seats) {
+		// TODO Auto-generated method stub
+		try {
+			stmt=conn.prepareStatement("delete from seat_base_price_master where no_seats=?");
+			stmt.setInt(1, seats);
+			int val=stmt.executeUpdate();
+			if(val!=0) return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return false;
+	}
 		
 }
 

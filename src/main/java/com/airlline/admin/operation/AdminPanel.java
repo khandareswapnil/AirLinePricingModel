@@ -12,10 +12,10 @@ public class AdminPanel {
 		System.out.println("WELOCME TO ADMIN PANEL");
 		System.out.println("****************************************");
 		do {
-			System.out.println("1.USERS");
-			System.out.println("2. City Operation");
-			System.out.println("3.View Booking");
-			System.out.println("4. Add Flights Details");
+			System.out.println("1. Users Operations");
+			System.out.println("2. City Operations");
+			System.out.println("3. View Booking");
+			System.out.println("4. Flights Details Operationss");
 			System.out.println("Enter the Choice");
 			int ch = sc.nextInt();
 			switch (ch) {
@@ -31,7 +31,7 @@ public class AdminPanel {
 				break;
 			case 4:
 				AddFlightDetails addFlights=new AddFlightDetails();
-				addFlights.isDistanceOFCities();;
+				addFlights.flightALLOperation();;
 				break;
 			case 5:
 				clintApp.main(null);

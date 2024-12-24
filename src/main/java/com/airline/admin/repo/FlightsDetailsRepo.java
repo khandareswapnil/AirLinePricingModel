@@ -26,6 +26,11 @@ public interface FlightsDetailsRepo {
 	public List<AddDistanceOfCity> isViewAllDistanceRecords();
 	public boolean isUpdateCityDistRecord(String startCity, String endCity, int dist);
 	public boolean isDeleteCityDistRecord(String startCity, String endCity);
+	public List<FlightsSeatsAndBasePrice> isSearchSeatAndBasePriceExists(FlightsSeatsAndBasePrice fSABP) ;
+	public List<FlightsSeatsAndBasePrice> isViewALlSeatAndBasePriceRecords();
+	public boolean isUpdateSeatAndBasePriceRecord(int noOfSits,int bprice);
+	public boolean isDeleteSeatAndBasePriceRecord(int seats);
+
 
 	
 

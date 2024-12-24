@@ -17,7 +17,7 @@ public class ClientAppication {
 		do
 		{
 			System.out.println("******** WELCOME TO NANA CHI AIRLINE ******** ");
-			System.out.println("1.Login");
+			System.out.println("1. Login");
 			System.out.println("2. Register");
 
 			int ch=sc.nextInt();
@@ -37,19 +37,19 @@ public class ClientAppication {
 				else
 				{
 					UserLoginOperation ul = new UserLoginOperation();
-					boolean status= ul.userLogin(userName,password);
-					if(status)
+					int uid= ul.userLogin(userName,password);
+					if(uid!=0)
 					{
-						up.userPanel();
+						up.userPanel(uid);
 					}
 				}
 				
 				break;
 			case 2:
 				     UserRegistrationOperation ur= new UserRegistrationOperation();
-				        boolean status =ur.registerUser(); 
-				        if(status)
-				        	up.userPanel();
+				        int uid =ur.registerUser(); 
+				        if(uid!=0)
+				        	up.userPanel(uid);
 				        	
 				
 

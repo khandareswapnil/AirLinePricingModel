@@ -96,7 +96,7 @@ public class FlightsScheduleOpeartion {
 			new SearchFlightSchedule().searchFlightSchedule();
 			break;
 		case 6:
-			new AddFlightDetails().isDistanceOFCities();
+			new AddFlightDetails().flightALLOperation();
 			break;
 			
 		}

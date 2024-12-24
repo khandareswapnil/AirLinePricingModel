@@ -4,16 +4,16 @@ import java.util.*;
 import com.airline.user.repo.UserLoginRepo;
 public class UserLoginOperation {
 	Scanner sc =new Scanner(System.in);
-	public boolean userLogin(String userName,String password)
+	public int userLogin(String userName,String password)
 	{
 		
 		
 		UserLoginRepo userLoginRepo = new UserLoginRepo();
-		boolean status= userLoginRepo.validateUserRepo(userName,password);
+		int uid= userLoginRepo.validateUserRepo(userName,password);
 		
-		if(status)
+		if(uid!=0)
 		{
-			return true;
+			return uid;
 		}
 		else
 		{
@@ -26,6 +26,6 @@ public class UserLoginOperation {
 			userLogin(userName,password);
 		}
 		
-		return true;
+		return uid;
 	}
 }
