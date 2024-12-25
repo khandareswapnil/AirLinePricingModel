@@ -7,7 +7,6 @@ import com.airline.app.ClientAppication;
 public class AdminPanel {
 
 	public void adminPanel() {
-		ClientAppication clintApp = new ClientAppication();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("WELOCME TO ADMIN PANEL");
 		System.out.println("****************************************");
@@ -16,6 +15,7 @@ public class AdminPanel {
 			System.out.println("2. City Operations");
 			System.out.println("3. View Booking");
 			System.out.println("4. Flights Details Operationss");
+			System.out.println("5. For Exit");
 			System.out.println("Enter the Choice");
 			int ch = sc.nextInt();
 			switch (ch) {
@@ -34,7 +34,7 @@ public class AdminPanel {
 				addFlights.flightALLOperation();;
 				break;
 			case 5:
-				clintApp.main(null);
+				new ClientAppication().main(null);
 				break;
 			default:
 				System.out.println("Invalid Input");

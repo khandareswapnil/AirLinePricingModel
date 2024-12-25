@@ -11,6 +11,7 @@ public class CityOperation {
 	Scanner sc=new Scanner(System.in);
 	CitytEntity cityEntity=new CitytEntity();
 	CityOperationSerIMPL startCityService=new CityOperationSerIMPL();
+
 	
 	public void addStartCity(){
 		do {
@@ -26,22 +27,32 @@ public class CityOperation {
 			switch(ch)
 			{
 			case 1:
+				List<CitytEntity> list =null;
 				System.out.println("Enter the City Name");
 				sc.nextLine();
 				String cityName=sc.nextLine();
-				cityEntity.setCityName(cityName);;
-				boolean b=startCityService.isAddStartCity(cityEntity);
-				if(b)
+				cityEntity.setCityName(cityName);
+				list=startCityService.isSearchCity(cityName);
+				if(list.isEmpty())
 				{
-					System.out.println("City Added Sucess");
+					boolean b=startCityService.isAddStartCity(cityEntity);
+					if(b)
+					{
+						System.out.println("City Added Sucess");
+					}
+					else
+					{
+						System.out.println("Some Problem is there........");
+					}
 				}
 				else
 				{
-					System.out.println("Some Problem is there........");
+					System.out.println("City Already Present");
 				}
+				
 				break;
 			case 2:
-				List<CitytEntity> list=new ArrayList<>();
+				List<CitytEntity> list1=new ArrayList<>();
 				list=startCityService.isGetCity();
 				if(list.isEmpty())
 				{
@@ -51,7 +62,7 @@ public class CityOperation {
 				}else
 				{
 					System.out.println("City Name");
-					list.forEach(list1->System.out.println(list1.getCityName()));
+					list.forEach(list2->System.out.println(list2.getCityName()));
 				}
 				
 				break;
@@ -59,34 +70,51 @@ public class CityOperation {
 				System.out.println("Enter the Old City Name");
 				sc.nextLine();
 				 String oldCityName=sc.nextLine();
-				 System.out.println("Enter the New City Name");
-					sc.nextLine();
-					String newCityName=sc.nextLine();
-				 
-				 
-				b=startCityService.isUpdateCity(oldCityName,newCityName);
-				if(b)
-				{
-					System.out.println("City Name Update Sucess");
-				}
-				else
-				{
-					System.out.println("Some Problem Is There.............");
-				}
-				break;
-			case 4:
-				System.out.println("Enter the Old City Name");
-				sc.nextLine();
-				 cityName=sc.nextLine();
-				 b=startCityService.isDeleted(cityName);
-				 if(b)
+				 List<CitytEntity> cityList=startCityService.isSearchCity(oldCityName);
+				 if(!cityList.isEmpty())
 				 {
-					 System.out.println("Deleted Sucess");
+					 System.out.println("Enter the New City Name");
+						String newCityName=sc.nextLine();
+						boolean b=startCityService.isUpdateCity(oldCityName,newCityName);
+						if(b)
+						{
+							System.out.println("City Name Update Sucess");
+						}
+						else
+						{
+							System.out.println("Some Problem Is There.............");
+						}
 				 }
 				 else
 				 {
-					 System.out.println("Some Problem is There");
+					 System.out.println("City Not Found");
 				 }
+
+				break;
+			case 4:
+				 //List<CitytEntity> deleteCityList=null;
+				System.out.println("Enter the Old City Name");
+				sc.nextLine();
+				 cityName=sc.nextLine();
+				 List<CitytEntity>  deleteCityList=startCityService.isSearchCity(cityName);
+				 if(!deleteCityList.isEmpty())
+				 {
+						boolean b=startCityService.isDeleted(cityName);
+						 if(b)
+						 {
+							 System.out.println("Deleted Sucess");
+						 }
+						 else
+						 {
+							 System.out.println("we are in if of delete block");
+						 }
+				 }
+				 else
+				 {
+					 System.out.println("City Not Found");
+				 }
+
+			
 				break;
 			case 5:
 				System.out.println("Enter the City Name");
@@ -94,7 +122,13 @@ public class CityOperation {
 				cityName=sc.nextLine();
 				
 				 list=startCityService.isSearchCity(cityName);
-				 list.forEach(list1->System.out.println(list1.getCityName()));
+				 if(!list.isEmpty())
+				 {
+				 list.forEach(list2->System.out.println(list2.getCityName()));
+				 }else
+				 {
+					 System.out.println("City Not Found");
+				 }
 				break;
 			case 6:
 				AdminPanel adminPanel=new AdminPanel();
