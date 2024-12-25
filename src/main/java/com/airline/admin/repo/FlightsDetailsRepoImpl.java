@@ -593,6 +593,69 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			return false;
 		}
 
+	}
+
+	@Override
+	public int isSearchByCityDateNameTime(String startCity, String endCity, String fname, String date, String time) {
+		String query="select fshedule.fsid from flightschedule fshedule"+
+				" INNER JOIN citymaster c ON fshedule.start_city_id = c.cityid"+
+				" INNER JOIN citymaster c1 ON fshedule.end_city_id = c1.cityid"+
+				" inner join flightsinfomaster finame on fshedule.flight_id=finame.fid"+
+				" INNER JOIN flightstiming_master ftime ON fshedule.tid = ftime.tid"+
+				" where  c.cityName=? and c1.cityName=? and finame.flightsname=? and ftime.time=? and fshedule.date=? ";
+		int fsid=0;
+		try {
+			
+			stmt=conn.prepareStatement(query);
+			stmt.setString(1, startCity);
+			stmt.setString(2, endCity);
+			stmt.setString(3, fname);
+			stmt.setString(4, time);
+			stmt.setString(5, date);
+			
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				fsid=rs.getInt(1);
+			}
+			return fsid;
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return fsid;
+	}
+
+	@Override
+	public int isUpdate(int fsid, int tid) {
+			try {
+				stmt=conn.prepareStatement("update flightschedule set tid=? where fsid=?");
+				stmt.setInt(1, tid);
+				stmt.setInt(2, fsid);
+				int val=stmt.executeUpdate();
+				return val;
+				
+			}catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		return 0;
+	}
+
+	@Override
+	public boolean isDeleteSchedule(int fsid) {
+		try {
+			stmt=conn.prepareStatement("delete from flightschedule where fsid=?");
+			stmt.setInt(1, fsid);
+			int val=stmt.executeUpdate();
+			return val>0?true:false;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return false;
 	}		
 }
 

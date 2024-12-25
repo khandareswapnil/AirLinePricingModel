@@ -31,8 +31,9 @@ public interface FlightsDetailsRepo {
 	public boolean isUpdateSeatAndBasePriceRecord(int noOfSits,int bprice);
 	public boolean isDeleteSeatAndBasePriceRecord(int seats);
 	public boolean isUpdateFlightsDetaisl(FlightsDetails fDetails);
-
-
+	public int isSearchByCityDateNameTime(String startCity,String endCity,String fname,String date,String time);
+	public int isUpdate(int fsid,int tid);
+	public boolean isDeleteSchedule(int fsid);
 
 	
 
