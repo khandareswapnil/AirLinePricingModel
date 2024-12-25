@@ -12,5 +12,5 @@ public interface ViewFlightsRepo {
 	public Set<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCityDate(String scity, String ecity, String date);
 	public Set<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs); // helper method
 	public Set<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
-
+	public boolean isDeleteScheddule(String date,String time,String startCity,String endCity);
 }

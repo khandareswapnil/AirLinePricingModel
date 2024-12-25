@@ -189,6 +189,14 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 
 
 
+	@Override
+	public boolean isDeleteScheddule(String date, String time, String startCity, String endCity) {
+	
+		return false;
+	}
+
+
+
 	
 
 }

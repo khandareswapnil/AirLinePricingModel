@@ -80,7 +80,7 @@ public class FlightsScheduleOpeartion {
 		case 2:
 			System.out.println("Enter the Date");
 			sc.nextLine();
-			 date=sc.nextLine();
+			date=sc.nextLine();
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
 
 			Set<ViewFlightsScheduleByUser> set6= viewFlightsser.viewAllFlightsByDate(date);
@@ -100,6 +100,7 @@ public class FlightsScheduleOpeartion {
 			int fsid=fDetailsService.isSearchByCityDateNameTime(startCity, endCity, name, date, time);
 			if(fsid!=0)
 			{
+				System.out.println("Inside flight Records found....***///");
 				System.out.println("Enter the New Date for Schedule");
 				String newDate=sc.nextLine();
 				System.out.println("Enter the New Time");
@@ -108,13 +109,15 @@ public class FlightsScheduleOpeartion {
 				int timeid=0;
 				for(FlightsTimes ftime: list2)
 				{
+					System.out.println("Inside Checking in the for ..//");
 					if((ftime.getTime()).equals(newTime))
-					{
+					{ System.out.println("Inside if condition ...//");
 						timeid=ftime.getId();
 						break;
 					}
 					
 				}
+				System.out.println(timeid);
 				
 				int val=fDetailsService.isUpdate(fsid, timeid);
 				if(val!=0)
@@ -138,8 +141,8 @@ public class FlightsScheduleOpeartion {
 			sc.nextLine();
 			 date=sc.nextLine();
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
-			 list6= viewFlightsser.viewAllFlightsByDate(date);
-			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
+			 set6= viewFlightsser.viewAllFlightsByDate(date);
+			set6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
 			System.out.println("Enter The Start City");
 			startCity=sc.nextLine();
 			System.out.println("Enter the End City");
@@ -171,7 +174,7 @@ public class FlightsScheduleOpeartion {
 			break;
 		case 4:
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
-			List<ViewFlightsScheduleByUser> flightsList= viewFlightsser.isGetAllFlights();
+			Set<ViewFlightsScheduleByUser> flightsList= viewFlightsser.isGetAllFlights();
 			flightsList.forEach(flightsList3->System.out.println(flightsList3.getId() +"\t"+flightsList3.getFlightName()+"\t"+flightsList3.getStartCity()+"\t\t"+flightsList3.getEndCity()+"\t\t"+flightsList3.getDate()+"\t"+flightsList3.getTime()+"\t"+flightsList3.getNoOfSits()+"\t\t"+flightsList3.getBasePrice()));
 			break;
 		case 5:
