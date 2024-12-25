@@ -9,5 +9,6 @@ public interface ViewFlights {
 	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCityDate(String startcity, String endcity,String date); 
 	 
 	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
+	public boolean isDeleteScheddule(String date,String time,String startCity,String endCity);
 
 }
