@@ -30,6 +30,8 @@ public interface FlightsDetailsRepo {
 	public List<FlightsSeatsAndBasePrice> isViewALlSeatAndBasePriceRecords();
 	public boolean isUpdateSeatAndBasePriceRecord(int noOfSits,int bprice);
 	public boolean isDeleteSeatAndBasePriceRecord(int seats);
+	public boolean isUpdateFlightsDetaisl(FlightsDetails fDetails);
+
 
 
 	

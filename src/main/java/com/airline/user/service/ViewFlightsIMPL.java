@@ -37,6 +37,12 @@ public class ViewFlightsIMPL implements ViewFlights
 		// TODO Auto-generated method stub
 		return objFlightRepo.viewAllFlightsByDate(date);
 	}
+
+	@Override
+	public boolean isDeleteScheddule(String date, String time, String startCity, String endCity) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 		
 }

@@ -517,6 +517,82 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 		
 		return false;
 	}
-		
+	
+	public boolean isUpdateFlightsDetaisl(FlightsDetails fDetails)
+	{
+		try {
+			int scid=0;
+			int ecid=0;
+			int fid=0;
+			int tid=0;
+			int sbpid=0;
+			stmt=conn.prepareStatement("select * from CityMaster where cityName=?");
+			stmt.setString(1,fDetails.getStartCity());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				  scid=rs.getInt(1);
+				if(scid!=0)
+				{
+					stmt=conn.prepareStatement("select *from cityMaster where cityName=?");
+					stmt.setString(1, fDetails.getEndCity());
+					rs=stmt.executeQuery();
+					if(rs.next())
+					{
+						ecid=rs.getInt(1);
+					}
+				}
+			
+			}
+			stmt=conn.prepareStatement("select *from flightsinfomaster where flightsname=?");
+			stmt.setString(1, fDetails.getFname());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				fid=rs.getInt(1);
+			}
+			
+			stmt=conn.prepareStatement("select * from flightstiming_master where time=?");
+			stmt.setString(1, fDetails.getTime());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				tid=rs.getInt(1);
+			}
+			stmt=conn.prepareStatement("select * from seat_base_price_master where no_seats=? and base_price=?");
+			stmt.setInt(1, fDetails.getNo_seats());
+			stmt.setInt(2, fDetails.getBasePrice());
+			rs=stmt.executeQuery();
+			if(rs.next())
+			{
+				sbpid=rs.getInt(1);
+			}
+			
+			if( scid!=0 && ecid!=0 &&fid!=0 && tid!=0 && sbpid!=0)
+			{
+				stmt=conn.prepareStatement("update flightschedule set tid=?, date=? where start_city_id=? and end_city_id=? and flight_id=? and sbpid=?");
+				
+				stmt.setInt(1, tid);
+				stmt.setString(2,fDetails.getDate());
+				stmt.setInt(3, scid);
+				stmt.setInt(4, ecid);
+				stmt.setInt(5, fid);
+				stmt.setInt(6, sbpid);
+				int val=stmt.executeUpdate();
+				return val>0?true:false;
+			}
+			else 
+			{
+				return false;
+			}
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+		}
+
+	}		
 }
 

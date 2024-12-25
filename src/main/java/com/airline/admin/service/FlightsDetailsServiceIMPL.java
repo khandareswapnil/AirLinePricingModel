@@ -132,6 +132,13 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 		return fDetailsRepo.isDeleteSeatAndBasePriceRecord(seats);
 	}
 
+	@Override
+	public boolean isUpdateFlightsDetaisl(FlightsDetails fDetails) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdateFlightsDetaisl(fDetails);
+	}
+
+	
 	
 
 	
