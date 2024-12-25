@@ -27,7 +27,7 @@ public class FlightsTimeOperation {
 				System.out.println("Enter the Flights Timing");
 				sc.nextLine();
 				String ftime=sc.nextLine();
-				FlightsTimes fgtime=new FlightsTimes(ftime);
+				FlightsTimes fgtime=new FlightsTimes(0,ftime);
 				boolean b=fDetailsService.isAddTime(fgtime);
 				if(b)
 				{

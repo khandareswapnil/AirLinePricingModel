@@ -138,6 +138,24 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 		return fDetailsRepo.isUpdateFlightsDetaisl(fDetails);
 	}
 
+	@Override
+	public int isSearchByCityDateNameTime(String startCity, String endCity, String fname, String date, String time) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isSearchByCityDateNameTime(startCity, endCity, fname, date, time);
+	}
+
+	@Override
+	public int isUpdate(int fsid, int tid) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isUpdate(fsid, tid);
+	}
+
+	@Override
+	public boolean isDeleteSchedule(int fsid) {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isDeleteSchedule(fsid);
+	}
+
 	
 	
 

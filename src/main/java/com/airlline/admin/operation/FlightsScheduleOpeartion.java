@@ -84,44 +84,90 @@ public class FlightsScheduleOpeartion {
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
 
 			Set<ViewFlightsScheduleByUser> set6= viewFlightsser.viewAllFlightsByDate(date);
-			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
-			System.out.println("Enter the New Date");
-			date=sc.nextLine();
-			System.out.println("Enter Time");
-			List<FlightsTimes> list3=fDetailsService.isGetTime();
-			list3.forEach(list5->System.out.println(list5.getTime()));
-			time=sc.nextLine();
-			for(ViewFlightsScheduleByUser updateSchedule:list6)
-			{
-			 fDetails=new FlightsDetails(updateSchedule.getStartCity(),updateSchedule.getEndCity(),date,time,updateSchedule.getFlightName(),updateSchedule.getBasePrice(),updateSchedule.getNoOfSits());
-			  b=fDetailsService.isUpdateFlightsDetaisl(fDetails);
-				if(b)
-				{
-					System.out.println("Flights Schedule Update Sucess");
-				}
-				else
-				{
-					System.out.println("Please Enter the Information");
-				}
-			}
+			set6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
 
-
-			
-			break;
-		case 3:
-			System.out.println("Enter the Date");
-			date=sc.nextLine();
-			list6= viewFlightsser.viewAllFlightsByDate(date);
-			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
-			System.out.println("Enter the Time");
-			time=sc.nextLine();
-			System.out.println("Enter the Start City");
+			System.out.println("Enter The Start City");
 			startCity=sc.nextLine();
 			System.out.println("Enter the End City");
 			endCity=sc.nextLine();
+			System.out.println("Enter the Flights Name");
+			String name=sc.nextLine();
+			System.out.println("Enter the Time");
+			 list2=fDetailsService.isGetTime();
+				list2.forEach(list3->System.out.println(list3.getTime()));
+				time=sc.nextLine();
+
+			int fsid=fDetailsService.isSearchByCityDateNameTime(startCity, endCity, name, date, time);
+			if(fsid!=0)
+			{
+				System.out.println("Enter the New Date for Schedule");
+				String newDate=sc.nextLine();
+				System.out.println("Enter the New Time");
+				String newTime=sc.nextLine();
+				list2=fDetailsService.isGetTime();
+				int timeid=0;
+				for(FlightsTimes ftime: list2)
+				{
+					if((ftime.getTime()).equals(newTime))
+					{
+						timeid=ftime.getId();
+						break;
+					}
+					
+				}
+				
+				int val=fDetailsService.isUpdate(fsid, timeid);
+				if(val!=0)
+				{
+					System.out.println("Update SucessFully");
+				}
+				else
+				{
+					System.out.println("Some Problem is There");
+				}
+			}else
+			{
+				System.out.println("No Schedule Are Present");
+			}
 			
 			
-			
+			break;
+		case 3:
+		
+			System.out.println("Enter the Date");
+			sc.nextLine();
+			 date=sc.nextLine();
+			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
+			 list6= viewFlightsser.viewAllFlightsByDate(date);
+			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
+			System.out.println("Enter The Start City");
+			startCity=sc.nextLine();
+			System.out.println("Enter the End City");
+			endCity=sc.nextLine();
+			System.out.println("Enter the Flights Name");
+			name=sc.nextLine();
+			System.out.println("Enter the Time");
+			 list2=fDetailsService.isGetTime();
+				list2.forEach(list3->System.out.println(list3.getTime()));
+				time=sc.nextLine();
+
+			fsid=fDetailsService.isSearchByCityDateNameTime(startCity, endCity, name, date, time);
+			if(fsid!=0)
+			{
+				b=fDetailsService.isDeleteSchedule(fsid);
+				if(b)
+				{
+					System.out.println("Flights Schedule Delete SucessFully");
+				}
+				else
+				{
+					System.out.println("Some Problem is There");
+				}
+			}else
+			{
+				System.out.println("No Schedule Are Present");
+			}
+						
 			break;
 		case 4:
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
