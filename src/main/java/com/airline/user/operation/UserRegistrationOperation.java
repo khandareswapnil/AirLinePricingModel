@@ -2,6 +2,7 @@ package com.airline.user.operation;
 import java.util.*;
 
 import com.airline.admin.service.UserOperationsServiceIMPL;
+import com.airline.app.ClientAppication;
 import com.airline.email.verify.OTPGenerator;
 import com.airline.entity.OTP;
 import com.airline.entity.User;
@@ -54,16 +55,8 @@ public class UserRegistrationOperation {
             if(status)
             {
             	System.out.println("Registration Successful ! Login now.");
+            	new ClientAppication().main(null);
             	
-            	System.out.println("Enter the USer Name");
-    			String userName=sc.nextLine();
-    			System.out.println("Enter the Password");
-    			password=sc.nextLine();
-    			
-            	// for login after registration
-    			UserLoginOperation userloginOperation = new UserLoginOperation();
-            	uid = userloginOperation.userLogin(userName,password);      //method call for login
-            	return uid;
             }
             else
             {

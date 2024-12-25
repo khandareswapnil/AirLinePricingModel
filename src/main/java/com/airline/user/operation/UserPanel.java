@@ -26,7 +26,7 @@ public class UserPanel {
 
 	    if(id==uid)
 	    {
-	    	System.out.println("***********************WELCOME "+ name.toUpperCase()+" ************************\n");
+	    	System.out.println("*********************** WELCOME "+ name.toUpperCase()+" ************************\n");
 			ClientAppication capp=new ClientAppication();
 			Scanner sc = new Scanner(System.in);
 			ViewFlightsIMPL viewFlightsServiceRef =new ViewFlightsIMPL();  // reference for view all flight service class

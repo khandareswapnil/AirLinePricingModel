@@ -51,13 +51,13 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 		try {
 			int cid=0;
 			System.out.println(newCityName);
-			stmt=conn.prepareStatement("select scid from citymaster where startcityname=?");
+			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
 			stmt.setString(1, oldCityName);
 			rs=stmt.executeQuery();
 			if(rs.next())
 			{
-				cid=rs.getInt("scid");
-				stmt=conn.prepareStatement("update citymaster set startcityname=? where scid=?");
+				cid=rs.getInt("cityid");
+				stmt=conn.prepareStatement("update citymaster set cityname=? where cityid=?");
 				stmt.setString(1, newCityName);
 				stmt.setInt(2, cid);
 				int val=stmt.executeUpdate();
@@ -74,7 +74,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 	@Override
 	public boolean isDeleted(String name) {
 		try {
-			stmt=conn.prepareStatement("delete from citymaster where startcityname=?");
+			stmt=conn.prepareStatement("delete from citymaster where cityname=?");
 			stmt.setString(1, name);
 			int val=stmt.executeUpdate();
 			return val>0?true:false;
@@ -90,7 +90,7 @@ public class CityOperationRepoIMPL extends DBConfig implements CityOperation {
 	public List<CitytEntity> isSearchCity(String name) {
 		try {
 			List<CitytEntity> list=new ArrayList<>();
-			stmt=conn.prepareStatement("select * from citymaster where startcityname=?");
+			stmt=conn.prepareStatement("select * from citymaster where cityname=?");
 			stmt.setString(1, name);
 			rs=stmt.executeQuery();
 			while(rs.next())
