@@ -1,7 +1,7 @@
 package com.airline.user.operation;
 import java.util.*;
-
 import com.airline.user.repo.UserLoginRepo;
+import com.airlline.admin.operation.AdminPanel;
 public class UserLoginOperation {
 	Scanner sc =new Scanner(System.in);
 	public int userLogin(String userName,String password)
@@ -22,6 +22,10 @@ public class UserLoginOperation {
 			 userName=sc.nextLine();
 			System.out.println("Enter the Password");
 			password=sc.nextLine();
+			if(userName.equals("Admin") && password.equals("Admin"))
+			{
+				new AdminPanel().adminPanel();
+			}
 			
 			userLogin(userName,password);
 		}
