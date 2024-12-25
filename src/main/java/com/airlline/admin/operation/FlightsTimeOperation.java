@@ -15,9 +15,7 @@ public class FlightsTimeOperation {
 		{
 			System.out.println("1. ADD FLIGHTS TIME");
 			System.out.println("2. UPDATE FLIGHTS TIME");
-			System.out.println("3. DELETE FLIGHTS TIME");
 			System.out.println("4. VIEW FLIGHTS TIME");
-			System.out.println("5. SEARCH FLIGHTS TIME");
 			System.out.println("6. FOR EXIT");
 		
 			System.out.println("Enter the Choice");

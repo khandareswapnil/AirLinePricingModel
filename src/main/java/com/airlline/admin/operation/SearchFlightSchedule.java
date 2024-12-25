@@ -2,6 +2,7 @@ package com.airlline.admin.operation;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 import com.airline.entity.ViewFlightsScheduleByUser;
 import com.airline.user.service.ViewFlightsIMPL;
@@ -9,7 +10,7 @@ import com.airline.user.service.ViewFlightsIMPL;
 public class SearchFlightSchedule {
 	Scanner sc=new Scanner(System.in);
 	ViewFlightsIMPL viewFlight=new ViewFlightsIMPL();
-	List<ViewFlightsScheduleByUser> list=null;
+	Set<ViewFlightsScheduleByUser> set=null;
 	public void searchFlightSchedule()
 	{
 		do
@@ -27,11 +28,11 @@ public class SearchFlightSchedule {
 				String startCity=sc.nextLine();
 				System.out.println("Enter the End City");
 				String endCity=sc.nextLine();
-				list=viewFlight.isGetAllFlightsByStartEndCity(startCity, endCity);
-				if(!list.isEmpty())
+				set=viewFlight.isGetAllFlightsByStartEndCity(startCity, endCity);
+				if(!set.isEmpty())
 				{
 				System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
-				list.forEach(list1->System.out.println(list1.getId() +"\t"+list1.getFlightName()+"\t"+list1.getStartCity()+"\t\t"+list1.getEndCity()+"\t\t"+list1.getDate()+"\t"+list1.getTime()+"\t"+list1.getNoOfSits()+"\t\t"+list1.getBasePrice()));
+				set.forEach(set1->System.out.println(set1.getId() +"\t"+set1.getFlightName()+"\t"+set1.getStartCity()+"\t\t"+set1.getEndCity()+"\t\t"+set1.getDate()+"\t"+set1.getTime()+"\t"+set1.getNoOfSits()+"\t\t"+set1.getBasePrice()));
 				}else
 				{
 					System.out.println("No Search Found");
@@ -45,11 +46,11 @@ public class SearchFlightSchedule {
 				endCity=sc.nextLine();
 				System.out.println("Enter the Date");
 				String date=sc.nextLine();
-				list=viewFlight.isGetAllFlightsByStartEndCityDate(startCity, endCity,date);
-				if(!list.isEmpty())
+				set=viewFlight.isGetAllFlightsByStartEndCityDate(startCity, endCity,date);
+				if(!set.isEmpty())
 				{
 				System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
-				list.forEach(list1->System.out.println(list1.getId() +"\t"+list1.getFlightName()+"\t"+list1.getStartCity()+"\t\t"+list1.getEndCity()+"\t\t"+list1.getDate()+"\t"+list1.getTime()+"\t"+list1.getNoOfSits()+"\t\t"+list1.getBasePrice()));
+				set.forEach(set1->System.out.println(set1.getId() +"\t"+set1.getFlightName()+"\t"+set1.getStartCity()+"\t\t"+set1.getEndCity()+"\t\t"+set1.getDate()+"\t"+set1.getTime()+"\t"+set1.getNoOfSits()+"\t\t"+set1.getBasePrice()));
 				}else
 				{
 					System.out.println("No Search Found");
