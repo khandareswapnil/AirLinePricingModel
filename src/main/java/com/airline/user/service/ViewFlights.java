@@ -4,10 +4,10 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.ViewFlightsScheduleByUser;
 
 public interface ViewFlights {
-	public List<ViewFlightsScheduleByUser> isGetAllFlights();
-	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCity(String startcity, String endcity); 
-	public List<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCityDate(String startcity, String endcity,String date); 
+	public Set<ViewFlightsScheduleByUser> isGetAllFlights();
+	public Set<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCity(String startcity, String endcity); 
+	public Set<ViewFlightsScheduleByUser> isGetAllFlightsByStartEndCityDate(String startcity, String endcity,String date); 
 	 
-	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
+	public Set<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date);
 
 }

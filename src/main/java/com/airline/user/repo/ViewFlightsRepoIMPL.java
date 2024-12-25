@@ -2,19 +2,22 @@ package com.airline.user.repo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import com.airline.entity.ViewFlightsScheduleByUser;
 import com.ariline.config.DBConfig;
 public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 	
 	ViewFlightsScheduleByUser obj ;                                            //viewFlight Schedule entity class reference
-	List<ViewFlightsScheduleByUser> list ;                                     //  list reference to store found records
+	Set<ViewFlightsScheduleByUser> treeSet ;                                     //  list reference to store found records
 	int fsid;
 	String flightName;
 	String startCity;
 	String endCity;
-	String date;
-	String flightTime;
+	LocalDate date;
+	LocalTime flightTime;
 	int noOfSits;
 	int basePrice;   
 	String query;                                                            // created string to hold sql query
@@ -25,10 +28,10 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 	//helper method for to convert flight schedules data int id type to String type. takes resultset as parameter which may contain multiple records in id format
 	
 	@Override
-	public List<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs) {
+	public Set<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs) {
 		// TODO Auto-generated method stub
 		id=1;
-		list=new ArrayList<>();
+		treeSet=new TreeSet<>();
 		query = " select fi.flightsname, cm.cityname as StartCity, cm2.cityname as EndCity, fs.date, ftm.time, sbp.no_seats, sbp.base_price" +
                    " from flightschedule fs"+
                    " inner join flightsinfomaster fi ON fs.flight_id=fi.fid"+
@@ -48,13 +51,13 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 					flightName=rs2.getString(1);
 					startCity=rs2.getString(2);
 					endCity=rs2.getString(3);
-					date=rs2.getString(4);
-					flightTime=rs2.getString(5);
+					date=LocalDate.parse(rs2.getString(4));
+					flightTime=LocalTime.parse(rs2.getString(5));
 					noOfSits=rs2.getInt(6);
 					basePrice=rs2.getInt(7);
 					obj=new ViewFlightsScheduleByUser(id,flightName,startCity,endCity,date,flightTime,noOfSits,basePrice);
 					id++;
-					list.add(obj);	
+					treeSet.add(obj);	
 				} 
 			}
 			
@@ -63,24 +66,24 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 		{
 			e.printStackTrace();
 		}
-		return list;
+		return treeSet;
 	}
 	
 	
 	
 	@Override
-	public List<ViewFlightsScheduleByUser> viewAllFlights() {
+	public Set<ViewFlightsScheduleByUser> viewAllFlights() {
 		// TODO Auto-generated method stub
 		try 
 		{
 			stmt=conn.prepareStatement("select * from flightschedule");
 			rs=stmt.executeQuery();
-			list=new ArrayList<>();
+			treeSet=new TreeSet<>();
 		
 	
-			list=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 			
-			return list;
+			return treeSet;
 		}
 		catch(SQLException e)
 		{
@@ -92,7 +95,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 	
 
 	@Override
-	public List<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCity(String scity, String ecity) {
+	public Set<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCity(String scity, String ecity) {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -120,20 +123,20 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt.setInt(1, startCityId);
 			stmt.setInt(2, endCityId);
 			rs=stmt.executeQuery();
-			list = fetchFsRecordsInReadableFormat(rs);			
+			treeSet = fetchFsRecordsInReadableFormat(rs);			
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return list;
+		return treeSet;
 		
 	
 	}
 
 
 	@Override
-	public List<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCityDate(String scity, String ecity, String date) {
+	public Set<ViewFlightsScheduleByUser> viewAllFlightsByStartEndCityDate(String scity, String ecity, String date) {
 		// TODO Auto-generated method stub
 		try {
 			int startCityId=0;
@@ -161,27 +164,27 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt.setInt(2, endCityId);
 			stmt.setString(3, date);
 			rs=stmt.executeQuery();
-			list=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return treeSet;
 	}
 	
-	public List<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date)
+	public Set<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date)
 	{
 		try
 		{
 			stmt=conn.prepareStatement("select *from flightschedule where date=?");
 			stmt.setString(1, date);
 			rs=stmt.executeQuery();
-			list=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
-		return list;
+		return treeSet;
 	}
 
 }
