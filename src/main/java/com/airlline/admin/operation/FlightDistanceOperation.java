@@ -18,11 +18,11 @@ public class FlightDistanceOperation {
 	{
 		do
 		{
-			System.out.println("1. ADD DISTANCE OF TWO CITIES");
-			System.out.println("2. UPDATE DISTANCE OF TWO CITIES");
-			System.out.println("3. DELETE DISTANCE OF TWO CITIES");
-			System.out.println("4. VIEW ALL RECORDS OF DISTANCE OF TWO CITIES");
-			System.out.println("5. SEARCH RECORD OF DISTANCE OF TWO CITIES PRESENT?");
+			System.out.println("1. Add Distance Of Two Cities");
+			System.out.println("2. UPDATE  Distance Of Two Cities");
+			System.out.println("3. DELETE  Distance Of Two Cities");
+			System.out.println("4. View All Records Of  Distance Of Two Cities");
+			System.out.println("5. Search Record Of Distaince Of Two Cities Present");
 			System.out.println("6. FOR HOME PAGE");
 			System.out.println("7. FOR EXIT");
 
