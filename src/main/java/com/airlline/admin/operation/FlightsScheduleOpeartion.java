@@ -83,7 +83,7 @@ public class FlightsScheduleOpeartion {
 			 date=sc.nextLine();
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
 
-			List<ViewFlightsScheduleByUser> list6= viewFlightsser.viewAllFlightsByDate(date);
+			Set<ViewFlightsScheduleByUser> set6= viewFlightsser.viewAllFlightsByDate(date);
 			list6.forEach(list7->System.out.println(list7.getId() +"\t"+list7.getFlightName()+"\t"+list7.getStartCity()+"\t\t"+list7.getEndCity()+"\t\t"+list7.getDate()+"\t"+list7.getTime()+"\t"+list7.getNoOfSits()+"\t\t"+list7.getBasePrice()));
 			System.out.println("Enter the New Date");
 			date=sc.nextLine();

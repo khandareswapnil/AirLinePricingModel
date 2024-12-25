@@ -32,17 +32,6 @@ public class ViewFlightsIMPL implements ViewFlights
 		return objFlightRepo.viewAllFlightsByStartEndCityDate (startcity, endcity,date);
 	}
 
-	@Override
-	public Set<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date) {
-		// TODO Auto-generated method stub
-		return objFlightRepo.viewAllFlightsByDate(date);
-	}
-
-	@Override
-	public boolean isDeleteScheddule(String date, String time, String startCity, String endCity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
 		
 }
