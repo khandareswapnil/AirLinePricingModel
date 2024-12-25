@@ -132,6 +132,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			while(rs.next())
 			{
 				FlightsTimes time=new FlightsTimes();
+				time.setId(rs.getInt(1));
 				time.setTime(rs.getString(2));
 				list.add(time);
 			}
