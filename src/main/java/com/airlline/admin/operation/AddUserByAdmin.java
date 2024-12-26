@@ -33,8 +33,8 @@ public class AddUserByAdmin {
 			break;
 		case 2:
 			list=userOpSer.isGetUser();
-			System.out.println("Name\tEmail\t\tContact\t\tGender");
-			list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+			System.out.println("Name\tEmail\t\tContact\t\tGender\t\tCity");
+			list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
 			break;
 		case 3:
 			System.out.println("Enter the Email");
@@ -43,11 +43,11 @@ public class AddUserByAdmin {
 			boolean b=userOpSer.isDeleted(email);
 			 if(b)
 			 {
-				 System.out.println("Deleted Sucessfully....................");
+				 System.out.println("Deleted Sucessfully");
 			 }
 			 else
 			 {
-				 System.out.println("Some Problem is There.......................");
+				 System.out.println("User Not Found");
 			 }
 			break;
 		case 4:
@@ -63,7 +63,7 @@ public class AddUserByAdmin {
 			 }
 			 else
 			 {
-				 System.out.println("Some Problem is There...................");
+				 System.out.println("User Not Found");
 			 }
 			break;
 		case 5:
@@ -80,16 +80,32 @@ public class AddUserByAdmin {
 						sc.nextLine();
 						String searchName=sc.nextLine();
 						list=userOpSer.isSearchByName(searchName);
-						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+						if(list.isEmpty())
+						{
+							list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+						}
+						else
+						{
+							System.out.println("User Not Found");
+						}
+
 						break;
 					case 2:
 						System.out.println("Enter the City Name For Search :");
 						sc.nextLine();
 						String cityNamee=sc.nextLine();
 						list=userOpSer.isSearchByCityName(cityNamee);
-						list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
+						if(list.isEmpty())
+						{
+							list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
+						}
+						else
+						{
+							System.out.println("User Not Found");
+						}
 						break;
 					case 3:
+						userOperation();
 						break;
 						default:
 							System.out.println("Invalid Input");
