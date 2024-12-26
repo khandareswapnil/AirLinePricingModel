@@ -163,6 +163,7 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 		return fDetailsRepo.isGetFLightTimes();
 	}
 
+
 	
 	
 

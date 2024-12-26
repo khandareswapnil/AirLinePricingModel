@@ -33,41 +33,71 @@ public class UserPanel {
 
 	    if(id==uid)
 	    {
-	    	System.out.println("*********************** WELCOME "+ name.toUpperCase()+" ************************\n");
+	    	 System.out.println("======================================================");
+	    	    System.out.println("*********************** WELCOME " + name.toUpperCase() + " ************************");
+	    	    System.out.println("======================================================\n");
+
 			ClientAppication capp=new ClientAppication();
 			Scanner sc = new Scanner(System.in);
+			
 			ViewFlightsIMPL viewFlightsServiceRef =new ViewFlightsIMPL();  // reference for view all flight service class
 			CityOperationSerIMPL city =new CityOperationSerIMPL();         // reference for city operation repository class to get lists of all cities
 			Set<ViewFlightsScheduleByUser> set2=null;                    // created tree set of viewFlightsScheduleByUser entity class
 			BookingService bs =new BookingService();                     // Booking Service class object
 			FlightsDetailsRepoImpl fdrepo =new FlightsDetailsRepoImpl();   //admin repo reference for getting fsid
+			
 			do 
 			{
-				System.out.println("1. View all flights");
-				System.out.println("2. View all flights by start and end city");
-				System.out.println("3. View all flights by start city, end city and date wise");
-				System.out.println("4. Ticket Booking");
-				System.out.println("5. For Logout");
-				System.out.println("Enter your choice from above menu");
-				int menu=sc.nextInt();
-				sc.nextLine();
+				 System.out.println("======================================================");
+				    System.out.println("**************** AIRLINE SYSTEM MENU *****************");
+				    System.out.println("======================================================");
+				    System.out.println("1. View All Flights");
+				    System.out.println("2. View Flights by Start and End City");
+				    System.out.println("3. View Flights by Start City, End City, and Date");
+				    System.out.println("4. Ticket Booking");
+				    System.out.println("5. View Booking History");
+				    System.out.println("6. Logout");
+				    System.out.println("======================================================");
+				    System.out.print("Enter your choice: ");
+				    int menu = sc.nextInt();
+				    sc.nextLine(); 
 				
+				int count;
 				switch(menu) 
 				{
 				case 1:
-					set2=viewFlightsServiceRef.isGetAllFlights();
-					System.out.println("-------------------------------------------------------------------------------------------");
-					System.out.println("\nNo.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
-					int count=0;
-					for(ViewFlightsScheduleByUser viewSchedule:set2) {
-						++count;
-						System.out.println(count+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits());
-					}
-					//set2.forEach(list3->System.out.println(+list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
-					System.out.println("-------------------------------------------------------------------------------------------");
-					System.out.println("");
-					
-					break;
+				    System.out.println("\n======================================================");
+				    System.out.println("                   AVAILABLE FLIGHTS                  ");
+				    System.out.println("======================================================");
+				    System.out.printf("%-5s %-20s %-15s %-15s %-15s %-10s %-10s %-10s\n", 
+				                      "No.", "Flight Name", "Start City", "End City", 
+				                      "Date", "Time", "Seats", "Price");
+				    System.out.println("-------------------------------------------------------------------------------------------");
+
+				    set2 = viewFlightsServiceRef.isGetAllFlights(); // Fetch all flights
+
+				    if (set2.isEmpty()) {
+				        System.out.println("No flights available at the moment.");
+				    } else {
+				         count = 0;
+				        for (ViewFlightsScheduleByUser viewSchedule : set2) {
+				            ++count;
+				            System.out.printf("%-5d %-20s %-15s %-15s %-15s %-10s %-10d %-10d\n", 
+				                              count,
+				                              viewSchedule.getFlightName(),
+				                              viewSchedule.getStartCity(),
+				                              viewSchedule.getEndCity(),
+				                              viewSchedule.getDate(),
+				                              viewSchedule.getTime(),
+				                              viewSchedule.getNoOfSits(),
+				                              viewSchedule.getBasePrice());
+				        }
+				    }
+
+				    System.out.println("-------------------------------------------------------------------------------------------");
+				    System.out.println();
+				    break;
+
 				case 2:	
 					System.out.println("");
 					List<CitytEntity> list= city.isGetCity();
@@ -215,6 +245,9 @@ public class UserPanel {
 				    }
 					break;
 				case 5:
+					List l=null;
+					
+				case 6:
 					System.out.println("---------------------------------------------------------------------------------------------------------\n");
 					capp.main(null);
 					default:
