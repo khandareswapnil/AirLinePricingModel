@@ -2,6 +2,7 @@ package com.airline.admin.repo;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.airline.entity.AddDistanceOfCity;
@@ -9,6 +10,7 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
 import com.airline.entity.FlightsTimes;
+import com.airline.entity.ViewBookingDetails;
 
 public interface FlightsDetailsRepo {
 	public boolean isFlightsName(FlightsName fname);
@@ -36,6 +38,7 @@ public interface FlightsDetailsRepo {
 	public int isUpdate(int fsid,int tid);
 	public boolean isDeleteSchedule(int fsid);
 	public Set<FlightsTimes> isGetFLightTimes();
+	public List<ViewBookingDetails> isViewBooking();
 	
 
 	

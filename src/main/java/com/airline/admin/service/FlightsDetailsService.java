@@ -1,6 +1,7 @@
 package com.airline.admin.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.airline.entity.AddDistanceOfCity;
@@ -8,6 +9,7 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
 import com.airline.entity.FlightsTimes;
+import com.airline.entity.ViewBookingDetails;
 
 public interface FlightsDetailsService {
 	public boolean isFlightsName(FlightsName fname);
@@ -35,7 +37,8 @@ public interface FlightsDetailsService {
 	public int isUpdate(int fsid,int tid);
 	public boolean isDeleteSchedule(int fsid);
 	public Set<FlightsTimes> isGetFLightTimes();
-	
+	public List<ViewBookingDetails> isViewBooking();
+
 
 
 
