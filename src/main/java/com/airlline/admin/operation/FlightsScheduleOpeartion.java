@@ -56,8 +56,8 @@ public class FlightsScheduleOpeartion {
 			System.out.println("Enter the Date ");
 			String date=sc.nextLine();
 			System.out.println("Enter the departure time ");
-			List<FlightsTimes> list2=fDetailsService.isGetTime();
-			list2.forEach(list3->System.out.println(list3.getTime()));
+			Set<FlightsTimes> setTime=fDetailsService.isGetFLightTimes();
+			setTime.forEach(set1->System.out.println(set1.getTime()));
 			String time=sc.nextLine();
 			System.out.println("Choose the No. of Seats and Base Price");
 			List<FlightsSeatsAndBasePrice> list4=fDetailsService.isGetSeat();
@@ -94,8 +94,8 @@ public class FlightsScheduleOpeartion {
 			System.out.println("Enter the Flights Name");
 			String name=sc.nextLine();
 			System.out.println("Enter the Time");
-			 list2=fDetailsService.isGetTime();
-				list2.forEach(list3->System.out.println(list3.getTime()));
+			setTime=fDetailsService.isGetFLightTimes();
+			setTime.forEach(set1->System.out.println(set1.getTime()));
 				time=sc.nextLine();
 
 			int fsid=fDetailsService.isSearchByCityDateNameTime(startCity, endCity, name, date, time);
@@ -106,9 +106,9 @@ public class FlightsScheduleOpeartion {
 				String newDate=sc.nextLine();
 				System.out.println("Enter the New Time");
 				String newTime=sc.nextLine();
-				list2=fDetailsService.isGetTime();
+				setTime=fDetailsService.isGetFLightTimes();
 				int timeid=0;
-				for(FlightsTimes ftime: list2)
+				for(FlightsTimes ftime: setTime)
 				{
 					if((ftime.getTime()).equals(newTime))
 					{
@@ -149,8 +149,8 @@ public class FlightsScheduleOpeartion {
 			System.out.println("Enter the Flights Name");
 			name=sc.nextLine();
 			System.out.println("Enter the Time");
-			 list2=fDetailsService.isGetTime();
-				list2.forEach(list3->System.out.println(list3.getTime()));
+			setTime=fDetailsService.isGetFLightTimes();
+			setTime.forEach(set->System.out.println(set.getTime()));
 				time=sc.nextLine();
 
 			fsid=fDetailsService.isSearchByCityDateNameTime(startCity, endCity, name, date, time);
@@ -174,7 +174,12 @@ public class FlightsScheduleOpeartion {
 		case 4:
 			System.out.println("SR No."+"\t"+"Flight Name"+"\t"+"Start City"+"\t"+"End City"+"\t"+"Date"+"\t\t"+"Time"+"\t"+"No Of Seats"+"\t"+"Base Price(RS)");
 			Set<ViewFlightsScheduleByUser> flightsList= viewFlightsser.isGetAllFlights();
-			flightsList.forEach(flightsList3->System.out.println(flightsList3.getId() +"\t"+flightsList3.getFlightName()+"\t"+flightsList3.getStartCity()+"\t\t"+flightsList3.getEndCity()+"\t\t"+flightsList3.getDate()+"\t"+flightsList3.getTime()+"\t"+flightsList3.getNoOfSits()+"\t\t"+flightsList3.getBasePrice()));
+			int count=0;
+			for(ViewFlightsScheduleByUser viewSchedule:flightsList)
+			{
+				++count;
+				System.out.println(count+"\t\t"+viewSchedule.getFlightName()+"\t\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t\t"+viewSchedule.getTime()+"\t\t"+viewSchedule.getNoOfSits()+"\t\t"+viewSchedule.getBasePrice());
+			}
 			break;
 		case 5:
 			new SearchFlightSchedule().searchFlightSchedule();

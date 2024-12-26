@@ -1,6 +1,7 @@
 package com.airlline.admin.operation;
 
 import java.util.Scanner;
+import java.util.Set;
 
 import com.airline.admin.service.FlightsDetailsServiceIMPL;
 import com.airline.entity.FlightsTimes;
@@ -14,9 +15,8 @@ public class FlightsTimeOperation {
 		do
 		{
 			System.out.println("1. ADD FLIGHTS TIME");
-			System.out.println("2. UPDATE FLIGHTS TIME");
-			System.out.println("4. VIEW FLIGHTS TIME");
-			System.out.println("6. FOR EXIT");
+			System.out.println("2. VIEW FLIGHTS TIME");
+			System.out.println("3. FOR EXIT");
 		
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
@@ -39,6 +39,16 @@ public class FlightsTimeOperation {
 
 				}
 				break;
+			case 2:
+				Set<FlightsTimes> timeSet=fDetailsService.isGetFLightTimes();
+				timeSet.forEach(timeSet1->System.out.println(timeSet1.getTime()));
+				
+				break;
+			case 3:
+				new AddFlightDetails().flightALLOperation();
+				break;
+				default:
+					System.out.println("Invalid Input");
 			}
 		}while(true);
 	}
