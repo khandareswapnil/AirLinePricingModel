@@ -99,7 +99,7 @@ public class UserPanel {
 				    break;
 
 				case 2:	
-					System.out.println("");
+					
 					List<CitytEntity> list= city.isGetCity();
 					list.forEach(list1->System.out.println(list1.getCityName()));
 					System.out.println("\nEnter Your start city from above");
@@ -181,13 +181,17 @@ public class UserPanel {
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 				    if(!set2.isEmpty()) {
 						System.out.println("-------------------------------------------------------------------------------------------");
+
 				    	System.out.println("\nNo.\tFSINO\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price\tFinal Price");
 				    	count=0;
 				    	List<AddDistanceOfCity> liDis=fDetailsService.isViewAllDistanceRecords();
 				    	int dis=0;
-				    	for(AddDistanceOfCity cityDistance: liDis)
+				    	for(AddDistanceOfCity cityDistance: liDis)	
 				    	{
-				    		if((cityDistance.getScity().equals(scity1))&&(cityDistance.getEcity().equals(ecity1)))
+				    		System.out.println(cityDistance.getScity());
+				    		System.out.println(cityDistance.getEcity());
+
+				    		if((cityDistance.getScity()).equals(scity1)&&(cityDistance.getEcity()).equals(ecity1))
 				    		{
 				    			dis=cityDistance.getDistance();
 						    	System.out.println(dis);
