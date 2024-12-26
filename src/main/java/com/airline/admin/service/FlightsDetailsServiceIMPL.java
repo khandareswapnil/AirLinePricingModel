@@ -1,6 +1,7 @@
 package com.airline.admin.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
 import com.airline.entity.AddDistanceOfCity;
@@ -154,6 +155,12 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	public boolean isDeleteSchedule(int fsid) {
 		// TODO Auto-generated method stub
 		return fDetailsRepo.isDeleteSchedule(fsid);
+	}
+
+	@Override
+	public Set<FlightsTimes> isGetFLightTimes() {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isGetFLightTimes();
 	}
 
 	

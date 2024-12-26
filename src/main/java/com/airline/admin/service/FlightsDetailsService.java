@@ -1,6 +1,7 @@
 package com.airline.admin.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.FlightsDetails;
@@ -33,7 +34,8 @@ public interface FlightsDetailsService {
 	public int isSearchByCityDateNameTime(String startCity,String endCity,String fname,String date,String time);
 	public int isUpdate(int fsid,int tid);
 	public boolean isDeleteSchedule(int fsid);
-
+	public Set<FlightsTimes> isGetFLightTimes();
+	
 
 
 

@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FlightsName {
+public class FlightsName{
 	private String flightname;
+
+	
 }

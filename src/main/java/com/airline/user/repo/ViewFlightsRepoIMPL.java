@@ -55,7 +55,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 					flightTime=LocalTime.parse(rs2.getString(5));
 					noOfSits=rs2.getInt(6);
 					basePrice=rs2.getInt(7);
-					System.out.println("ID BEFORE ADD IN SET : "+id);
+					
 					obj=new ViewFlightsScheduleByUser(id,flightName,startCity,endCity,date,flightTime,noOfSits,basePrice);
 					id++;
 					treeSet.add(obj);	
@@ -91,6 +91,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			e.printStackTrace();
 			return null;
 		}
+		
 	
 	}
 	
