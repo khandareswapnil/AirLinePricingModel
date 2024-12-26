@@ -6,6 +6,7 @@ import com.airline.admin.repo.UserOperationRepoIMPL;
 import com.airline.admin.service.CityOperationSerIMPL;
 import com.airline.app.ClientAppication;
 import com.airline.entity.CitytEntity;
+import com.airline.entity.Seat;
 import com.airline.entity.User;
 import com.airline.entity.ViewFlightsScheduleByUser;
 import com.airline.user.service.BookingService;
@@ -146,12 +147,18 @@ public class UserPanel {
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 				    if(!set2.isEmpty()) {
 						System.out.println("-------------------------------------------------------------------------------------------");
-				    	System.out.println("\nNo.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
-				    	set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
+				    	System.out.println("\nNo.\tFSINO\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
+				    	count=0;
+						for(ViewFlightsScheduleByUser viewSchedule:set2) {
+							++count;
+							System.out.println(count+"\t"+viewSchedule.getId()+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits());
+						}
+				    	//set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
+				    	
 						System.out.println("-------------------------------------------------------------------------------------------");
 						System.out.println("");
 						
-						System.out.println("Choose Flight from above");
+						System.out.println("Enter FSINO number from above");
 						int ch =sc.nextInt();
                     for(ViewFlightsScheduleByUser el: set2)
                     {
@@ -159,15 +166,29 @@ public class UserPanel {
                     		System.out.println("Flight mached from above...");
                     		 int fsid=fdrepo.isSearchByCityDateNameTime(scity1, ecity1, el.getFlightName(), date, el.getTime().toString());
                     		 System.out.println("Print fsid : "+fsid);
-                    		 List<Integer> l=bs.showAvailableSeats(fsid);
+                    		 List<Seat> l=bs.showAvailableSeats(fsid);
                     		 System.out.println("Seat list is empty : "+l.isEmpty());
-                    		 for(Integer i:l) {
-                    			 System.out.printf("[" + i + " ]");
+                    		 for(Seat i:l) {
+                    			 if(i.getStatus()==0) {
+                    				 System.out.printf("[ "+i.getSno()+" ]\t");
+                    				 if(i.getSno()%6==0) System.out.println("");
+                    			 }
+                    			 else {
+                    				 System.out.printf("[ "+i.getSno()+" B]\t");
+                    				 if(i.getSno()%6==0) System.out.println("");
+                    			 }
                     		 }
+                    		 System.out.println("Enter Seat No from Above");
+                    		 int seatNo=sc.nextInt();
+                    		boolean b= bs.bookTicket(uid, fsid, seatNo);          // calling seat booking service method
+                    		if(b) {
+                    			System.out.println("Your Ticket is Booked");
+                    		}
+                    		else {
+                    			System.out.println("This seat is already booked..");
+                    		}
                     	}
-                    	if(true) {
-                    		System.out.println("Your Ticket is Booked");
-                    	}
+                    	
                     }
 				    }
 				    else
