@@ -11,7 +11,7 @@ import com.ariline.config.DBConfig;
 public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 	
 	ViewFlightsScheduleByUser obj ;                                            //viewFlight Schedule entity class reference
-	Set<ViewFlightsScheduleByUser> hasSet ;                                     //  list reference to store found records
+	Set<ViewFlightsScheduleByUser> treeSet ;                                     //  list reference to store found records
 	int fsid;
 	String flightName;
 	String startCity;
@@ -31,7 +31,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 	public Set<ViewFlightsScheduleByUser> fetchFsRecordsInReadableFormat(ResultSet rs) {
 		// TODO Auto-generated method stub
 		id=1;
-		hasSet=new HashSet<>();
+		treeSet=new TreeSet<>();
 		query = " select fi.flightsname, cm.cityname as StartCity, cm2.cityname as EndCity, fs.date, ftm.time, sbp.no_seats, sbp.base_price" +
                    " from flightschedule fs"+
                    " inner join flightsinfomaster fi ON fs.flight_id=fi.fid"+
@@ -55,9 +55,10 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 					flightTime=LocalTime.parse(rs2.getString(5));
 					noOfSits=rs2.getInt(6);
 					basePrice=rs2.getInt(7);
+					
 					obj=new ViewFlightsScheduleByUser(id,flightName,startCity,endCity,date,flightTime,noOfSits,basePrice);
 					id++;
-					hasSet.add(obj);	
+					treeSet.add(obj);	
 				} 
 			}
 			
@@ -66,7 +67,7 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 		{
 			e.printStackTrace();
 		}
-		return hasSet;
+		return treeSet;
 	}
 	
 	
@@ -78,12 +79,12 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 		{
 			stmt=conn.prepareStatement("select * from flightschedule");
 			rs=stmt.executeQuery();
-			hasSet=new TreeSet<>();
+			treeSet=new TreeSet<>();
 		
 	
-			hasSet=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 			
-			return hasSet;
+			return treeSet;
 		}
 		catch(SQLException e)
 		{
@@ -124,13 +125,13 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt.setInt(1, startCityId);
 			stmt.setInt(2, endCityId);
 			rs=stmt.executeQuery();
-			hasSet = fetchFsRecordsInReadableFormat(rs);			
+			treeSet = fetchFsRecordsInReadableFormat(rs);			
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
 		}
-		return hasSet;
+		return treeSet;
 		
 	
 	}
@@ -165,12 +166,12 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt.setInt(2, endCityId);
 			stmt.setString(3, date);
 			rs=stmt.executeQuery();
-			hasSet=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return hasSet;
+		return treeSet;
 	}
 	
 	public Set<ViewFlightsScheduleByUser> viewAllFlightsByDate(String date)
@@ -180,12 +181,12 @@ public class ViewFlightsRepoIMPL extends DBConfig implements ViewFlightsRepo{
 			stmt=conn.prepareStatement("select *from flightschedule where date=?");
 			stmt.setString(1, date);
 			rs=stmt.executeQuery();
-			hasSet=fetchFsRecordsInReadableFormat(rs);
+			treeSet=fetchFsRecordsInReadableFormat(rs);
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
-		return 		hasSet;
+		return treeSet;
 	}
 
 

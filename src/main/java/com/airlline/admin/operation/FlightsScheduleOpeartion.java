@@ -69,6 +69,7 @@ public class FlightsScheduleOpeartion {
 			if(b)
 			{
 				System.out.println("Flights Schedule Added Sucess");
+				
 			}
 			else
 			{
@@ -109,15 +110,13 @@ public class FlightsScheduleOpeartion {
 				int timeid=0;
 				for(FlightsTimes ftime: setTime)
 				{
-					System.out.println("Inside Checking in the for ..//");
 					if((ftime.getTime()).equals(newTime))
-					{ System.out.println("Inside if condition ...//");
+					{
 						timeid=ftime.getId();
 						break;
 					}
 					
 				}
-				System.out.println(timeid);
 				
 				int val=fDetailsService.isUpdate(fsid, timeid);
 				if(val!=0)
