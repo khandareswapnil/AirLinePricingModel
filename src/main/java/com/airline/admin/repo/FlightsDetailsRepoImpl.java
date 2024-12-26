@@ -4,7 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.FlightsDetails;
@@ -657,6 +658,30 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			ex.printStackTrace();
 		}
 		return false;
-	}		
+	}	
+	
+	public Set<FlightsTimes> isGetFLightTimes()
+	{
+		try
+		{
+			Set<FlightsTimes> timeSet=new TreeSet<>();
+			stmt=conn.prepareStatement("select *from flightstiming_master");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				FlightsTimes fTime=new FlightsTimes();
+				fTime.setId(rs.getInt(1));
+				fTime.setTime(rs.getString(2));
+				timeSet.add(fTime);
+			}
+			return timeSet;
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return null;
+		}
+		
+		
+	}
 }
 
