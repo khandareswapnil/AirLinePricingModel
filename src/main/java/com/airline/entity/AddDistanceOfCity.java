@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-
 public class AddDistanceOfCity {
 	private String scity;
 	private String ecity;
