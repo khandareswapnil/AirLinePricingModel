@@ -57,18 +57,29 @@ public class FlightsNameOperation {
 				List<FlightsName> list1=fDetailsService.isSearchName(fgname);
 				if(list1==null)
 				{
-					System.out.println("This Flights Are Not Present.........");
+					System.out.println("This Flights Are Not Present");
 
 				}
 				else
 				{
 					System.out.println("Enter the New Name");
 					String newName=sc.nextLine();
-					boolean b=fDetailsService.isUpdate(fname, newName);
-					if(b==true)
-					{
-						System.out.println("Flight Name Update Sucessfully...............");
-					}
+					fgname=new FlightsName(newName);
+					List<FlightsName> list2=fDetailsService.isSearchName(fgname);
+					 if(list2==null)
+					 {
+						 boolean b=fDetailsService.isUpdate(fname, newName);
+							if(b==true)
+							{
+								System.out.println("Flight Name Update Sucessfully");
+							}
+							break;
+					 }
+					 else
+					 {
+						 System.out.println("This Flights Are Already Present");
+					 }
+					
 				}
 				
 				
@@ -114,6 +125,7 @@ public class FlightsNameOperation {
 				}
 				break;
 			case 6:
+				new AddFlightDetails().flightALLOperation();
 				break;
 				default : 
 					System.out.println("Invalid Input");
