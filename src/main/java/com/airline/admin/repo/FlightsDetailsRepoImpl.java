@@ -227,7 +227,36 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 				stmt.setInt(5, sbpid);
 				stmt.setString(6,fDetails.getDate());
 				int val=stmt.executeUpdate();
-				return val>0?true:false;
+				if(val!=0) {
+					stmt=conn.prepareStatement("select fsid from flightschedule where start_city_id=? AND end_city_id=? AND flight_id=? AND tid=? AND sbpid=?");
+					stmt.setInt(1, scid);
+					stmt.setInt(2, ecid);
+					stmt.setInt(3, fid);
+					stmt.setInt(4, tid);
+					stmt.setInt(5, sbpid);
+					rs=stmt.executeQuery();
+					if(rs.next()) 
+					{
+						int fsid=rs.getInt(1);
+						int noOfSits = 0;
+					stmt=conn.prepareStatement("select no_seats from seat_base_price_master where sbpid=?");
+					stmt.setInt(1, sbpid);
+					rs=stmt.executeQuery();
+					   if(rs.next())
+					   {
+						noOfSits=rs.getInt(1);
+					   }
+					  for(int i=1;i<=noOfSits;i++) {
+						  stmt=conn.prepareStatement("insert into seatmaster values('0',?,?,?)");
+						  stmt.setInt(1, fsid);
+						  stmt.setInt(2, i);
+						  stmt.setInt(3, 0);
+						  stmt.executeUpdate();
+					  }
+					}
+					return true;
+				}
+				else return false;
 			}
 			else 
 			{

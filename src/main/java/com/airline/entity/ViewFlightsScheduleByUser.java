@@ -26,7 +26,11 @@ public class ViewFlightsScheduleByUser implements Comparable<ViewFlightsSchedule
         
         // If dates are equal, compare by time
         if (value == 0) {
-            return this.time.compareTo(second.time);
+            int val2= this.time.compareTo(second.time);
+            if(val2==0){
+            	return 1;
+            }
+            return val2;
         }
 
         return value;
