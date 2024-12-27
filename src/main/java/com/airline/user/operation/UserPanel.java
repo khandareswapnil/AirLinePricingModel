@@ -1,11 +1,15 @@
 package com.airline.user.operation;
+import java.time.LocalTime;
 import java.util.*;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
 import com.airline.admin.repo.UserOperationRepoIMPL;
 import com.airline.admin.service.CityOperationSerIMPL;
 import com.airline.admin.service.FlightsDetailsServiceIMPL;
+import com.airline.admin.service.UserOperationsService;
+import com.airline.admin.service.UserOperationsServiceIMPL;
 import com.airline.app.ClientAppication;
+import com.airline.email.verify.OTPGenerator;
 import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.CitytEntity;
 import com.airline.entity.Seat;
@@ -15,6 +19,8 @@ import com.airline.user.service.BookingService;
 import com.airline.user.service.ViewFlightsIMPL;
 public class UserPanel {
 	FlightsDetailsServiceIMPL fDetailsService=new FlightsDetailsServiceIMPL();
+	 UserOperationsService userOpService=new UserOperationsServiceIMPL();
+
 
 	public void userPanel(int uid)
 	{
@@ -80,6 +86,7 @@ public class UserPanel {
 					{
 						System.out.println("Enter different city as start city and end city");
 					}
+					
 					
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCity (scity, ecity);
 					if(!set2.isEmpty()) {
@@ -150,6 +157,8 @@ public class UserPanel {
 					date=sc.nextLine();
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 					int finalPrice=0;
+					LocalTime time=null;
+					String fname=null;
 					if (!set2.isEmpty()) {
 					    System.out.println("-------------------------------------------------------------------------------------------");
 					    System.out.println(String.format("%-4s %-8s %-15s %-12s %-12s %-12s %-10s %-12s %-12s", 
@@ -170,6 +179,8 @@ public class UserPanel {
 					    for (ViewFlightsScheduleByUser viewSchedule : set2) {
 					        ++count;
 					        finalPrice = viewSchedule.getBasePrice() * dis;
+					        time=viewSchedule.getTime();
+					        fname=viewSchedule.getFlightName();
 					        System.out.println(String.format("%-4d %-8s %-15s %-12s %-12s %-12s %-10s %-12d %-12d", 
 					                                         count, viewSchedule.getId(), viewSchedule.getFlightName(),
 					                                         viewSchedule.getStartCity(), viewSchedule.getEndCity(),
@@ -204,10 +215,24 @@ public class UserPanel {
                     		 }
                     		 System.out.println("Enter Seat No from Above");
                     		 int seatNo=sc.nextInt();
-                    		 System.out.println(finalPrice);
+                    		 List<User> userList=userOpService.isGetUser();
+                    		 String userName=null;
+                    		 String userEmail=null;
+                    		 for(User user:userList)
+                    		 {
+                    			if(uid==user.getId()) 
+                    			{
+                    				userName=user.getName();
+                    				userEmail=user.getEmail();
+                    			}
+                    		 }
+                    		// System.out.println(finalPrice);
                     		boolean b= bs.bookTicket(uid, fsid, seatNo,finalPrice);          // calling seat booking service method
                     		if(b) {
+                    			OTPGenerator emailSend=new OTPGenerator();
                     			System.out.println("Your Ticket is Booked");
+                    			String message=emailSend.ticketBookInfo(userEmail,name,fname,scity1,ecity1,date,time,seatNo,finalPrice);
+                    			System.out.println(message);
                     		}
                     		else {
                     			System.out.println("This seat is already booked..");

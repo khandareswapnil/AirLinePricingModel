@@ -31,7 +31,7 @@ public class SeatsAndBasePriceOperation {
 				System.out.println("Enter the Flights Seats");
 				sc.nextLine();
 				int seats=sc.nextInt();
-				System.out.println("Enter the Base Price");
+				System.out.println("Enter the Base Price(RS)");
 				int basePrice=sc.nextInt();
 				FlightsSeatsAndBasePrice fSABP=new FlightsSeatsAndBasePrice(seats,basePrice);
 				list=fDetailsService.isSearchSeatAndBasePriceExists(fSABP);
@@ -101,7 +101,7 @@ public class SeatsAndBasePriceOperation {
 				list=fDetailsService.isViewALlSeatAndBasePriceRecords();
 				if(!list.isEmpty()) {
 					System.out.println("-------------------------------------------------------------------------------------------");
-					System.out.println("No Of Sits\tBase Price");
+					System.out.println("No Of Sits\tBase Price(RS)");
 					for(FlightsSeatsAndBasePrice el: list)
 					{
 						System.out.println(el.getNo_OF_Seats()+"\t\t"+el.getBasePrice());
