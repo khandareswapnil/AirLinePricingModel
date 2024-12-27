@@ -17,7 +17,8 @@ public class AdminPanel {
 			System.out.println("2. City Operations");
 			System.out.println("3. View Booking");
 			System.out.println("4. Flights Details Operationss");
-			System.out.println("5. For Exit");
+			System.out.println("5. Report");
+			System.out.println("6. For Exit");
 			System.out.println("Enter the Choice");
 			int ch = sc.nextInt();
 			switch (ch) {
@@ -38,6 +39,8 @@ public class AdminPanel {
 				addFlights.flightALLOperation();;
 				break;
 			case 5:
+				break;
+			case 6:
 				new ClientAppication().main(null);
 				break;
 			default:

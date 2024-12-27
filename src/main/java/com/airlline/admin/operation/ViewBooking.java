@@ -36,8 +36,6 @@ public class ViewBooking {
 				        viewBook.getTime(),
 				    viewBook.getSeatNo(),
 				    viewBook.getFinalPirce()));
-				    
-				    
 				}
 
 		}

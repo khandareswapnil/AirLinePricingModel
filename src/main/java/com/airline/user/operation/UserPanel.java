@@ -234,6 +234,7 @@ public class UserPanel {
                     		 }
                     		 System.out.println("Enter Seat No from Above");
                     		 int seatNo=sc.nextInt();
+                    		 System.out.println(finalPrice);
                     		boolean b= bs.bookTicket(uid, fsid, seatNo,finalPrice);          // calling seat booking service method
                     		if(b) {
                     			System.out.println("Your Ticket is Booked");

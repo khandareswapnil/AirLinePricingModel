@@ -236,10 +236,11 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 						noOfSits=rs.getInt(1);
 					   }
 					  for(int i=1;i<=noOfSits;i++) {
-						  stmt=conn.prepareStatement("insert into seatmaster values('0',?,?,?)");
+						  stmt=conn.prepareStatement("insert into seatmaster values('0',?,?,?,?)");
 						  stmt.setInt(1, fsid);
 						  stmt.setInt(2, i);
 						  stmt.setInt(3, 0);
+						  stmt.setInt(4, 0);
 						  stmt.executeUpdate();
 					  }
 					}
