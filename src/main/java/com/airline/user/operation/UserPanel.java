@@ -75,10 +75,10 @@ public class UserPanel {
 				    System.out.println("\n======================================================");
 				    System.out.println("                   AVAILABLE FLIGHTS                  ");
 				    System.out.println("======================================================");
-				    System.out.printf("%-5s %-20s %-15s %-15s %-15s %-10s %-10s %-10s\n", 
+				    System.out.printf("%-5s %-20s %-15s %-15s %-15s %-10s %-10s\n ", 
 				                      "No.", "Flight Name", "Start City", "End City", 
-				                      "Date", "Time", "Seats", "Price");
-				    System.out.println("------------------------------------------------------------------------------------------------------");
+				                      "Date", "Time", "Seats");
+				    System.out.println("---------------------------------------------------------------------------------------");
 
 				    set2 = viewFlightsServiceRef.isGetAllFlights(); // Fetch all flights
 
@@ -88,19 +88,19 @@ public class UserPanel {
 				         count = 0;
 				        for (ViewFlightsScheduleByUser viewSchedule : set2) {
 				            ++count;
-				            System.out.printf("%-5d %-20s %-15s %-15s %-15s %-10s %-10d %-10d\n", 
+				            System.out.printf("%-5d %-20s %-15s %-15s %-15s %-10s %-10d\n", 
 				                              count,
 				                              viewSchedule.getFlightName(),
 				                              viewSchedule.getStartCity(),
 				                              viewSchedule.getEndCity(),
 				                              viewSchedule.getDate(),
 				                              viewSchedule.getTime(),
-				                              viewSchedule.getNoOfSits(),
-				                              viewSchedule.getBasePrice());
+				                              viewSchedule.getNoOfSits());
+				                             
 				        }
 				    }
 
-				    System.out.println("------------------------------------------------------------------------------------------------------");
+				    System.out.println("-----------------------------------------------------------------------------------------");
 				    System.out.println();
 				    break;
 
@@ -221,10 +221,10 @@ public class UserPanel {
 						System.out.println("\n======================================================");
 					    System.out.println("                   AVAILABLE FLIGHTS                  ");
 					    System.out.println("======================================================");
-					    System.out.println(String.format("%-4s %-8s %-15s %-12s %-12s %-12s %-10s %-12s %-12s", 
+					    System.out.println(String.format("%-4s %-15s %-15s %-12s %-12s %-12s %-10s %-12s %-12s", 
 					                                     "No.", "Flight Num", "Flight Name", "Start City", "End City", 
 					                                     "Date", "Time", "No Of Sits", "Price"));
-					    System.out.println("-------------------------------------------------------------------------------------------");
+					    System.out.println("--------------------------------------------------------------------------------------------------------");
 
 					    count = 0;
 					    List<AddDistanceOfCity> liDis = fDetailsService.isViewAllDistanceRecords();
@@ -241,19 +241,19 @@ public class UserPanel {
 					        finalPrice = viewSchedule.getBasePrice() * dis;
 					        time=viewSchedule.getTime();
 					        fname=viewSchedule.getFlightName();
-					        System.out.println(String.format("%-4d %-8s %-15s %-12s %-12s %-12s %-10s %-12d %-12d", 
+					        System.out.println(String.format("%-4d %-15s %-15s %-12s %-12s %-12s %-10s %-12d %-12d", 
 					                                         count, viewSchedule.getId(), viewSchedule.getFlightName(),
 					                                         viewSchedule.getStartCity(), viewSchedule.getEndCity(),
 					                                         viewSchedule.getDate(), viewSchedule.getTime(), 
 					                                         viewSchedule.getNoOfSits(), finalPrice));
 					    }
 					    
-					    System.out.println("-------------------------------------------------------------------------------------------");
+					    System.out.println("--------------------------------------------------------------------------------------------------------");
 					    System.out.println("");
 		
 						System.out.println("Enter Flight number from above");
 						int ch =sc.nextInt();
-               		 System.out.println("\n--------------------------------------------------------------------------------------------");
+               		 System.out.println("\n------------------------------------------------------------------------------------------");
                		 System.out.println();
 
                     for(ViewFlightsScheduleByUser el: set2)
@@ -273,7 +273,7 @@ public class UserPanel {
                     			        System.out.println();  // Move to the next line after every 6 seats
                     			    }
                     		 }
-                    		 System.out.println("\n--------------------------------------------------------------------------------------------");
+                    		 System.out.println("\n------------------------------------------------------------------------------------------");
                     		 System.out.println("Enter Seat No from Above:");
                     		 int seatNo=sc.nextInt();
                     		 System.out.println();

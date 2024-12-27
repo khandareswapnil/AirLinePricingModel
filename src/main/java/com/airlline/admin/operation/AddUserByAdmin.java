@@ -40,10 +40,10 @@ public class AddUserByAdmin {
 			System.out.println("\n--- View User Details ---");
 			list=userOpSer.isGetUser();
 			System.out.println("====================================================================================");
-			System.out.printf("\n%-20s %-30s %-15s %-15s %-20s\n", "Name", "Email", "Contact", "Gender", "City");
+			System.out.printf("\n%-20s %-35s %-15s %-15s %-20s\n", "Name", "Email", "Contact", "Gender", "City");
 		    System.out.println("====================================================================================");
 		    list.forEach(list1 -> System.out.printf(
-		    	    "%-20s %-30s %-15s %-15s %-20s\n", 
+		    	    "%-20s %-35s %-15s %-15s %-20s\n", 
 		    	    list1.getName(), 
 		    	    list1.getEmail(), 
 		    	    list1.getContact(), 

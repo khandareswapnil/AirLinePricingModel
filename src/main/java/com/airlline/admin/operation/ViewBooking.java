@@ -18,14 +18,14 @@ public class ViewBooking {
 		int count=0;
 		if(list!=null)
 		{
-			System.out.println(String.format("%-20s%-25s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
+			System.out.println(String.format("%-20s%-35s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
 				    "User Name", "Email", "Contact", "Flight Name", "Start City", "End City", "Date", "Time","Seat No","Price"));
 
 				System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 
 				for (ViewBookingDetails viewBook : list) {
 				    ++count;
-				    System.out.println(String.format("%-20s%-25s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
+				    System.out.println(String.format("%-20s%-35s%-15s%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
 				        viewBook.getUName(),
 				        viewBook.getUEmail(),
 				        viewBook.getUContact(),
