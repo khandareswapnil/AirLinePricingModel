@@ -10,7 +10,9 @@ import com.airline.entity.AddDistanceOfCity;
 import com.airline.entity.CitytEntity;
 import com.airline.entity.Seat;
 import com.airline.entity.User;
+import com.airline.entity.ViewBookingDetails;
 import com.airline.entity.ViewFlightsScheduleByUser;
+import com.airline.user.repo.UserHistory;
 import com.airline.user.service.BookingService;
 import com.airline.user.service.ViewFlightsIMPL;
 public class UserPanel {
@@ -48,8 +50,6 @@ public class UserPanel {
 			
 			do 
 			{
-				 System.out.println("======================================================");
-				    System.out.println("**************** AIRLINE SYSTEM MENU *****************");
 				    System.out.println("======================================================");
 				    System.out.println("1. View All Flights");
 				    System.out.println("2. View Flights by Start and End City");
@@ -62,7 +62,7 @@ public class UserPanel {
 				    int menu = sc.nextInt();
 				    sc.nextLine(); 
 				
-				int count;
+				int count = 0;
 				switch(menu) 
 				{
 				case 1:
@@ -99,7 +99,7 @@ public class UserPanel {
 				    break;
 
 				case 2:	
-					
+					System.out.println("");
 					List<CitytEntity> list= city.isGetCity();
 					list.forEach(list1->System.out.println(list1.getCityName()));
 					System.out.println("\nEnter Your start city from above");
@@ -179,36 +179,37 @@ public class UserPanel {
 					System.out.println("Enter the date");
 					date=sc.nextLine();
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
-				    if(!set2.isEmpty()) {
-						System.out.println("-------------------------------------------------------------------------------------------");
+					if (!set2.isEmpty()) {
+					    System.out.println("-------------------------------------------------------------------------------------------");
+					    System.out.println(String.format("%-4s %-8s %-15s %-12s %-12s %-12s %-10s %-12s %-12s", 
+					                                     "No.", "FSINO", "Flight Name", "Start City", "End City", 
+					                                     "Date", "Time", "No Of Sits", "Final Price"));
+					    System.out.println("-------------------------------------------------------------------------------------------");
 
-				    	System.out.println("\nNo.\tFSINO\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price\tFinal Price");
-				    	count=0;
-				    	List<AddDistanceOfCity> liDis=fDetailsService.isViewAllDistanceRecords();
-				    	int dis=0;
-				    	for(AddDistanceOfCity cityDistance: liDis)	
-				    	{
-				    		System.out.println(cityDistance.getScity());
-				    		System.out.println(cityDistance.getEcity());
+					    count = 0;
+					    List<AddDistanceOfCity> liDis = fDetailsService.isViewAllDistanceRecords();
+					    int dis = 0;
 
-				    		if((cityDistance.getScity()).equals(scity1)&&(cityDistance.getEcity()).equals(ecity1))
-				    		{
-				    			dis=cityDistance.getDistance();
-						    	System.out.println(dis);
-						    	System.out.println("inside in condition");
+					    for (AddDistanceOfCity cityDistance : liDis) {
+					        if ((cityDistance.getScity().equals(scity1)) && (cityDistance.getEcity().equals(ecity1))) {
+					            dis = cityDistance.getDistance();
+					        }
+					    }
 
-				    		}
-				    	}
+					    for (ViewFlightsScheduleByUser viewSchedule : set2) {
+					        ++count;
+					        int finalPrice = viewSchedule.getBasePrice() * dis;
+					        System.out.println(String.format("%-4d %-8s %-15s %-12s %-12s %-12s %-10s %-12d %-12d", 
+					                                         count, viewSchedule.getId(), viewSchedule.getFlightName(),
+					                                         viewSchedule.getStartCity(), viewSchedule.getEndCity(),
+					                                         viewSchedule.getDate(), viewSchedule.getTime(), 
+					                                         viewSchedule.getNoOfSits(), finalPrice));
+					    }
+					    
+					    System.out.println("-------------------------------------------------------------------------------------------");
+					    System.out.println("");
+					
 
-						for(ViewFlightsScheduleByUser viewSchedule:set2) {
-							++count;
-							int finalPrice=viewSchedule.getBasePrice()*dis;
-							System.out.println(count+"\t"+viewSchedule.getId()+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits()+"\t"+finalPrice);
-						}
-				    	//set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
-				    	
-						System.out.println("-------------------------------------------------------------------------------------------");
-						System.out.println("");
 						
 						System.out.println("Enter FSINO number from above");
 						int ch =sc.nextInt();
@@ -249,8 +250,29 @@ public class UserPanel {
 				    }
 					break;
 				case 5:
-					List l=null;
-					
+					List<ViewBookingDetails> l=null;
+					UserHistory u=new UserHistory();
+					l=u.isGetUserHistory(uid);
+					if(l.isEmpty()) {
+						System.out.println("No record found");
+					}
+					else {
+						System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s", 
+							     "Flight Name", "Start City", "End City", "Date", "Time"));
+
+							System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
+							count=0;
+							for (ViewBookingDetails viewBook : l) {
+							    ++count;
+							    System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s", 
+							        viewBook.getFName(),
+							        viewBook.getStartCityName(),
+							        viewBook.getEndCityName(),
+							        viewBook.getDate(),
+							        viewBook.getTime()));
+							}
+					}
+					break;
 				case 6:
 					System.out.println("---------------------------------------------------------------------------------------------------------\n");
 					capp.main(null);

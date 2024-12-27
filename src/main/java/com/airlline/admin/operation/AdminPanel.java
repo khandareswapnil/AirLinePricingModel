@@ -2,11 +2,13 @@ package com.airlline.admin.operation;
 
 import java.util.*;
 
+import com.airline.admin.service.FlightsDetailsServiceIMPL;
 import com.airline.app.ClientAppication;
 
 public class AdminPanel {
 
 	public void adminPanel() {
+		FlightsDetailsServiceIMPL fDservice=new FlightsDetailsServiceIMPL();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("WELOCME TO ADMIN PANEL");
 		System.out.println("****************************************");
@@ -28,6 +30,8 @@ public class AdminPanel {
 				startCityAdd.addStartCity();
 				break;
 			case 3:
+				ViewBooking viewBooking=new ViewBooking();
+				viewBooking.viewBookingDetails();
 				break;
 			case 4:
 				AddFlightDetails addFlights=new AddFlightDetails();

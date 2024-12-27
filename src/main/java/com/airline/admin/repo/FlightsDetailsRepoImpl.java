@@ -1,9 +1,12 @@
 package com.airline.admin.repo;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,6 +15,7 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
 import com.airline.entity.FlightsTimes;
+import com.airline.entity.ViewBookingDetails;
 import com.ariline.config.DBConfig;
 
 public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRepo {
@@ -103,6 +107,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 		}
 		return false;
 	}
+	
 
 	@Override
 	public List<FlightsName> isGetFlightName() {
@@ -710,7 +715,44 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 			return null;
 		}
 		
-		
 	}
+
+	public List<ViewBookingDetails> isViewBooking() {
+		String query = "SELECT ui.name,ui.email,ui.contact, f.flightsname,ci.cityname,ci2.cityname,fs.date,t.time"
+			+" FROM booking_details db JOIN userinfo ui ON db.uid = ui.uid JOIN seatmaster sm ON db.sid = sm.id"
+			+" JOIN flightschedule fs ON sm.fsid = fs.fsid JOIN flightsinfomaster f ON fs.flight_id = f.fid"
+			+" JOIN citymaster ci ON fs.start_city_id = ci.cityid JOIN citymaster ci2 ON fs.end_city_id = ci2.cityid"
+			+" JOIN seat_base_price_master sb ON fs.sbpid = sb.sbpid JOIN flightstiming_master t ON fs.tid = t.tid";
+	    List<ViewBookingDetails> list=new ArrayList<>();
+	    try {
+	    	
+	    	stmt=conn.prepareStatement(query);
+	    	rs=stmt.executeQuery();
+	    	while(rs.next())
+	    	{
+	    		ViewBookingDetails viewBookinDetail=new ViewBookingDetails();
+	    		viewBookinDetail.setUName(rs.getString(1));
+	    		viewBookinDetail.setUEmail(rs.getString(2));
+	    		viewBookinDetail.setUContact(rs.getString(3));
+	    		viewBookinDetail.setFName(rs.getString(4));
+	    		viewBookinDetail.setStartCityName(rs.getString(5));
+	    		viewBookinDetail.setEndCityName(rs.getString(6));
+	    		viewBookinDetail.setDate(rs.getString(7));
+	    		viewBookinDetail.setTime(rs.getString(8));
+	    		list.add(viewBookinDetail);
+	    	}
+	    	return list;
+	    }catch(Exception ex)
+	    {
+	    	ex.printStackTrace();
+	    }
+	    return list;
+	}
+
+
+
+		
+	
+	
 }
 

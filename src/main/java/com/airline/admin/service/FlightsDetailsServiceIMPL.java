@@ -1,6 +1,7 @@
 package com.airline.admin.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
@@ -9,6 +10,7 @@ import com.airline.entity.FlightsDetails;
 import com.airline.entity.FlightsName;
 import com.airline.entity.FlightsSeatsAndBasePrice;
 import com.airline.entity.FlightsTimes;
+import com.airline.entity.ViewBookingDetails;
 
 public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 {
@@ -164,9 +166,13 @@ public class FlightsDetailsServiceIMPL implements FlightsDetailsService
 	}
 
 
-	
-	
+	@Override
+	public List<ViewBookingDetails> isViewBooking() {
+		// TODO Auto-generated method stub
+		return fDetailsRepo.isViewBooking();
 
+	}
+	
 	
 
 }
