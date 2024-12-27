@@ -39,7 +39,6 @@ public interface FlightsDetailsRepo {
 	public boolean isDeleteSchedule(int fsid);
 	public Set<FlightsTimes> isGetFLightTimes();
 	public List<ViewBookingDetails> isViewBooking();
-	
 
 	
 
