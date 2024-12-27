@@ -98,9 +98,13 @@ public class UserPanel {
 						System.out.println("\nNo.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
 					    count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
+							if (!viewSchedule.getDate().isBefore(LocalDate.now())) {
+
 							++count;
 							System.out.println(count+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits());
 						}
+						}
+						
 						//set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
 						System.out.println("-------------------------------------------------------------------------------------------");
 						System.out.println("");
@@ -125,6 +129,11 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					String date=sc.nextLine();
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		            LocalDate parsedDate = LocalDate.parse(date, formatter);
+
+					if (!parsedDate.isBefore(LocalDate.now()))
+					{
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 				    if(!set2.isEmpty()) {
 						System.out.println("-------------------------------------------------------------------------------------------");
@@ -142,6 +151,10 @@ public class UserPanel {
 				    {
 				    	System.out.println("No record found.....");
 				    }
+					}else
+					{
+						System.out.println("Please Enter the Correct Date");
+					}
 					
 					break;
 				case 4:
@@ -159,10 +172,10 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					date=sc.nextLine();
-			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		            LocalDate parsedDate = LocalDate.parse(date, formatter);
+			        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		            LocalDate parsedDate1 = LocalDate.parse(date, formatter1);
 
-					if (!parsedDate.isBefore(LocalDate.now()))
+					if (!parsedDate1.isBefore(LocalDate.now()))
 					{
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 					int finalPrice=0;
