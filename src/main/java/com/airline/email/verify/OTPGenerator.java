@@ -50,17 +50,24 @@ FlightsDetailsServiceIMPL fDService=new FlightsDetailsServiceIMPL();
 		        	    "Dear %s, Thank You For Booking!\n\n" +
 		        	    "Booking Details:\n" +
 		        	    "----------------------------------------\n" +
-		        	    "Flight Name      : %s\n" +
-		        	    "From             : %s\n" +
-		        	    "To               : %s\n" +
-		        	    "Date             : %s\n" +
-		        	    "Time             : %s\n" +
-		        	    "Seat No          : %s\n" +
-		        	    "Price            : %s\n" +
+		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
 		        	    "----------------------------------------\n" +
 		        	    "Have a safe journey!\n",
-		        	    name, fname, scity1, ecity1, date, time, seatNo, finalPrice
+		        	    name, 
+		        	    "Flight Name", fname, 
+		        	    "From", scity1, 
+		        	    "To", ecity1, 
+		        	    "Date", date, 
+		        	    "Time", time, 
+		        	    "Seat No", seatNo, 
+		        	    "Price", finalPrice
 		        	);
+
 
 		        String message1=new SendEmail().sendEmail(to,from,subject,message);
 		        String message2=null;
