@@ -48,11 +48,12 @@ public class BookingRepo extends DBConfig {
 					stmt.setInt(1, uid);
 					stmt.setInt(2, sid);
 					int val=stmt.executeUpdate();
-					stmt=conn.prepareStatement("update seatmaster set status=? where fsid=? AND S_NO=? and finalPrice=?");
+					stmt=conn.prepareStatement("update seatmaster set status=?,final_price=? where fsid=? AND S_NO=?");
 					stmt.setInt(1, 1);
-					stmt.setInt(2, fsid);
-					stmt.setInt(3, seatNo);
-					stmt.setInt(4, finalPrice);
+					stmt.setInt(2, finalPrice);
+					stmt.setInt(3, fsid);
+					stmt.setInt(4, seatNo);
+					
 					int val2=stmt.executeUpdate();
 					if(val!=0 && val2!=0) return true;
 					else return false;
