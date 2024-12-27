@@ -18,7 +18,6 @@ public class ViewBookingDetails {
 	String date;
 	String time;
 	int SeatNo;
-	
 	int finalPirce;
 	
 }

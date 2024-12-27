@@ -258,19 +258,21 @@ public class UserPanel {
 						System.out.println("No record found");
 					}
 					else {
-						System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s", 
-							     "Flight Name", "Start City", "End City", "Date", "Time"));
+						System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
+							     "Flight Name", "Start City", "End City", "Date", "Time","Seat No","Price"));
 
 							System.out.println("-------------------------------------------------------------------------------------------------------------------------------------------------");
 							count=0;
 							for (ViewBookingDetails viewBook : l) {
 							    ++count;
-							    System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s", 
+							    System.out.println(String.format("%-20s%-15s%-15s%-15s%-15s%-15s%-15s", 
 							        viewBook.getFName(),
 							        viewBook.getStartCityName(),
 							        viewBook.getEndCityName(),
 							        viewBook.getDate(),
-							        viewBook.getTime()));
+							        viewBook.getTime(),
+							        viewBook.getSeatNo(),
+							        viewBook.getFinalPirce()));
 							}
 					}
 					break;

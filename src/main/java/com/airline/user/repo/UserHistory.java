@@ -11,7 +11,7 @@ public class UserHistory extends DBConfig {
 	ViewBookingDetails viewBooking;
 	List <ViewBookingDetails> list= new ArrayList<>();
 	public List<ViewBookingDetails> isGetUserHistory(int uid)  {
-		String query= "SELECT ui.name, ui.email, ui.contact, f.flightsname, ci.cityname AS start_city, ci2.cityname AS end_city, fs.date AS flight_date, t.time AS flight_time"+
+		String query= "SELECT ui.name, ui.email, ui.contact, f.flightsname, ci.cityname AS start_city, ci2.cityname AS end_city, fs.date AS flight_date, t.time AS flight_time,sm.S_NO,sm.finalPrice"+
 						" FROM booking_details bd"+ 
 						" JOIN userinfo ui ON bd.uid = ui.uid"+
 						" JOIN seatmaster sm ON bd.sid = sm.id"+
@@ -35,7 +35,9 @@ public class UserHistory extends DBConfig {
 				String ecity=rs.getString(6);
 				String date=rs.getString(7);
 				String time=rs.getString(8);
-				viewBooking=new ViewBookingDetails(uname,uemail,ucontact,fname,scity,ecity,date,time);
+				int sno=rs.getInt(9);
+				int price=rs.getInt(10);
+				viewBooking=new ViewBookingDetails(uname,uemail,ucontact,fname,scity,ecity,date,time,sno,price);
 				list.add(viewBooking);
 			}
 			return list;
