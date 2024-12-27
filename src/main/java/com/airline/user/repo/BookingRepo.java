@@ -15,15 +15,17 @@ public class BookingRepo extends DBConfig {
 	public List<Seat> showAvailableSeats(int fsid){
 		try {
 			list=new ArrayList<>();
-			stmt=conn.prepareStatement(" select S_NO, status from seatmaster where fsid=?");
-			stmt.setInt(1,fsid);
-			rs=stmt.executeQuery();
+
+			stmt=conn.prepareStatement("select S_NO ,status from seatmaster where fsid=?");
+			stmt.setInt(1, fsid);
+			rs=stmt.executeQuery();	
 			while(rs.next()) {
-				int sno=rs.getInt(1);
-				int status=rs.getInt(2);
-				seat=new Seat(sno,status);
+				seat=new Seat();
+				seat.setSno(rs.getInt(1));
+				seat.setStatus(rs.getInt(2));
 				list.add(seat);
 			}
+			return list;
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();

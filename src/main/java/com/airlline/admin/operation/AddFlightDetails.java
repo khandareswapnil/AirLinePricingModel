@@ -20,15 +20,19 @@ public class AddFlightDetails {
 	public void flightALLOperation()
 	{
 		do {
+	        System.out.println("==================================================");
 			System.out.println("1. Flights Name Operations");
 			System.out.println("2. Flights Times Operations");
 			System.out.println("3. Distance Of Two Cities Operations");
 			System.out.println("4. Flight Seats And Base Price Operations");
 			System.out.println("5. Flights Schedule Operations");
-			System.out.println("6. FOR Exit");
+			System.out.println("6. Exit");
+	        System.out.println("==================================================");
+
 
 			System.out.println("Enter the Choice");
 			int ch=sc.nextInt();
+	        System.out.println("+-------------------------------------------+");
 			switch(ch)
 			{
 			case 1:

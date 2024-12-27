@@ -44,7 +44,7 @@ public class SendEmail {
 
 	         // Send the email
 	         Transport.send(mimeMessage);
-	         String sucess="OTP Sent Sucessfully";
+	         String sucess="true";
 	         return sucess;
 	         
 	     } catch (MessagingException e) {

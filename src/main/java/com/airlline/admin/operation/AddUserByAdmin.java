@@ -16,15 +16,20 @@ public class AddUserByAdmin {
 	{
 	do
 	{
+        System.out.println("+-------------------------------------------+");
 		System.out.println("1. Add the User");
 		System.out.println("2. View User");
 		System.out.println("3. Delete the User");
 		System.out.println("4. Update The User ");
 		System.out.println("5. Serach User");
 		System.out.println("6. For EXIT");
+        System.out.println("+-------------------------------------------+");
+
+		
 		System.out.println("Enter the Choice");
 		int ch=sc.nextInt();
-		
+        System.out.println("+-------------------------------------------+");
+
 		switch(ch)
 		{
 		case 1:
@@ -32,11 +37,22 @@ public class AddUserByAdmin {
 			userRegisOpe.registerUser();
 			break;
 		case 2:
+			System.out.println("\n--- View User Details ---");
 			list=userOpSer.isGetUser();
-			System.out.println("Name\tEmail\t\tContact\t\tGender\t\tCity");
-			list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
+			System.out.println("====================================================================================");
+			System.out.printf("\n%-20s %-30s %-15s %-15s %-20s\n", "Name", "Email", "Contact", "Gender", "City");
+		    System.out.println("====================================================================================");
+		    list.forEach(list1 -> System.out.printf(
+		    	    "%-20s %-30s %-15s %-15s %-20s\n", 
+		    	    list1.getName(), 
+		    	    list1.getEmail(), 
+		    	    list1.getContact(), 
+		    	    list1.getGender(), 
+		    	    list1.getCityname()
+		    	));
 			break;
 		case 3:
+			System.out.println("+-------------------------------------------+");
 			System.out.println("Enter the Email");
 			sc.nextLine();
 			String email=sc.nextLine();
@@ -51,6 +67,7 @@ public class AddUserByAdmin {
 			 }
 			break;
 		case 4:
+			System.out.println("+-------------------------------------------+");
 			System.out.println("Enter the Name :");
 			sc.nextLine();
 			String name=sc.nextLine();
@@ -67,6 +84,7 @@ public class AddUserByAdmin {
 			 }
 			break;
 		case 5:
+			System.out.println("+-------------------------------------------+");
 			do {
 				System.out.println("1. Search By Name");
 				System.out.println("2. Search By City");

@@ -18,9 +18,9 @@ public class UserRegistrationOperation {
 
 		int uid=0;
 		int flag=0;
-        System.out.println("Plase Enter the Email ");
-        System.out.println("Enter Email: ");
-        String email = sc.nextLine();
+		System.out.println("\n--- REGISTER ---");
+		 System.out.println("Please Enter Your Email: ");
+		    String email = sc.nextLine();
         userList=userOpSer.isGetUser();
         for(User user:userList)
         {
@@ -34,7 +34,7 @@ public class UserRegistrationOperation {
         	 OTPGenerator otpGen=new OTPGenerator();
              list=otpGen.otpGenerator(email);
              list.forEach(list1->System.out.println(list1.getMeassage()));
-             System.out.println("Enter the OTP");
+             System.out.println("Enter the OTP :");
              int otp=sc.nextInt();
              int verifyOTP=0;
              for(OTP otp1:list)
@@ -42,9 +42,9 @@ public class UserRegistrationOperation {
              	verifyOTP=otp1.getOtp();
              }
              if(verifyOTP==otp)
-             {
+             {  System.out.println("OTP Verified! Provide the following details for registration:");
              	System.out.println("Provide following details for registration");
-         		System.out.println("Enter Name: ");
+         		System.out.println("Enter Name : ");
          		sc.nextLine();
                  String name = sc.nextLine();
                  
@@ -77,6 +77,9 @@ public class UserRegistrationOperation {
                  	registerUser();
                  }
                 
+             }
+             else {
+            	 System.out.println("Invalid OTP. Registration failed.");
              }
         }
         else

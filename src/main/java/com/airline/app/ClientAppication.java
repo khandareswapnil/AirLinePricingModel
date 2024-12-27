@@ -16,20 +16,25 @@ public class ClientAppication {
 
 		do
 		{
-			System.out.println("******** WELCOME TO NANA CHI AIRLINE ******** ");
-			System.out.println("1. Login");
-			System.out.println("2. Register");
-
+			System.out.println("=============================================");
+		    System.out.println("        WELCOME TO SKY AIRLINE          ");
+		    System.out.println("=============================================");
+		    
+		    System.out.println("\n------------- MAIN MENU -------------");
+	        System.out.println("1. Login");
+	        System.out.println("2. Register");
+	        System.out.println("-------------------------------------");
+	        System.out.print("Enter your choice (1-2): ");
 			int ch=sc.nextInt();
+			sc.nextLine();
 			switch(ch)
 			{
 			case 1:
-				System.out.println("Enter the User Name");
-				sc.nextLine();
-				String userName=sc.nextLine();
-				System.out.println("Enter the Password");
-				String password=sc.nextLine();
-				
+				System.out.println("\n--- LOGIN ---");
+                System.out.print("Enter Username: ");
+                String userName = sc.nextLine();
+                System.out.print("Enter Password: ");
+                String password = sc.nextLine();
 				if(userName.equals("Admin") && password.equals("Admin"))
 				{
 					adPanel.adminPanel();

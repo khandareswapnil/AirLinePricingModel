@@ -10,15 +10,17 @@ public class AdminPanel {
 	public void adminPanel() {
 		FlightsDetailsServiceIMPL fDservice=new FlightsDetailsServiceIMPL();
 		Scanner sc = new Scanner(System.in);
-		System.out.println("WELOCME TO ADMIN PANEL");
-		System.out.println("****************************************");
+		System.out.println("=============================================");
+	    System.out.println("              WELCOME TO ADMIN PANEL         ");
+	    System.out.println("=============================================");
 		do {
 			System.out.println("1. Users Operations");
 			System.out.println("2. City Operations");
 			System.out.println("3. View Booking");
 			System.out.println("4. Flights Details Operationss");
-			System.out.println("5. Report");
-			System.out.println("6. For Exit");
+			System.out.println("5. General Report");
+			System.out.println("6. Exit");
+			 System.out.println("*********************************************");
 			System.out.println("Enter the Choice");
 			int ch = sc.nextInt();
 			switch (ch) {
