@@ -32,7 +32,7 @@ public class BookingRepo extends DBConfig {
 	}
 	
 	
-	public boolean bookTicket(int uid, int fsid, int seatNo) {
+	public boolean bookTicket(int uid, int fsid, int seatNo,int finalPrice) {
 		try {
 			stmt=conn.prepareStatement("select * from seatmaster where fsid=? AND S_NO=?");
 			stmt.setInt(1, fsid);
@@ -48,10 +48,11 @@ public class BookingRepo extends DBConfig {
 					stmt.setInt(1, uid);
 					stmt.setInt(2, sid);
 					int val=stmt.executeUpdate();
-					stmt=conn.prepareStatement("update seatmaster set status=? where fsid=? AND S_NO=?");
+					stmt=conn.prepareStatement("update seatmaster set status=? where fsid=? AND S_NO=? and finalPrice=?");
 					stmt.setInt(1, 1);
 					stmt.setInt(2, fsid);
 					stmt.setInt(3, seatNo);
+					stmt.setInt(4, finalPrice);
 					int val2=stmt.executeUpdate();
 					if(val!=0 && val2!=0) return true;
 					else return false;

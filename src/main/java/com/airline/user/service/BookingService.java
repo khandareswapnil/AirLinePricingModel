@@ -12,8 +12,8 @@ public class BookingService {
 		return bookrepo.showAvailableSeats(fsid);
 	}
     
-	public boolean bookTicket(int uid, int fsid, int seatNo) {
+	public boolean bookTicket(int uid, int fsid, int seatNo,int finalPrice) {
 		
-		return bookrepo.bookTicket(uid, fsid, seatNo);	
+		return bookrepo.bookTicket(uid, fsid, seatNo,finalPrice);	
 	}
 }

@@ -17,5 +17,8 @@ public class ViewBookingDetails {
 	String endCityName;
 	String date;
 	String time;
+	int SeatNo;
+	
+	int finalPirce;
 	
 }

@@ -149,6 +149,7 @@ public class UserPanel {
 					System.out.println("Enter the date");
 					date=sc.nextLine();
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
+					int finalPrice=0;
 					if (!set2.isEmpty()) {
 					    System.out.println("-------------------------------------------------------------------------------------------");
 					    System.out.println(String.format("%-4s %-8s %-15s %-12s %-12s %-12s %-10s %-12s %-12s", 
@@ -168,7 +169,7 @@ public class UserPanel {
 
 					    for (ViewFlightsScheduleByUser viewSchedule : set2) {
 					        ++count;
-					        int finalPrice = viewSchedule.getBasePrice() * dis;
+					        finalPrice = viewSchedule.getBasePrice() * dis;
 					        System.out.println(String.format("%-4d %-8s %-15s %-12s %-12s %-12s %-10s %-12d %-12d", 
 					                                         count, viewSchedule.getId(), viewSchedule.getFlightName(),
 					                                         viewSchedule.getStartCity(), viewSchedule.getEndCity(),
@@ -203,7 +204,7 @@ public class UserPanel {
                     		 }
                     		 System.out.println("Enter Seat No from Above");
                     		 int seatNo=sc.nextInt();
-                    		boolean b= bs.bookTicket(uid, fsid, seatNo);          // calling seat booking service method
+                    		boolean b= bs.bookTicket(uid, fsid, seatNo,finalPrice);          // calling seat booking service method
                     		if(b) {
                     			System.out.println("Your Ticket is Booked");
                     		}

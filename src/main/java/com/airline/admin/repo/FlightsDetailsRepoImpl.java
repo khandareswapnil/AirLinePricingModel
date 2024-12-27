@@ -69,36 +69,19 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	@Override
 	public boolean isAddDistance(AddDistanceOfCity addDistnace) {
 		try {
-			int flag=0;
-			stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-			stmt.setString(1,addDistnace.getScity() );
-			int sid=0;
-			rs=stmt.executeQuery();
-			if(rs.next())
-			{
-				sid=rs.getInt(1);
-				
-				if(sid!=0)
-				{
-					stmt=conn.prepareStatement("select cityid from citymaster where cityname=?");
-					stmt.setString(1, addDistnace.getEcity());
-					int eid=0;
-					rs=stmt.executeQuery();
-					if(rs.next())
-					{
-						eid=rs.getInt(1);
-						if(eid!=0)
-						{
-							stmt=conn.prepareStatement("insert into start_end_city_join values(?,?,?,'0')");
-							stmt.setInt(1, sid);
-							stmt.setInt(2, eid);
-							stmt.setInt(3,addDistnace.getDistance());
-							int val=stmt.executeUpdate();
-							return val>0?true:false;
-						}
-					}
-				}
-			}
+			stmt = conn.prepareStatement(
+				    "INSERT INTO start_end_city_join (startCity_id, EndCity_id, distnace,id) " +
+				    "SELECT c1.cityid, c2.cityid, ?, '0' " +
+				    "FROM citymaster c1 " +
+				    "JOIN citymaster c2 ON c1.cityname = ? AND c2.cityname = ?;"
+				);
+				stmt.setInt(1, addDistnace.getDistance());
+				stmt.setString(2, addDistnace.getScity());
+				stmt.setString(3, addDistnace.getEcity());
+
+				int val = stmt.executeUpdate();
+										return val>0?true:false;
+						
 			
 			
 		}catch(Exception ex)
@@ -428,25 +411,21 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 		int startCityId =0;
 		int endCityId=0;
 		try {
-			stmt=conn.prepareStatement("select *from citymaster where cityname=? ");
-			stmt.setString(1, startCity);
-			
-			rs=stmt.executeQuery();
-			if(rs.next())
-			{
-				 startCityId = rs.getInt(1);
-			}
-			stmt=conn.prepareStatement("select *from citymaster where cityname=? ");
-			stmt.setString(1, endCity);
-			rs=stmt.executeQuery();
-			if(rs.next())
-			{
-				endCityId = rs.getInt(1);
-			}
-			stmt=conn.prepareStatement("update start_end_city_join set distnace=? where startCity_id=? AND  EndCity_id=?");
-			stmt.setInt(1, dist);
-			stmt.setInt(2,startCityId );
-			stmt.setInt(3, endCityId);
+			stmt = conn.prepareStatement(
+				    "WITH CityIds AS (" +
+				        "SELECT cityid, cityname FROM citymaster WHERE cityname IN (?, ?) " +
+				    ") " +
+				    "UPDATE start_end_city_join " +
+				    "SET distnace = ? " +
+				    "WHERE startCity_id = (SELECT cityid FROM CityIds WHERE cityname = ?) " +
+				    "AND EndCity_id = (SELECT cityid FROM CityIds WHERE cityname = ?)"
+				);
+
+				stmt.setString(1, startCity);  // For Start City
+				stmt.setString(2, endCity);    // For End City
+				stmt.setInt(3, dist);          // Distance
+				stmt.setString(4, startCity);  // For Start City
+				stmt.setString(5, endCity);    
 			int val=stmt.executeUpdate();
 			if(val!=0) return true;
 			
@@ -718,7 +697,7 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	}
 
 	public List<ViewBookingDetails> isViewBooking() {
-		String query = "SELECT ui.name,ui.email,ui.contact, f.flightsname,ci.cityname,ci2.cityname,fs.date,t.time"
+		String query = "SELECT ui.name,ui.email,ui.contact, f.flightsname,ci.cityname,ci2.cityname,fs.date,t.time,sm.S_NO,sm.final_price"
 			+" FROM booking_details db JOIN userinfo ui ON db.uid = ui.uid JOIN seatmaster sm ON db.sid = sm.id"
 			+" JOIN flightschedule fs ON sm.fsid = fs.fsid JOIN flightsinfomaster f ON fs.flight_id = f.fid"
 			+" JOIN citymaster ci ON fs.start_city_id = ci.cityid JOIN citymaster ci2 ON fs.end_city_id = ci2.cityid"
@@ -739,6 +718,9 @@ public class FlightsDetailsRepoImpl extends DBConfig implements FlightsDetailsRe
 	    		viewBookinDetail.setEndCityName(rs.getString(6));
 	    		viewBookinDetail.setDate(rs.getString(7));
 	    		viewBookinDetail.setTime(rs.getString(8));
+	    		viewBookinDetail.setSeatNo(rs.getInt(9));
+	    		viewBookinDetail.setFinalPirce(rs.getInt(10));
+	    		
 	    		list.add(viewBookinDetail);
 	    	}
 	    	return list;
