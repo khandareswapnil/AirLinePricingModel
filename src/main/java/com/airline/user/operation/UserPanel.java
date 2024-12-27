@@ -72,7 +72,7 @@ public class UserPanel {
 				    System.out.printf("%-5s %-20s %-15s %-15s %-15s %-10s %-10s %-10s\n", 
 				                      "No.", "Flight Name", "Start City", "End City", 
 				                      "Date", "Time", "Seats", "Price");
-				    System.out.println("-------------------------------------------------------------------------------------------");
+				    System.out.println("------------------------------------------------------------------------------------------------------");
 
 				    set2 = viewFlightsServiceRef.isGetAllFlights(); // Fetch all flights
 
@@ -94,18 +94,24 @@ public class UserPanel {
 				        }
 				    }
 
-				    System.out.println("-------------------------------------------------------------------------------------------");
+				    System.out.println("------------------------------------------------------------------------------------------------------");
 				    System.out.println();
 				    break;
 
 				case 2:	
+					System.out.println("\nAvailable Cities:");
+					System.out.println("-------------------------------------------------");
+
+					// Display city names
+					List<CitytEntity> list = city.isGetCity();
+					list.forEach(list1 -> System.out.println(" - " + list1.getCityName()));
+
+					System.out.println("\nEnter your start city from the above list:");
+					String scity = sc.nextLine();
+
+					System.out.println("Enter your end city from the above list:");
+					String ecity = sc.nextLine();
 					System.out.println("");
-					List<CitytEntity> list= city.isGetCity();
-					list.forEach(list1->System.out.println(list1.getCityName()));
-					System.out.println("\nEnter Your start city from above");
-					String scity=sc.nextLine();
-					System.out.println("Enter end city from above");
-					String ecity=sc.nextLine();
 					if(ecity.equals(scity)) 
 					{
 						System.out.println("Enter different city as start city and end city");
@@ -113,15 +119,24 @@ public class UserPanel {
 					
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCity (scity, ecity);
 					if(!set2.isEmpty()) {
-						System.out.println("-------------------------------------------------------------------------------------------");
-						System.out.println("\nNo.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
+						System.out.println("\n======================================================");
+					    System.out.println("                   AVAILABLE FLIGHTS                  ");
+					    System.out.println("======================================================");
+					    System.out.println("No.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\t\tNo. of Seats");
+					    System.out.println("-------------------------------------------------------------------------------------------------------");
 					    count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
 							++count;
-							System.out.println(count+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits());
-						}
-						//set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
-						System.out.println("-------------------------------------------------------------------------------------------");
+							 System.out.println(
+							            count + "\t" +
+							            viewSchedule.getFlightName() + "\t" +
+							            viewSchedule.getStartCity() + "\t\t" +
+							            viewSchedule.getEndCity() + "\t\t" +
+							            viewSchedule.getDate() + "\t" +
+							            viewSchedule.getTime() + "\t\t" +
+							            viewSchedule.getNoOfSits() + "\t\t" 
+							        );						}
+						System.out.println("-------------------------------------------------------------------------------------------------------");
 						System.out.println("");
 					}
 					else {
@@ -130,9 +145,10 @@ public class UserPanel {
 					
 					break;
 				case 3:
-					System.out.println("");
+					System.out.println("\nAvailable Cities:");
+					System.out.println("-------------------------------------------------");
 					List<CitytEntity> citylist= city.isGetCity();
-					citylist.forEach(list1->System.out.println(list1.getCityName()));
+					citylist.forEach(list1->System.out.println(" - " + list1.getCityName()));
 					System.out.println("\nEnter Your start city from above");
 					String scity1=sc.nextLine();
 					System.out.println("Enter end city from above");
@@ -144,17 +160,26 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					String date=sc.nextLine();
+					System.out.println("");
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 				    if(!set2.isEmpty()) {
-						System.out.println("-------------------------------------------------------------------------------------------");
-				    	System.out.println("\nNo.\tFlight Name\tStart City\tEnd City\tDate\t\tTime\tNo OF Sits\tBase Price");
+				    	System.out.println("----------------------------------------------------------------------------------------------------------");
+				    	System.out.println("No.\tFlight Name     \tStart City     \tEnd City       \tDate        \tTime     \tNo. of Seats");
+				    	System.out.println("----------------------------------------------------------------------------------------------------------");
 				    	count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
 							++count;
-							System.out.println(count+"\t"+viewSchedule.getFlightName()+"\t"+viewSchedule.getStartCity()+"\t\t"+viewSchedule.getEndCity()+"\t\t"+viewSchedule.getDate()+"\t"+viewSchedule.getTime()+"\t"+viewSchedule.getNoOfSits());
+							System.out.printf("%-3d\t%-16s\t%-15s\t%-15s\t%-12s\t%-10s\t%-10d\n",
+							        count, 
+							        viewSchedule.getFlightName(), 
+							        viewSchedule.getStartCity(), 
+							        viewSchedule.getEndCity(), 
+							        viewSchedule.getDate(), 
+							        viewSchedule.getTime(), 
+							        viewSchedule.getNoOfSits()
+							    );
 						}
-				    	//set2.forEach(list3->System.out.println(list3.getId()+"\t"+list3.getFlightName()+"\t"+list3.getStartCity()+"\t\t"+list3.getEndCity()+"\t\t"+list3.getDate()+"\t"+list3.getTime()+"\t"+list3.getNoOfSits()+"\t"+list3.getBasePrice()));
-						System.out.println("-------------------------------------------------------------------------------------------");
+						System.out.println("----------------------------------------------------------------------------------------------------------");
 						System.out.println("");
 				    }
 				    else
@@ -212,39 +237,45 @@ public class UserPanel {
 					
 
 						
-						System.out.println("Enter FSINO number from above");
-						int ch =sc.nextInt();
-                    for(ViewFlightsScheduleByUser el: set2)
-                    {
-                    	if(el.getId()==ch) {
-                    		System.out.println("Flight mached from above...");
-                    		 int fsid=fdrepo.isSearchByCityDateNameTime(scity1, ecity1, el.getFlightName(), date, el.getTime().toString());
-                    		 System.out.println("Print fsid : "+fsid);
-                    		 List<Seat> l=bs.showAvailableSeats(fsid);
-                    		 System.out.println("Seat list is empty : "+l.isEmpty());
-                    		 for(Seat i:l) {
-                    			 if(i.getStatus()==0) {
-                    				 System.out.printf("[ "+i.getSno()+" ]\t");
-                    				 if(i.getSno()%6==0) System.out.println("");
-                    			 }
-                    			 else {
-                    				 System.out.printf("[ "+i.getSno()+" B]\t");
-                    				 if(i.getSno()%6==0) System.out.println("");
-                    			 }
-                    		 }
-                    		 System.out.println("Enter Seat No from Above");
-                    		 int seatNo=sc.nextInt();
-                    		 System.out.println(finalPrice);
-                    		boolean b= bs.bookTicket(uid, fsid, seatNo,finalPrice);          // calling seat booking service method
-                    		if(b) {
-                    			System.out.println("Your Ticket is Booked");
-                    		}
-                    		else {
-                    			System.out.println("This seat is already booked..");
-                    		}
-                    	}
-                    	
-                    }
+					    System.out.println("Enter FSINO number from above");
+					    int ch = sc.nextInt();
+					    for (ViewFlightsScheduleByUser el : set2) {
+					        if (el.getId() == ch) {
+					            int fsid = fdrepo.isSearchByCityDateNameTime(scity1, ecity1, el.getFlightName(), date, el.getTime().toString());
+					            List<Seat> l = bs.showAvailableSeats(fsid);
+
+					            System.out.println("Seat list is empty: " + l.isEmpty());
+					            if (!l.isEmpty()) {
+					                System.out.println("Flight Seats:");
+					                System.out.println("-------------------------------------------------------------------------------------");
+
+					                for (Seat i : l) {
+					                    if (i.getStatus() == 0) {
+					                        System.out.printf("[ %2d   ]\t", i.getSno()); // Available seat
+					                    } else {
+					                        System.out.printf("[ %2d B ]\t", i.getSno()); // Booked seat
+					                    }
+
+					                    // Break line after every 6 seats
+					                    if (i.getSno() % 6 == 0) {
+					                        System.out.println();
+					                    }
+					                }
+					                System.out.println("\n-------------------------------------------------------------------------------------");
+					            }
+
+					            System.out.println("Enter Seat No from Above");
+					            int seatNo = sc.nextInt();
+					            System.out.println("Ticket Price: "+finalPrice);
+					            boolean b = bs.bookTicket(uid, fsid, seatNo, finalPrice); // calling seat booking service method
+					            if (b) {
+					                System.out.println("Your Ticket is Booked!");
+					            } else {
+					                System.out.println("This seat is already booked..");
+					            }
+					        }
+					    }
+
 				    }
 				    else
 				    {

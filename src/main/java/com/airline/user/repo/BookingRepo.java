@@ -14,9 +14,9 @@ public class BookingRepo extends DBConfig {
 	
 	public List<Seat> showAvailableSeats(int fsid){
 		try {
-			list=new ArrayList<>();;
-			stmt=conn.prepareStatement("select S_NO ,status from seatmaster where fsid=?");
-			stmt.setInt(1, fsid);
+			list=new ArrayList<>();
+			stmt=conn.prepareStatement(" select S_NO, status from seatmaster where fsid=?");
+			stmt.setInt(1,fsid);
 			rs=stmt.executeQuery();
 			while(rs.next()) {
 				int sno=rs.getInt(1);

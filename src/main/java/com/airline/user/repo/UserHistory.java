@@ -11,7 +11,7 @@ public class UserHistory extends DBConfig {
 	ViewBookingDetails viewBooking;
 	List <ViewBookingDetails> list= new ArrayList<>();
 	public List<ViewBookingDetails> isGetUserHistory(int uid)  {
-		String query= "SELECT ui.name, ui.email, ui.contact, f.flightsname, ci.cityname AS start_city, ci2.cityname AS end_city, fs.date AS flight_date, t.time AS flight_time,sm.S_NO,sm.finalPrice"+
+		String query= "SELECT ui.name, ui.email, ui.contact, f.flightsname, ci.cityname AS start_city, ci2.cityname AS end_city, fs.date AS flight_date, t.time AS flight_time,sm.S_NO,sm.final_Price"+
 						" FROM booking_details bd"+ 
 						" JOIN userinfo ui ON bd.uid = ui.uid"+
 						" JOIN seatmaster sm ON bd.sid = sm.id"+
