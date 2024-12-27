@@ -1,5 +1,7 @@
 package com.airline.user.operation;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.airline.admin.repo.FlightsDetailsRepoImpl;
@@ -72,6 +74,7 @@ public class UserPanel {
 				switch(menu) 
 				{
 				case 1:
+
 				    System.out.println("\n======================================================");
 				    System.out.println("                   AVAILABLE FLIGHTS                  ");
 				    System.out.println("======================================================");
@@ -87,15 +90,18 @@ public class UserPanel {
 				    } else {
 				         count = 0;
 				        for (ViewFlightsScheduleByUser viewSchedule : set2) {
-				            ++count;
-				            System.out.printf("%-5d %-20s %-15s %-15s %-15s %-10s %-10d\n", 
-				                              count,
-				                              viewSchedule.getFlightName(),
-				                              viewSchedule.getStartCity(),
-				                              viewSchedule.getEndCity(),
-				                              viewSchedule.getDate(),
-				                              viewSchedule.getTime(),
-				                              viewSchedule.getNoOfSits());
+				        	if (!viewSchedule.getDate().isBefore(LocalDate.now())) {
+				        		++count;
+					            System.out.printf("%-5d %-20s %-15s %-15s %-15s %-10s %-10d\n", 
+					                              count,
+					                              viewSchedule.getFlightName(),
+					                              viewSchedule.getStartCity(),
+					                              viewSchedule.getEndCity(),
+					                              viewSchedule.getDate(),
+					                              viewSchedule.getTime(),
+					                              viewSchedule.getNoOfSits());
+				        	}
+				            
 				                             
 				        }
 				    }
@@ -103,6 +109,7 @@ public class UserPanel {
 				    System.out.println("-----------------------------------------------------------------------------------------");
 				    System.out.println();
 				    break;
+
 
 				case 2:	
 					System.out.println("\nAvailable Cities:");
@@ -133,18 +140,21 @@ public class UserPanel {
 					    System.out.println("-------------------------------------------------------------------------------------------------------");
 					    count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
-							++count;
-							 System.out.println(
-							            count + "\t" +
-							            viewSchedule.getFlightName() + "\t" +
-							            viewSchedule.getStartCity() + "\t\t" +
-							            viewSchedule.getEndCity() + "\t\t" +
-							            viewSchedule.getDate() + "\t" +
-							            viewSchedule.getTime() + "\t\t" +
-							            viewSchedule.getNoOfSits() + "\t\t" 
-							        );						}
-						System.out.println("-------------------------------------------------------------------------------------------------------");
-						System.out.println("");
+							if (!viewSchedule.getDate().isBefore(LocalDate.now())) {
+								++count;
+								 System.out.println(
+								            count + "\t" +
+								            viewSchedule.getFlightName() + "\t" +
+								            viewSchedule.getStartCity() + "\t\t" +
+								            viewSchedule.getEndCity() + "\t\t" +
+								            viewSchedule.getDate() + "\t" +
+								            viewSchedule.getTime() + "\t\t" +
+								            viewSchedule.getNoOfSits() + "\t\t" 
+								        );						}
+							System.out.println("-------------------------------------------------------------------------------------------------------");
+							System.out.println("");
+							}
+							
 					}
 					else {
 						System.out.println("No record found...\n");
@@ -177,19 +187,22 @@ public class UserPanel {
 				    	System.out.println("----------------------------------------------------------------------------------------------------------");
 				    	count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
-							++count;
-							System.out.printf("%-3d\t%-16s\t%-15s\t%-15s\t%-12s\t%-10s\t%-10d\n",
-							        count, 
-							        viewSchedule.getFlightName(), 
-							        viewSchedule.getStartCity(), 
-							        viewSchedule.getEndCity(), 
-							        viewSchedule.getDate(), 
-							        viewSchedule.getTime(), 
-							        viewSchedule.getNoOfSits()
-							    );
-						}
-						System.out.println("----------------------------------------------------------------------------------------------------------");
-						System.out.println("");
+							if (!viewSchedule.getDate().isBefore(LocalDate.now())) {
+								++count;
+								System.out.printf("%-3d\t%-16s\t%-15s\t%-15s\t%-12s\t%-10s\t%-10d\n",
+								        count, 
+								        viewSchedule.getFlightName(), 
+								        viewSchedule.getStartCity(), 
+								        viewSchedule.getEndCity(), 
+								        viewSchedule.getDate(), 
+								        viewSchedule.getTime(), 
+								        viewSchedule.getNoOfSits()
+								    );
+							}
+							System.out.println("----------------------------------------------------------------------------------------------------------");
+							System.out.println("");
+							}
+							
 				    }
 				    else
 				    {
@@ -213,6 +226,11 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					date=sc.nextLine();
+			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		            LocalDate parsedDate = LocalDate.parse(date, formatter);
+
+					if (!parsedDate.isBefore(LocalDate.now()))
+					{
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 					int finalPrice=0;
 					LocalTime time=null;
@@ -308,6 +326,11 @@ public class UserPanel {
 				    {
 				    	System.out.println("No record found.....");
 				    }
+					}
+					else
+					{
+						System.out.println("Enter the Correct Date");
+					}
 					break;
 				case 5:
 					List<ViewBookingDetails> l=null;

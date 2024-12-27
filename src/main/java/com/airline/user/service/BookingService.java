@@ -16,4 +16,8 @@ public class BookingService {
 		
 		return bookrepo.bookTicket(uid, fsid, seatNo,finalPrice);	
 	}
+	public String getMaxUser()
+	{
+		return bookrepo.getMaxUser();
+	}
 }

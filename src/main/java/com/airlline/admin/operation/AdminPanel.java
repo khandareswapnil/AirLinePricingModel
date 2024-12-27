@@ -41,6 +41,8 @@ public class AdminPanel {
 				addFlights.flightALLOperation();;
 				break;
 			case 5:
+				Report report=new Report();
+				report.report();
 				break;
 			case 6:
 				new ClientAppication().main(null);

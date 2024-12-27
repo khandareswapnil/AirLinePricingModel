@@ -68,4 +68,28 @@ public class BookingRepo extends DBConfig {
 		
 		return false;
 	}
+	public String getMaxUser()
+	{
+		
+		String name=null;
+		try {
+			stmt=conn.prepareStatement("SELECT u.name, bd.uid, COUNT(bd.uid) AS booking_count"
+					+ " FROM booking_details bd"
+					+ " JOIN userinfo u ON bd.uid = u.uid"
+					+ " GROUP BY bd.uid, u.name\r\n"
+					+ " ORDER BY booking_count DESC"
+					+ " LIMIT 1;");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+			name=rs.getString(1);
+			}
+			return name;
+			
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return name;
+	}
 }
