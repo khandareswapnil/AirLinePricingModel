@@ -141,6 +141,7 @@ public class UserPanel {
 					    count=0;
 						for(ViewFlightsScheduleByUser viewSchedule:set2) {
 							if (!viewSchedule.getDate().isBefore(LocalDate.now())) {
+
 								++count;
 								 System.out.println(
 								            count + "\t" +
@@ -155,6 +156,7 @@ public class UserPanel {
 							System.out.println("");
 							}
 							
+
 					}
 					else {
 						System.out.println("No record found...\n");
@@ -177,7 +179,15 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					String date=sc.nextLine();
+
 					System.out.println("");
+
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		            LocalDate parsedDate = LocalDate.parse(date, formatter);
+
+					if (!parsedDate.isBefore(LocalDate.now()))
+					{
+
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 				    if(!set2.isEmpty()) {
 				    	System.out.println("\n======================================================");
@@ -208,6 +218,10 @@ public class UserPanel {
 				    {
 				    	System.out.println("No record found.....");
 				    }
+					}else
+					{
+						System.out.println("Please Enter the Correct Date");
+					}
 					
 					break;
 				case 4:
@@ -226,10 +240,10 @@ public class UserPanel {
 					}
 					System.out.println("Enter the date");
 					date=sc.nextLine();
-			        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		            LocalDate parsedDate = LocalDate.parse(date, formatter);
+			        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		            LocalDate parsedDate1 = LocalDate.parse(date, formatter1);
 
-					if (!parsedDate.isBefore(LocalDate.now()))
+					if (!parsedDate1.isBefore(LocalDate.now()))
 					{
 					set2 =viewFlightsServiceRef.isGetAllFlightsByStartEndCityDate (scity1,ecity1,date );
 					int finalPrice=0;
