@@ -20,9 +20,7 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 		stmt.setString(4, user.getPassword());
 		stmt.setString(5, user.getGender());
 		stmt.setString(6, user.getCityname());
-
-		
-		
+			
 		int res=stmt.executeUpdate();		
 		return res>0?true:false;
 		}catch(Exception exc)
@@ -46,6 +44,7 @@ public class UserOperationRepoIMPL extends DBConfig implements UserOperationRepo
 			 user.setEmail(rs.getString(3));
 			 user.setContact(rs.getString(4));
 			 user.setGender(rs.getString(6));
+			 user.setCityname(rs.getString(7));
 			 list.add(user);
 			
 		 }

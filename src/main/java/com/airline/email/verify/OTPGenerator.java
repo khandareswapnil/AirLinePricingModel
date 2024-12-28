@@ -56,6 +56,7 @@ FlightsDetailsServiceIMPL fDService=new FlightsDetailsServiceIMPL();
 		        	    "%-15s : %s\n" +
 		        	    "%-15s : %s\n" +
 		        	    "%-15s : %s\n" +
+		        	    "%-15s : %s\n" +
 		        	    "----------------------------------------\n" +
 		        	    "Have a safe journey!\n",
 		        	    name, 

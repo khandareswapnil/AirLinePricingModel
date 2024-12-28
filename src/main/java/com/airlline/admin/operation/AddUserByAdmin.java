@@ -16,7 +16,7 @@ public class AddUserByAdmin {
 	{
 	do
 	{
-        System.out.println("+-------------------------------------------+");
+        System.out.println("\n+-------------------------------------------+");
 		System.out.println("1. Add the User");
 		System.out.println("2. View User");
 		System.out.println("3. Delete the User");
@@ -37,7 +37,7 @@ public class AddUserByAdmin {
 			userRegisOpe.registerUser();
 			break;
 		case 2:
-			System.out.println("\n--- View User Details ---");
+			System.out.println("\n--- User Details ---");
 			list=userOpSer.isGetUser();
 			System.out.println("====================================================================================");
 			System.out.printf("\n%-20s %-35s %-15s %-15s %-20s\n", "Name", "Email", "Contact", "Gender", "City");
@@ -52,7 +52,7 @@ public class AddUserByAdmin {
 		    	));
 			break;
 		case 3:
-			System.out.println("+-------------------------------------------+");
+			System.out.println("\n-------------------------------------------\n");
 			System.out.println("Enter the Email");
 			sc.nextLine();
 			String email=sc.nextLine();
@@ -98,9 +98,11 @@ public class AddUserByAdmin {
 						sc.nextLine();
 						String searchName=sc.nextLine();
 						list=userOpSer.isSearchByName(searchName);
-						if(list.isEmpty())
+						if(!list.isEmpty())
 						{
 							list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()));
+							System.out.println("\n-------------------------------------------\n");
+							
 						}
 						else
 						{
@@ -113,7 +115,7 @@ public class AddUserByAdmin {
 						sc.nextLine();
 						String cityNamee=sc.nextLine();
 						list=userOpSer.isSearchByCityName(cityNamee);
-						if(list.isEmpty())
+						if(!list.isEmpty())
 						{
 							list.forEach(list1->System.out.println(list1.getName()+"\t"+list1.getEmail()+"\t"+list1.getContact()+"\t"+list1.getGender()+"\t"+list1.getCityname()));
 						}
